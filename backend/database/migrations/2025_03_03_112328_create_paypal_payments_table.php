@@ -19,7 +19,16 @@ return new class extends Migration
             $table->text('paypal_payment_id')->nullable();
             $table->string('amount')->nullable();
             $table->string('currency')->nullable();
+            $table->string('minimum_picks')->nullable();
+            $table->string('minimum_picks_amount')->nullable();
+            $table->string('maximum_picks_amount')->nullable();
+            $table->string('maximum_loss')->nullable();
+            $table->string('maximum_daily_loss')->nullable();
+            $table->string('profit_target')->nullable();
+            $table->string('time_limit')->nullable();
             $table->string('payment_status')->default('Pending')->nullable();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             
             $table->timestamps();
         });

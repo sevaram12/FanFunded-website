@@ -35,6 +35,7 @@ class PaypalController extends Controller
     {
         $validate = Validator::make($request->all(), [
             'amount' => 'required',
+            
             // 'user_id' => 'required|exists:users,id'
         ]);
 
@@ -86,6 +87,13 @@ class PaypalController extends Controller
                 'amount' => $request->amount,
                 'user_id' => $request->user_id,
                 'currency' => 'USD',
+                'minimum_picks' => $request->minimum_picks,
+                'minimum_picks_amount' => $request->minimum_picks_amount,
+                'maximum_picks_amount' => $request->maximum_picks_amount,
+                'maximum_loss' => $request->maximum_loss, 
+                'maximum_daily_loss' => $request->maximum_daily_loss,
+                'profit_target' => $request->profit_target,
+                'time_limit' => $request->time_limit,
                 'paypal_payment_id' => $payment->getId()
             ]);
 
@@ -107,6 +115,20 @@ class PaypalController extends Controller
 
     public function getPaymentStatus(Request $request)
     {
+        $validate = Validator::make($request->all(),[
+            'payment_id' => 'required',
+            'payer_id' => 'required'
+        ]);
+
+        if($validate->fails()){
+            return response()->json([
+                'result' => false,
+                'status' => 422,
+                'message' => 'All Fields are required',
+                'error' => $validate->errors()
+            ],422);
+        }
+
         $payment_id = $request->query('payment_id');
         $payer_id = $request->query('PayerID');
 
