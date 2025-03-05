@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\api\AuthController;
+use App\Http\Controllers\admin\api\BillingController;
 use App\Http\Controllers\admin\api\PaypalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -43,3 +44,19 @@ Route::get('/events', [SportController::class, 'events']);
 Route::get('/getEventOdds', [SportController::class, 'getEventOdds']);
 Route::get('/participants', [SportController::class, 'participants']);
 Route::get('/historical_odds', [SportController::class, 'historical_odds']);
+
+
+
+
+Route::post('signup',[AuthController::class,'signup']);
+Route::post('login',[AuthController::class,'login']);
+Route::post('logout',[AuthController::class,'logout']);
+
+
+Route::post('billing-details',[BillingController::class,'billing_details']);
+
+
+Route::post('paypal',[PaypalController::class,'payWithPaypal'])->name('paypal');
+Route::match(['get', 'post'], '/paypal/status', [PaypalController::class, 'getPaymentStatus'])->name('api.paypal.status');
+
+
