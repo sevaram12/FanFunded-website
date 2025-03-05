@@ -20,3 +20,5 @@ Route::get('/', function () {
 
 
 Route::get('test',[AdminController::class,'test']);
+
+Route::get('test1',[AdminController::class,'test1']);
