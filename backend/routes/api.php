@@ -43,6 +43,8 @@ Route::post('paypal',[PaypalController::class,'payWithPaypal'])->name('paypal');
 Route::match(['get', 'post'], '/paypal/status', [PaypalController::class, 'getPaymentStatus'])->name('api.paypal.status');
 
 
+// sys
+
 
 //---------------------------------------------sports--------------------------------------------------------------//
 
