@@ -32,8 +32,10 @@ Route::post('logout', [AuthController::class, 'logout']);
 
 //------------------------------------Paypal------------------------------------------------------//
 
+
 Route::post('paypal', [PaypalController::class, 'payWithPaypal'])->name('paypal');
 Route::post('/paypal/status', [PaypalController::class, 'getPaymentStatus'])->name('api.paypal.status');
+
 
 //---------------------------------------------sports--------------------------------------------------------------//
 
@@ -53,10 +55,23 @@ Route::post('login',[AuthController::class,'login']);
 Route::post('logout',[AuthController::class,'logout']);
 
 
+
 Route::post('billing-details',[BillingController::class,'billing_details']);
 
 
 Route::post('paypal',[PaypalController::class,'payWithPaypal'])->name('paypal');
 Route::match(['get', 'post'], '/paypal/status', [PaypalController::class, 'getPaymentStatus'])->name('api.paypal.status');
 
+
+
+
+//---------------------------------------------sports--------------------------------------------------------------//
+
+Route::get('/sports', [SportController::class, 'sports']);
+Route::get('/odds', [SportController::class, 'odds']);
+Route::get('/scores', [SportController::class, 'scores']);
+Route::get('/events', [SportController::class, 'events']);
+Route::get('/getEventOdds', [SportController::class, 'getEventOdds']);
+Route::get('/participants', [SportController::class, 'participants']);
+Route::get('/historical_odds', [SportController::class, 'historical_odds']);
 
