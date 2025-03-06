@@ -25,7 +25,12 @@
 
     @include('admin.partial.hero')
 
-    
+    <section class="top_matches  pb-8 pb-md-10">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 gx-0 gx-lg-4">
+                    <div class="top_matches__main">
+                      
     @yield('admin-content')
     
     
