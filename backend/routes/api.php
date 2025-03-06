@@ -32,10 +32,8 @@ Route::post('logout', [AuthController::class, 'logout']);
 
 
 
-// sys
 
-
-//---------------------------------------------sports--------------------------------------------------------------//
+//--------------------------------------sports-------------------------------------------------------//
 
 Route::get('/sports', [SportController::class, 'sports']);
 Route::get('/odds', [SportController::class, 'odds']);

@@ -11,7 +11,7 @@
   <header class="header-section2 header-section">
       <nav class="navbar navbar-expand-lg position-relative py-md-3 py-lg-6 workready">
           <div class="collapse navbar-collapse justify-content-between" id="navbar-content">
-              <ul
+              {{-- <ul
                   class="navbar-nav2fixed  navbar-nav d-flex align-items-lg-center gap-4 gap-sm-5  py-2 py-lg-0 align-self-center p2-bg">
                   <li class="dropdown show-dropdown">
                       <a href="index.html">Home</a>
@@ -37,10 +37,10 @@
                       <a href="create-acount.html" class="cmn-btn px-xxl-11">Sign Up</a>
                       </div>
                   </li>
-              </ul>
+              </ul> --}}
           </div>
           <div class="right-area custom-pos position-relative d-flex gap-0 gap-lg-7 align-items-center me-5 me-xl-10">
-              <div class="language-area">
+              {{-- <div class="language-area">
                   <div class="translate_wrapper">
                       <div class="current_lang">
                           <div class="lang d-flex align-items-center gap-2">
@@ -77,9 +77,132 @@
                           </div>
                       </div>
                   </div>
-              </div>
-              <a href="login.html" class="cmn-btn second-alt px-xxl-11 rounded-2 me-5 me-lg-0 d-none d-sm-block">Log In</a>
-              <a href="create-acount.html" class="cmn-btn d-none px-xxl-11 d-sm-block d-lg-none d-xl-block">Sign Up</a>
+              </div> --}}
+
+
+              <ul class="navbar-nav navbar-nav-right">
+                <li class="nav-item nav-profile dropdown">
+                   <a class="nav-link mb-3" href="#" data-toggle="dropdown" id="profileDropdown" style=" object-fit: cover;">
+                        <img src="{{ asset('public/assets/upload/dummy.jpg') }}" alt="profile" style="width:45px; height:45px;"
+    
+                             >
+                    </a>
+    
+                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                        <!--<a class="dropdown-item" href="" >-->
+                        <!--    <i class="fa-regular fa-user"></i>-->
+                        <!--    Profile-->
+                        <!--</a>-->
+                        <a class="dropdown-item" href="{{ url('logout') }}">
+                            <i class="typcn typcn-eject text-primary"></i>
+                            Logout
+                        </a>
+                    </div>
+                </li>
+                {{-- <li class="nav-item nav-date dropdown">
+            <a class="nav-link d-flex justify-content-center align-items-center" href="javascript:;">
+              <h6 class="date mb-0">Today : Mar 23</h6>
+              <i class="typcn typcn-calendar"></i>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
+              <i class="typcn typcn-cog-outline mx-0"></i>
+              <span class="count"></span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
+              <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                    <img src="../../images/faces/face4.jpg" alt="image" class="profile-pic">
+                </div>
+                <div class="preview-item-content flex-grow">
+                  <h6 class="preview-subject ellipsis font-weight-normal">David Grey
+                  </h6>
+                  <p class="font-weight-light small-text text-muted mb-0">
+                    The meeting is cancelled
+                  </p>
+                </div>
+              </a>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                    <img src="../../images/faces/face2.jpg" alt="image" class="profile-pic">
+                </div>
+                <div class="preview-item-content flex-grow">
+                  <h6 class="preview-subject ellipsis font-weight-normal">Tim Cook
+                  </h6>
+                  <p class="font-weight-light small-text text-muted mb-0">
+                    New product launch
+                  </p>
+                </div>
+              </a>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                    <img src="../../images/faces/face3.jpg" alt="image" class="profile-pic">
+                </div>
+                <div class="preview-item-content flex-grow">
+                  <h6 class="preview-subject ellipsis font-weight-normal"> Johnson
+                  </h6>
+                  <p class="font-weight-light small-text text-muted mb-0">
+                    Upcoming board meeting
+                  </p>
+                </div>
+              </a>
+            </div>
+          </li>
+          <li class="nav-item dropdown mr-0">
+            <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center" id="notificationDropdown" href="#" data-toggle="dropdown">
+              <i class="typcn typcn-bell mx-0"></i>
+              <span class="count"></span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+              <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                  <div class="preview-icon bg-success">
+                    <i class="typcn typcn-info mx-0"></i>
+                  </div>
+                </div>
+                <div class="preview-item-content">
+                  <h6 class="preview-subject font-weight-normal">Application Error</h6>
+                  <p class="font-weight-light small-text mb-0 text-muted">
+                    Just now
+                  </p>
+                </div>
+              </a>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                  <div class="preview-icon bg-warning">
+                    <i class="typcn typcn-cog-outline mx-0"></i>
+                  </div>
+                </div>
+                <div class="preview-item-content">
+                  <h6 class="preview-subject font-weight-normal">Settings</h6>
+                  <p class="font-weight-light small-text mb-0 text-muted">
+                    Private message
+                  </p>
+                </div>
+              </a>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                  <div class="preview-icon bg-info">
+                    <i class="typcn typcn-user mx-0"></i> 
+                  </div>
+                </div>
+                <div class="preview-item-content">
+                  <h6 class="preview-subject font-weight-normal">New user registration</h6>
+                  <p class="font-weight-light small-text mb-0 text-muted">
+                    2 days ago
+                  </p>
+                </div>
+              </a>
+            </div>
+          </li> --}}
+            </ul>
+
+
+              {{-- <a href="login.html" class="cmn-btn second-alt px-xxl-11 rounded-2 me-5 me-lg-0 d-none d-sm-block">Log In</a>
+              <a href="create-acount.html" class="cmn-btn d-none px-xxl-11 d-sm-block d-lg-none d-xl-block">Sign Up</a> --}}
           </div>
           <button class="navbar-toggler mt-1 mt-sm-2 mt-lg-0" type="button" data-bs-toggle="collapse" aria-label="Navbar Toggler"
               data-bs-target="#navbar-content" aria-expanded="true" id="nav-icon3">
