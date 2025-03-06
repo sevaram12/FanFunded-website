@@ -6,7 +6,7 @@
                   <div class="row w-100">
                       <div class="col-12">
                           <div class="live-playing">
-                              <div class="hero_area__topslider swiper-wrapper">
+                              {{-- <div class="hero_area__topslider swiper-wrapper">
                                   <div class="hero_area__topslider-card swiper-slide p-4 p-md-6">
                                       <div
                                           class="hero_area__topslider-cardtop d-flex align-items-center justify-content-between mb-4 mb-md-6">
@@ -289,7 +289,7 @@
                                           </div>
                                       </div>
                                   </div>
-                              </div>
+                              </div> --}}
                           </div>
                       </div>
                   </div>

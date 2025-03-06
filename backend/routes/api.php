@@ -32,7 +32,9 @@ Route::post('logout', [AuthController::class, 'logout']);
 
 
 
-//---------------------------------------------sports--------------------------------------------------------------//
+
+
+//--------------------------------------sports-------------------------------------------------------//
 
 Route::get('/sports', [SportController::class, 'sports']);
 Route::get('/odds', [SportController::class, 'odds']);
@@ -46,6 +48,8 @@ Route::get('/historical_event_odds', [SportController::class, 'historical_event_
 
 
 
-Route::post('billing-details', [BillingController::class, 'billing_details']);
-Route::post('paypal', [PaypalController::class, 'payWithPaypal'])->name('paypal');
+Route::post('billing-details',[BillingController::class,'billing_details']);
+
+
+Route::post('paypal',[PaypalController::class,'payWithPaypal'])->name('paypal');
 Route::match(['get', 'post'], '/paypal/status', [PaypalController::class, 'getPaymentStatus'])->name('api.paypal.status');

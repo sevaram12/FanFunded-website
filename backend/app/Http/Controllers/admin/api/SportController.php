@@ -310,7 +310,7 @@ class SportController extends Controller
             }
 
             $timezone = 'UTC';
-            $currentDate = Carbon::now($timezone); 
+            $currentDate = Carbon::now($timezone);
             $providedDate = Carbon::parse($date, $timezone);
 
             Log::info('Current Date:', ['current_date' => $currentDate->toIso8601String()]);
@@ -617,5 +617,4 @@ class SportController extends Controller
             return response()->json(['error' => 'An error occurred: ' . $exception->getMessage()], 500);
         }
     }
-    
 }

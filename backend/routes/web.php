@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\user\UserSportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,3 +23,6 @@ Route::get('/', function () {
 Route::get('test',[AdminController::class,'test']);
 
 Route::get('test1',[AdminController::class,'test1']);
+
+Route::get('sport-details',[UserSportController::class,'sport_details']);
+Route::get('score',[UserSportController::class,'scores']);
