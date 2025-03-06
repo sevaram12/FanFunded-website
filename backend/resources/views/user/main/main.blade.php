@@ -16,6 +16,7 @@
     <link rel="shortcut icon" href="{{asset('assets/images/fav.png')}}" type="image/x-icon">
     <!-- ==== css dependencies start ==== -->
     <link rel="stylesheet" href="{{asset('assets/css/style.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/fanfunded-style.css')}}">
 </head>
 
 <body>
@@ -25,8 +26,12 @@
 
     @include('user.partial.hero')
 
-    
-    @yield('user-content')
+    <section class="top_matches  pb-8 pb-md-10">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 gx-0 gx-lg-4">
+                    <div class="top_matches__main">
+                        @yield('user-content')
     
     
     @include('user.partial.footer')

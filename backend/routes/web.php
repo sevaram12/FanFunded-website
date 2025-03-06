@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\admin\AdminAuthController;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\user\UserSportController;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +28,8 @@ Route::get('test1',[AdminController::class,'test1']);
 
 Route::get('sport-details',[UserSportController::class,'sport_details']);
 Route::get('score',[UserSportController::class,'scores']);
+
+
+// ********************************* Admin Dashboard ***************************************
+
+Route::get('user-details',[AdminAuthController::class,'user_details']);

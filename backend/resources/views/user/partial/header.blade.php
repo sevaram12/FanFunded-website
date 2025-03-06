@@ -134,27 +134,27 @@
                   </li>
                   <li class="d-flex align-items-center justify-content-between px-3 py-2 rounded-3 gap-5">
                       <a href="tennis.html" class="d-flex align-items-center gap-2" data-key="aussierules_afl"><img
-                              src="assets/images/icon/soccer-icon.png" alt="icon">Aussie Rules</a>
+                              src="assets/images/icon/aussie-rules.png" alt="icon">Aussie Rules</a>
                       <button type="button" class="g1-color"><i class="ti ti-star"></i></button>
                   </li>
                   <li class="d-flex align-items-center justify-content-between px-3 py-2 rounded-3 gap-5">
                       <a href="basketball.html" class="d-flex align-items-center gap-2" data-key="baseball_mlb_preseason"><img
-                              src="assets/images/icon/basketball.png" alt="icon">Baseball</a>
+                              src="assets/images/icon/soccer-icon.png" alt="icon">Baseball</a>
                       <button type="button" class="g1-color"><i class="ti ti-star"></i></button>
                   </li>
                   <li class="d-flex align-items-center justify-content-between px-3 py-2 rounded-3 gap-5">
                       <a href="cricket.html" class="d-flex align-items-center gap-2" data-key="basketball_euroleague"><img
-                              src="assets/images/icon/cricket.png" alt="icon">Basketball</a>
+                              src="assets/images/icon/basketball.png" alt="icon">Basketball</a>
                       <button type="button" class="g1-color"><i class="ti ti-star"></i></button>
                   </li>
                   <li class="d-flex align-items-center justify-content-between px-3 py-2 rounded-3 gap-5">
                       <a href="ecricket.html" class="d-flex align-items-center gap-2" data-key="boxing_boxing"><img
-                              src="assets/images/icon/ecricket.png" alt="icon">Boxing</a>
+                              src="assets/images/icon/boxing.png" alt="icon">Boxing</a>
                       <button type="button" class="g1-color"><i class="ti ti-star"></i></button>
                   </li>
                   <li class="d-flex align-items-center justify-content-between px-3 py-2 rounded-3 gap-5">
                       <a href="american-football.html" class="d-flex align-items-center gap-2"><img
-                              src="assets/images/icon/america-football.png" alt="icon" data-key="cricket_icc_trophy">Cricket</a>
+                              src="assets/images/icon/cricket.png" alt="icon" data-key="cricket_icc_trophy">Cricket</a>
                       <button type="button" class="g1-color"><i class="ti ti-star"></i></button>
                   </li>
                   <li class="d-flex align-items-center justify-content-between px-3 py-2 rounded-3 gap-5">
@@ -164,12 +164,12 @@
                   </li>
                   <li class="d-flex align-items-center justify-content-between px-3 py-2 rounded-3 gap-5">
                       <a href="nba-2k.html" class="d-flex align-items-center gap-2"><img
-                              src="assets/images/icon/nba2k.png" alt="icon" data-key="golf_us_open_winner">Golf</a>
+                              src="assets/images/icon/waterpolo.png" alt="icon" data-key="golf_us_open_winner">Golf</a>
                       <button type="button" class="g1-color"><i class="ti ti-star"></i></button>
                   </li>
                   <li class="d-flex align-items-center justify-content-between px-3 py-2 rounded-3 gap-5">
                       <a href="volleyball.html" class="d-flex align-items-center gap-2"><img
-                              src="assets/images/icon/volleyball.png" alt="icon" data-key="lacrosse_ncaa">Lacrosse</a>
+                              src="assets/images/icon/penalty-shootout.png" alt="icon" data-key="lacrosse_ncaa">Lacrosse</a>
                       <button type="button" class="g1-color"><i class="ti ti-star"></i></button>
                   </li>
                   <li class="d-flex align-items-center justify-content-between px-3 py-2 rounded-3 gap-5">
@@ -189,7 +189,7 @@
                   </li>
                   <li class="d-flex align-items-center justify-content-between px-3 py-2 rounded-3 gap-5">
                       <a href="table-tennis.html" class="d-flex align-items-center gap-2" data-key="soccer_argentina_primera_division"><img
-                              src="assets/images/icon/table-tennis.png" alt="icon">Soccer</a>
+                              src="assets/images/icon/soccer-icon.png" alt="icon">Soccer</a>
                       <button type="button" class="g1-color"><i class="ti ti-star"></i></button>
                   </li>
                   <li class="d-flex align-items-center justify-content-between px-3 py-2 rounded-3 gap-5">

@@ -227,8 +227,8 @@
               </div>
               <ul class="secend-actives bg1-color rounded-5 d-flex flex-column gap-5 mb-5">
                   <li class="active">
-                      <a href="index.html" class="d-flex align-items-center gap-2"><i
-                              class="ti ti-brand-google-home n5-color fs-five"></i> Home</a>
+                      <a href="{{url('user-details')}}" class="d-flex align-items-center gap-2"><i
+                              class="ti ti-brand-google-home n5-color fs-five"></i> Dashboard</a>
                   </li>
                   <li class="active">
                       <a href="javascript:void(0)" class="d-flex align-items-center gap-2"><i
