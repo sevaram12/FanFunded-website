@@ -237,22 +237,22 @@
 
 <script>
 
-  function openTab(tabName) {
-      document.querySelectorAll('.tab-content').forEach(tab => {
-          tab.style.display = 'none';
-      });
-      document.querySelectorAll('.tab').forEach(tab => {
-          tab.classList.remove('active');
-      });
-      document.getElementById(tabName).style.display = 'block';
-      event.target.classList.add('active');
-  }
+function openTab(tabName) {
+    document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.style.display = 'none';
+    });
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    document.getElementById(tabName).style.display = 'block';
+    event.target.classList.add('active');
+}
 
 
 function openPickslip(type, value) {
-document.getElementById('pick-info').innerText = `${type}: ${value}`;
-document.getElementById('pickslip').classList.add('open');
-document.getElementById('schedule-container').classList.add('shrink');
+    document.getElementById('pick-info').innerText = `${type}: ${value}`;
+    document.getElementById('pickslip').classList.add('open');
+    document.getElementById('schedule-container').classList.add('shrink');
 }
 
 

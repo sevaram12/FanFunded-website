@@ -146,19 +146,19 @@
               <hr class="py-0 my-0">
               <h5 class="mb-4 mb-md-6 mt-4 mt-md-6">Popular</h5>
               <ul class="aside_namelist d-flex flex-column gap-2">
-                  <li class="d-flex align-items-center justify-content-between px-3 py-2 rounded-3 gap-5">
+                <li class="d-flex align-items-center justify-content-between px-3 py-2 rounded-3 gap-5">
                     <a href="{{ url('american-football') }}?sport={{ urlencode('americanfootball_ncaaf') }}" class="d-flex align-items-center gap-2">
                         <img src="assets/images/icon/soccer-icon.png" alt="icon" data-key="americanfootball_ncaaf">
                         American Football
                     </a>
-                      <button type="button" class="g1-color"><i class="ti ti-star"></i></button>
-                  </li>
+                    <button type="button" class="g1-color"><i class="ti ti-star"></i></button>
+                </li>
                 
                   <li class="d-flex align-items-center justify-content-between px-3 py-2 rounded-3 gap-5">
                     <a href="cricket.html" class="d-flex align-items-center gap-2" data-key="basketball_euroleague"><img
                             src="assets/images/icon/basketball.png" alt="icon">Basketball</a>
-                      <button type="button" class="g1-color"><i class="ti ti-star"></i></button>
-                  </li>
+                    <button type="button" class="g1-color"><i class="ti ti-star"></i></button>
+                </li>
                   <li class="d-flex align-items-center justify-content-between px-3 py-2 rounded-3 gap-5">
                       <a href="basketball.html" class="d-flex align-items-center gap-2" data-key="baseball_mlb_preseason"><img
                               src="assets/images/icon/soccer-icon.png" alt="icon">Baseball</a>
@@ -167,8 +167,8 @@
                   <li class="d-flex align-items-center justify-content-between px-3 py-2 rounded-3 gap-5">
                     <a href="fifa-volta.html" class="d-flex align-items-center gap-2" data-key="mma_mixed_martial_arts"><img
                             src="assets/images/icon/fifa-volta.png" alt="icon">Mixed Martial Arts</a>
-                      <button type="button" class="g1-color"><i class="ti ti-star"></i></button>
-                  </li>
+                    <button type="button" class="g1-color"><i class="ti ti-star"></i></button>
+                </li>
                   
                  
                   <li class="d-flex align-items-center justify-content-between px-3 py-2 rounded-3 gap-5">
