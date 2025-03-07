@@ -118,7 +118,7 @@ class SportController extends Controller
         }
     }
 
-    //--------------------------------------------------------getEventOdds ------------------------------------------------//
+    //--------------------------------------------------------getEventOdds ------------------------------------------//
 
     public function getEventOdds(Request $request)
     {
@@ -177,7 +177,7 @@ class SportController extends Controller
         }
     }
 
-    //----------------------------------------------------- participants -----------------------------------------------//
+    //----------------------------------------------------- participants ---------------------------------------------//
 
     public function participants()
     {
@@ -224,7 +224,7 @@ class SportController extends Controller
         }
     }
 
-    //--------------------------------------------------------odds ------------------------------------------------//
+    //--------------------------------------------------------odds --------------------------------------------------//
 
     public function odds(Request $request)
     {
@@ -275,6 +275,36 @@ class SportController extends Controller
 
             $oddsData = [];
             foreach ($responseData as $event) {
+                $bookmakersData = [];
+
+                foreach ($event['bookmakers'] as $bookmaker) {
+                    $marketsData = [];
+
+                    foreach ($bookmaker['markets'] as $market) {
+                        $outcomesData = [];
+
+                        foreach ($market['outcomes'] as $outcome) {
+                            $outcomesData[] = [
+                                'name' => $outcome['name'],
+                                'price' => $outcome['price'],
+                                'point' => isset($outcome['point']) ? $outcome['point'] : null
+                            ];
+                        }
+
+                        $marketsData[] = [
+                            'key' => $market['key'],
+                            'outcomes' => $outcomesData
+                        ];
+                    }
+
+                    $bookmakersData[] = [
+                        'key' => $bookmaker['key'],
+                        'title' => $bookmaker['title'],
+                        'last_update' => $bookmaker['last_update'],
+                        'markets' => $marketsData
+                    ];
+                }
+
                 $oddsData[] = [
                     'id' => $event['id'],
                     'sport_key' => $event['sport_key'],
@@ -497,6 +527,7 @@ class SportController extends Controller
     public function historical_event_odds(Request $request)
     {
         try {
+            // Capture inputs from the request
             $eventId = $request->input('eventId');
             $date = $request->input('date');
             $regions = $request->input('regions', 'us');
@@ -513,47 +544,56 @@ class SportController extends Controller
 
             $apiUrl = "https://api.the-odds-api.com/v4/historical/sports/basketball_nba/events/{$eventId}/odds?apiKey={$apiKey}&date={$date}&regions={$regions}&markets={$markets}";
 
+            // Log the API URL
             Log::info("API URL: {$apiUrl}");
 
+            // Initialize cURL session
             $curl = curl_init();
 
             curl_setopt_array($curl, [
-                CURLOPT_URL => $apiUrl,
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_TIMEOUT => 30,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "GET",
-                CURLOPT_HTTPHEADER => [
-                    "Content-Type: application/json"
-                ],
-            ]);
+                    CURLOPT_URL => $apiUrl,
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_TIMEOUT => 30,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => "GET",
+                    CURLOPT_HTTPHEADER => [
+                        "Content-Type: application/json",
+                    ],
+                ]
+            );
 
-
+            // Execute the cURL request
             $response = curl_exec($curl);
             $err = curl_error($curl);
             $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
             curl_close($curl);
 
+            // Log status code and raw response
             Log::info("API Response Status Code: {$statusCode}");
             Log::info("Raw API Response: {$response}");
 
+            // Handle cURL errors
             if ($err) {
                 Log::error("cURL error: {$err}");
                 return response()->json(['error' => 'Error connecting to The Odds API.'], 500);
             }
 
+            // Handle API request failures
             if ($statusCode !== 200) {
                 Log::error("API request failed with status code {$statusCode}");
                 return response()->json(['error' => 'The API request failed.'], 500);
             }
 
+            // Decode JSON response
             $responseData = json_decode($response, true);
 
+            // Handle invalid JSON response
             if ($responseData === null) {
                 Log::error('Invalid JSON response from The Odds API.', ['response' => $response]);
                 return response()->json(['error' => 'Invalid JSON response from The Odds API.'], 500);
             }
 
+            // Handle empty response data
             if (empty($responseData)) {
                 return response()->json([
                     'error' => true,
@@ -561,10 +601,11 @@ class SportController extends Controller
                 ], 404);
             }
 
+            // Log API response data
             Log::info('API response data:', ['response_data' => $responseData]);
 
+            // Process and format the data for response
             $oddsData = [];
-
             if (is_array($responseData)) {
                 foreach ($responseData as $event) {
                     $bookmakersData = [];
@@ -604,12 +645,15 @@ class SportController extends Controller
                     ];
                 }
             } else {
+                // Handle the case where response data is not an array
                 Log::error("Expected an array but got a non-array response data.");
                 return response()->json(['error' => 'Expected an array but got a non-array response data.'], 500);
             }
 
             return response()->json([
-                'error' => false,
+                'timestamp' => now()->toISOString(),
+                'previous_timestamp' => now()->subMinutes(5)->toISOString(),
+                'next_timestamp' => now()->addMinutes(5)->toISOString(),
                 'data' => $oddsData
             ]);
         } catch (Exception $exception) {
