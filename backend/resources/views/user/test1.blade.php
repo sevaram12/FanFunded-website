@@ -4,6 +4,35 @@
 
 <!-- ----------------------------------------------------------------- -->
 
+<div class="New-Header">
+        <div class="new-navbar-wrapper">
+            <div class="new-navbar">
+                <div class="dropdown">
+                    <button class="dropbtn">
+                        UFC
+                        <span class="arrow">&#9662;</span>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="#">Option 1</a>
+                        <a href="#">Option 2</a>
+                        <a href="#">Option 3</a>
+                    </div>
+                </div>
+                <button>Football</button>
+                <button>Basketball</button>
+                <button>Baseball</button>
+                <button>MMA</button>
+                <button>Hockey</button>
+                <button>Soccer</button>
+                <button>Tennis</button>
+                <button>Golf</button>
+            </div>
+        </div>
+    </div>
+
+
+<!-- -------------------------------------------------------------------- -->
+
 <div class="main-content">
   <div class="container-schedule" id="schedule-container">
       <table class="schedule-table">
