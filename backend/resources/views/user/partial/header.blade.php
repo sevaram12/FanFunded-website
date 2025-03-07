@@ -11,7 +11,7 @@
   <header class="header-section2 header-section">
       <nav class="navbar navbar-expand-lg position-relative py-md-3 py-lg-6 workready">
           <div class="collapse navbar-collapse justify-content-between" id="navbar-content">
-              <ul
+              <!-- <ul
                   class="navbar-nav2fixed  navbar-nav d-flex align-items-lg-center gap-4 gap-sm-5  py-2 py-lg-0 align-self-center p2-bg">
                   <li class="dropdown show-dropdown">
                       <a href="index.html">Home</a>
@@ -37,10 +37,10 @@
                       <a href="create-acount.html" class="cmn-btn px-xxl-11">Sign Up</a>
                       </div>
                   </li>
-              </ul>
+              </ul> -->
           </div>
           <div class="right-area custom-pos position-relative d-flex gap-0 gap-lg-7 align-items-center me-5 me-xl-10">
-              <div class="language-area">
+              <!-- <div class="language-area">
                   <div class="translate_wrapper">
                       <div class="current_lang">
                           <div class="lang d-flex align-items-center gap-2">
@@ -77,9 +77,28 @@
                           </div>
                       </div>
                   </div>
-              </div>
-              <a href="login.html" class="cmn-btn second-alt px-xxl-11 rounded-2 me-5 me-lg-0 d-none d-sm-block">Log In</a>
-              <a href="create-acount.html" class="cmn-btn d-none px-xxl-11 d-sm-block d-lg-none d-xl-block">Sign Up</a>
+              </div> -->
+              <!-- <a href="login.html" class="cmn-btn second-alt px-xxl-11 rounded-2 me-5 me-lg-0 d-none d-sm-block">Log In</a> -->
+              <ul class="navbar-nav navbar-nav-right">
+              <li class="nav-item nav-profile dropdown">
+                   <a class="nav-link mb-3" href="#" data-toggle="dropdown" id="profileDropdown" style=" object-fit: cover;">
+                        <img src="{{ asset('public/assets/upload/dummy.jpg') }}" alt="profile" style="width:45px; height:45px;"
+    
+                             >
+                    </a>
+    
+                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                        <!--<a class="dropdown-item" href="" >-->
+                        <!--    <i class="fa-regular fa-user"></i>-->
+                        <!--    Profile-->
+                        <!--</a>-->
+                        <a class="dropdown-item" href="{{ url('logout') }}">
+                            <i class="typcn typcn-eject text-primary"></i>
+                            Logout
+                        </a>
+                    </div>
+                </li>
+              </ul>
           </div>
           <button class="navbar-toggler mt-1 mt-sm-2 mt-lg-0" type="button" data-bs-toggle="collapse" aria-label="Navbar Toggler"
               data-bs-target="#navbar-content" aria-expanded="true" id="nav-icon3">
