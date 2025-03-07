@@ -31,4 +31,8 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'odds_api' => [
+        'key' => env('6d37b47f19cd9291c267b58924f029de'),
+    ],
+
 ];

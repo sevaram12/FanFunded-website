@@ -45,6 +45,8 @@ Route::get('/participants', [SportController::class, 'participants']);
 Route::get('/historical_odds', [SportController::class, 'historical_odds']);
 Route::get('/historicalevents', [SportController::class, 'historicalevents']);
 Route::get('/historical_event_odds', [SportController::class, 'historical_event_odds']);
+Route::get('/calculatePayout', [SportController::class, 'calculatePayout']);
+
 
 
 
