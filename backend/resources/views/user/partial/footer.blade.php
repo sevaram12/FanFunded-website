@@ -1,5 +1,5 @@
 <div class="fixed_footer p3-bg rounded-5">
-  <div class="fixed_footer__head py-3 px-4">
+  {{-- <div class="fixed_footer__head py-3 px-4">
       <div class="d-flex justify-content-between">
           <div class="fixed_footer__head-betslip d-flex align-items-center gap-2">
               <span class="fw-bold">Betslip</span>
@@ -208,7 +208,7 @@
               </div>
           </div>
       </div>
-  </div>
+  </div> --}}
 </div>
 <!-- fixed footer ends -->
 <!-- Footer Section Starts -->
@@ -217,7 +217,7 @@
       <div class="row mb-10 mb-md-15 mb-lg-20">
           <div class="col-12">
               <div class="footer_section__main">
-                  <div class="row gy-8">
+                  {{-- <div class="row gy-8">
                       <div class="col-sm-6 col-md-4 col-lg-4 col-xl-2 col-xxl-2">
                           <div class="footer_section__sports">
                               <h4 class="mb-5 mb-md-6">Sports</h4>
@@ -374,12 +374,12 @@
                               </ul>
                           </div>
                       </div>
-                  </div>
+                  </div> --}}
               </div>
           </div>
       </div>
       <div class="row">
-          <div class="col-12 px-0 mx-0">
+          {{-- <div class="col-12 px-0 mx-0">
               <div class="brand-slider n6-bg pt-7 pb-1 pb-sm-2">
                   <div class="footer_section__slider swiper-wrapper d-flex align-items-center">
                       <div class="footer_section__slider-brand swiper-slide px-4">
@@ -453,7 +453,7 @@
                       </div>
                   </div>
               </div>
-          </div>
+          </div> --}}
       </div>
   </div>
 </footer>

@@ -33,3 +33,11 @@ Route::get('score',[UserSportController::class,'scores']);
 // ********************************* Admin Dashboard ***************************************
 
 Route::get('user-details',[AdminAuthController::class,'user_details']);
+
+
+
+
+// ********************************** User Dashboard ****************************************
+
+
+Route::get('american-football',[UserSportController::class,'odds']);

@@ -55,6 +55,73 @@ class UserSportController extends Controller
     }
 
 
+
+
+    public function odds(Request $request)
+    {
+        try {
+            $sport = $request->input('sport');
+
+            if (empty($sport)) {
+                return response()->json([
+                    'error' => 'Sport key is required.'
+                ], 400);
+            }
+
+            // dd($sport);
+
+            $apiKey = "6d37b47f19cd9291c267b58924f029de";
+            $regions = $request->input('regions','us');
+            $markets = $request->input('markets','h2h,totals,spreads');
+            $oddsFormat = $request->input('oddsFormat','american');
+
+            $apiUrl = "https://api.the-odds-api.com/v4/sports/{$sport}/odds/?apiKey={$apiKey}&regions={$regions}&markets={$markets}&oddsFormat={$oddsFormat}";
+
+            $curl = curl_init();
+
+            curl_setopt_array($curl, [
+                CURLOPT_URL => $apiUrl,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "GET",
+                CURLOPT_HTTPHEADER => [
+                    "Content-Type: application/json"
+                ],
+            ]);
+
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+            $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+            curl_close($curl);
+
+            if ($err) {
+                Log::error("cURL error: {$err}");
+                return view('user.sport.american-football')->with('error','Error Not connecting with odds data');
+                // return response()->json(['status' => 'Error connecting to The Odds API.'], 500);
+            }
+
+            $responseData = json_decode($response, true);
+            $oddsData = $responseData;
+
+            Log::info('API response data:', ['response_data' => $responseData]);
+
+            // dd($oddsData);
+            return view('user.sport.american-football',compact('oddsData'));
+
+        } catch (Exception $exception) {
+            $message = $exception->getMessage();
+            $sortmessage = strtok($message,'(');
+
+            return redirect('user.sport.american-football')->with('error','An error occured: '.$sortmessage);
+        }
+    }
+
+
+
+
+
+
     public function scores(Request $request)
     {
         try {
@@ -113,6 +180,11 @@ class UserSportController extends Controller
             return response()->json(['error' => 'An error occurred: ' . $exception->getMessage()], 500);
         }
     }
+
+
+
+
+
 
 
 }
