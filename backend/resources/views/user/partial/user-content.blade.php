@@ -1,5 +1,5 @@
 
-                  <div class="row w-100 mb-8 mb-md-10">
+                  <div class="row  mb-8 mb-md-10">
                       <div class="col-12">
                           <div class="top_matches__title d-flex align-items-center gap-2 mb-4">
                               <img src="assets/images/icon/king.png" alt="Icon">

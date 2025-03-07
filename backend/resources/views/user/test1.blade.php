@@ -2,6 +2,8 @@
 
 @section('user-content')
 
+<!-- ----------------------------------------------------------------- -->
+
 <div class="main-content">
   <div class="container-schedule" id="schedule-container">
       <table class="schedule-table">
@@ -9,9 +11,9 @@
               <tr>
                   <th>Time</th>
                   <th>MMA Fighters</th>
-                  <th>Total Rounds</th>
+                  <th>Point Spread	</th>
+                  <th>Total Points</th>
                   <th>Moneyline</th>
-                  <th></th>
               </tr>
           </thead>
           <tbody>
@@ -30,6 +32,7 @@
                           <span>Djorden Santos</span>
                       </div>
                   </td>
+                  
                   <td class="bet">
                       <div onclick="openPickslip('Total Rounds', 'O 2.5 +114')">O 2.5 <span class="odds">+114</span></div>
                       <div onclick="openPickslip('Total Rounds', 'U 2.5 -145')">U 2.5 <span class="odds">-145</span></div>
@@ -38,9 +41,10 @@
                       <div onclick="openPickslip('Moneyline', '+164')"><span class="odds">+164</span></div>
                       <div onclick="openPickslip('Moneyline', '-198')"><span class="odds">-198</span></div>
                   </td>
-                  <td>
-                      <button class="btn">More Picks</button>
-                  </td>
+                  <td class="bet">
+                  <div onclick="openPickslip('Moneyline', '+164')"><span class="odds">+164</span></div>
+                  <div onclick="openPickslip('Moneyline', '-198')"><span class="odds">-198</span></div>  
+                </td>
               </tr>
               <tr>
                   <td>
@@ -65,9 +69,10 @@
                       <div onclick="openPickslip('Moneyline', '+175')"><span class="odds">+175</span></div>
                       <div onclick="openPickslip('Moneyline', '-210')"><span class="odds">-210</span></div>
                   </td>
-                  <td>
-                      <button class="btn">More Picks</button>
-                  </td>
+                  <td class="bet">
+                  <div onclick="openPickslip('Moneyline', '+164')"><span class="odds">+164</span></div>
+                  <div onclick="openPickslip('Moneyline', '-198')"><span class="odds">-198</span></div>  
+                </td>
               </tr>
           </tbody>
       </table>
@@ -82,14 +87,16 @@
               <span class="tab" onclick="openTab('parlay')">Parlay</span>
           </div>
           <div class="tab-content" id="straight">
+
+              <div class="scroll-div">
               <div class="center-pick">
                   <div class="over">
                       <h6>Over 2.5</h6>
                       <h6>❌</h6>
                   </div>
                   <div class="total">
-                      <h6>Total Rounds</h6>
-                      <h6>-315</h6>
+                      <!-- <h6>Total Rounds</h6> -->
+                      <h6  id="pick-info"></h6>
                   </div>
                   <div class="date-time">
                       <h6>Mar 9 5:20 AM</h6>
@@ -106,36 +113,143 @@
                     </div>
                     
               </div>
-          </div>
 
-          <div class="tab-content" id="parlay" style="display: none;">
               <div class="center-pick">
                   <div class="over">
-                      <h6>CA Paulistano SP -11</h6>
+                      <h6>Over 2.5</h6>
                       <h6>❌</h6>
                   </div>
                   <div class="total">
-                      <h6>Point Spread</h6>
-                      <h6>-105</h6>
+                      <!-- <h6>Total Rounds</h6> -->
+                      <h6  id="pick-info"></h6>
                   </div>
                   <div class="date-time">
-                      <h6>Mar 7 4:00 AM</h6>
+                      <h6>Mar 9 5:20 AM</h6>
                   </div>
                   <div class="btuns-pick">
-                      <button>Pick</button>
-                      <button>To Win <br> 0.00</button>
+                        <div class="pick-input">
+                            <span>Pick</span>
+                            <input type="number" value="987">
+                        </div>
+                        <div class="win-input">
+                            <span>To Win</span>
+                            <input type="text" value="313.33" disabled>
+                        </div>
+                    </div>
+                    
+              </div>
+              <div class="center-pick">
+                  <div class="over">
+                      <h6>Over 2.5</h6>
+                      <h6>❌</h6>
                   </div>
+                  <div class="total">
+                      <!-- <h6>Total Rounds</h6> -->
+                      <h6  id="pick-info"></h6>
+                  </div>
+                  <div class="date-time">
+                      <h6>Mar 9 5:20 AM</h6>
+                  </div>
+                  <div class="btuns-pick">
+                        <div class="pick-input">
+                            <span>Pick</span>
+                            <input type="number" value="987">
+                        </div>
+                        <div class="win-input">
+                            <span>To Win</span>
+                            <input type="text" value="313.33" disabled>
+                        </div>
+                    </div>
+                    
+              </div>
+
+              </div>
+
+          </div>
+
+          <div class="tab-content" id="parlay" style="display: none;">
+           <div class="scroll-div">
+              <div class="center-pick">
+                  <div class="over">
+                      <h6>Over 2.5</h6>
+                      <h6>❌</h6>
+                  </div>
+                  <div class="total">
+                      <!-- <h6>Total Rounds</h6> -->
+                      <h6  id="pick-info"></h6>
+                  </div>
+                  <div class="date-time">
+                      <h6>Mar 9 5:20 AM</h6>
+                  </div>
+                  <div class="btuns-pick">
+                        <div class="pick-input">
+                            <span>Pick</span>
+                            <input type="number" value="987">
+                        </div>
+                        <div class="win-input">
+                            <span>To Win</span>
+                            <input type="text" value="313.33" disabled>
+                        </div>
+                    </div>
+                    
+              </div>
+
+              <div class="center-pick">
+                  <div class="over">
+                      <h6>Over 2.5</h6>
+                      <h6>❌</h6>
+                  </div>
+                  <div class="total">
+                      <!-- <h6>Total Rounds</h6> -->
+                      <h6  id="pick-info"></h6>
+                  </div>
+                  <div class="date-time">
+                      <h6>Mar 9 5:20 AM</h6>
+                  </div>
+                  <div class="btuns-pick">
+                        <div class="pick-input">
+                            <span>Pick</span>
+                            <input type="number" value="987">
+                        </div>
+                        <div class="win-input">
+                            <span>To Win</span>
+                            <input type="text" value="313.33" disabled>
+                        </div>
+                    </div>
+                    
+              </div>
+              <div class="center-pick">
+                  <div class="over">
+                      <h6>Over 2.5</h6>
+                      <h6>❌</h6>
+                  </div>
+                  <div class="total">
+                      <!-- <h6>Total Rounds</h6> -->
+                      <h6  id="pick-info"></h6>
+                  </div>
+                  <div class="date-time">
+                      <h6>Mar 9 5:20 AM</h6>
+                  </div>
+                  <div class="btuns-pick">
+                        <div class="pick-input">
+                            <span>Pick</span>
+                            <input type="number" value="987">
+                        </div>
+                        <div class="win-input">
+                            <span>To Win</span>
+                            <input type="text" value="313.33" disabled>
+                        </div>
+                    </div>
+                    
+              </div>
               </div>
           </div>
                   <div class="collect">
                       <h6>To Collect</h6>
                       <h6>$0.00</h6>
                   </div>
-                <p id="pick-info">Select a bet</p>
+                  <!-- <p id="pick-info">Select a bet</p> -->
                
-                <div class="pickslip-content">
-    
-                </div>
                  <div class="last-pick-btn">
                  <button class="btn-clear" onclick="closePickslip()">Clear</button>
                 <button class="white-pick">Pick Place</button>
@@ -177,4 +291,6 @@ function closePickslip() {
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+<!-- ----------------------------------------------------------------- -->
+ 
 @endsection
