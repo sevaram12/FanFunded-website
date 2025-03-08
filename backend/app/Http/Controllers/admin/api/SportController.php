@@ -234,12 +234,14 @@ class SportController extends Controller
             if (empty($sport)) {
                 return response()->json(['error' => 'Sport key is required.'], 400);
             }
+
     
             $apiKey = "a607ecbc3eb6420427d92365d46043ee";
             $regions = $request->input('regions', 'us');  // Default to 'us'
             $markets = $request->input('markets', 'h2h,totals,spreads');  // Default markets
             $oddsFormat = $request->input('oddsFormat', 'american');  // Default odds format
     
+
             $apiUrl = "https://api.the-odds-api.com/v4/sports/{$sport}/odds/?apiKey={$apiKey}&regions={$regions}&markets={$markets}&oddsFormat={$oddsFormat}";
     
             // Initialize cURL

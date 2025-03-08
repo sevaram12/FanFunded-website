@@ -24,7 +24,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('test',[AdminController::class,'test']);
 
-Route::get('/',[AdminController::class,'test1']);
+Route::get('test1',[AdminController::class,'test1']);
 
 Route::get('sport-details',[UserSportController::class,'sport_details']);
 Route::get('score',[UserSportController::class,'scores']);
@@ -33,11 +33,15 @@ Route::get('score',[UserSportController::class,'scores']);
 // ******************************** Admin Dashboard **************************************
 
 Route::get('user-details',[AdminAuthController::class,'user_details']);
+Route::get('signup',[AdminAuthController::class,'sign_up']);
+Route::post('signup',[AdminAuthController::class,'register']);
+Route::get('/',[AdminAuthController::class,'login']);
+Route::post('login',[AdminAuthController::class,'admin_login']);
 
 
 
+// ********************************** User Dashboard ****************************************
 
-// ********************************* User Dashboard ***************************************
 
 Route::get('american-football',[UserSportController::class,'american_football_odds']);
 Route::get('basketball',[UserSportController::class,'basketball_odds']);
