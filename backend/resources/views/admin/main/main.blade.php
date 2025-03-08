@@ -13,7 +13,7 @@
     <!-- #title -->
     <title>Oddsx - Sports Betting Website HTML Template</title>
     <!-- #favicon -->
-    <link rel="shortcut icon" href="{{asset('assets/images/fav.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('assets/images/white_logoff_new.png')}}" type="image/x-icon">
     <!-- ==== css dependencies start ==== -->
     <link rel="stylesheet" href="{{asset('assets/css/style.min.css')}}">
 </head>
