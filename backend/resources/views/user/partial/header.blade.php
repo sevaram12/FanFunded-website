@@ -164,7 +164,7 @@
                       <button type="button" class="g1-color"><i class="ti ti-star"></i></button>
                   </li>
                   <li class="d-flex align-items-center justify-content-between px-3 py-2 rounded-3 gap-5">
-                    <a href="fifa-volta.html" class="d-flex align-items-center gap-2" data-key="mma_mixed_martial_arts"><img
+                    <a href="{{ url('mma') }}?sport={{ urlencode('mma_mixed_martial_arts') }}" class="d-flex align-items-center gap-2"><img
                             src="assets/images/icon/fifa-volta.png" alt="icon">Mixed Martial Arts</a>
                     <button type="button" class="g1-color"><i class="ti ti-star"></i></button>
                 </li>

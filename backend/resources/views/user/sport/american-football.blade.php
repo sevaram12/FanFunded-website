@@ -198,15 +198,13 @@
 
                 <!-- --------------------------------------------- -->
                 <div class="tab-content" id="straight">
-
                     <div class="scroll-div">
                         <div class="center-pick">
                             <div class="over">
                                 <h6>Over 2.5</h6>
-                                <h6 class="remove-bet" onclick="removeBet(this)">❌</h6>
+                                <h6 class="remove-bet" style="cursor: pointer;" onclick="removeBet(this)">❌</h6>
                             </div>
                             <div class="total">
-                                <!-- <h6>Total Rounds</h6> -->
                                 <h6 id="pick-info"></h6>
                             </div>
                             <div class="date-time">
@@ -217,33 +215,28 @@
                                     <span>Pick</span>
                                     <input type="number" value="">
                                 </div>
-
                                 <div class="win-input">
                                     <span>To Win</span>
                                     <input type="text" value="" disabled>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-
                 </div>
-                <!-- --------------------------------------------------------------------- -->
+
+                <!-- --------------------------------------------- -->
                 <div class="tab-content" id="parlay" style="display: none;">
                     <div class="scroll-div">
                         <div class="center-pick">
                             <div class="over">
                                 <h6>Over 2.5</h6>
-                                <h6>❌</h6>
+                                <h6 class="remove-bet" style="cursor: pointer;" onclick="removeBet(this)">❌</h6>
                             </div>
                             <div class="total">
-                                <!-- <h6>Total Rounds</h6> -->
                                 <h6 id="pick-info"></h6>
                             </div>
                             <div class="date-time">
-                                <div class="date-time">
-                                    <h6 id="pick-date-time">Select a bet</h6>
-                                </div>
+                                <h6 id="pick-date-time">Select a bet</h6>
                             </div>
                             <div class="btuns-pick">
                                 <div class="pick-input">
@@ -255,17 +248,15 @@
                                     <input type="text" value="" disabled>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
 
-                <!-- ---------------------------------------------------------------------- -->
+                <!-- --------------------------------------------- -->
                 <div class="collect">
                     <h6>To Collect</h6>
                     <h6>$0.00</h6>
                 </div>
-                <!-- <p id="pick-info">Select a bet</p> -->
 
                 <div class="last-pick-btn">
                     <button class="btn-clear" onclick="closePickslip()">Clear</button>
@@ -291,7 +282,6 @@
             });
         });
 
-
         function openTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(tab => {
                 tab.style.display = 'none';
@@ -303,18 +293,71 @@
             event.target.classList.add('active');
         }
 
-
         function openPickslip(type, value) {
-            document.getElementById('pick-info').innerText = `${type}: ${value}`;
-            document.getElementById('pickslip').classList.add('open');
-            document.getElementById('schedule-container').classList.add('shrink');
+            let pickslip = document.getElementById("pickslip");
+            let betContainer = document.querySelector(".scroll-div"); // Get the container for picks
+
+            // Ensure pickslip opens every time a new pick is added
+            pickslip.style.display = "block";
+            pickslip.classList.add("open");
+
+            // Create a new pick entry (APPENDS instead of replacing)
+            let newBet = document.createElement("div");
+            newBet.classList.add("center-pick");
+            newBet.innerHTML = `
+        <div class="over">
+            <h6>${type}</h6>
+            <h6 class="remove-bet" style="cursor: pointer;" onclick="removeBet(this)">❌</h6>
+        </div>
+        <div class="total">
+            <h6>${value}</h6>
+        </div>
+        <div class="date-time">
+            <h6>Select a bet</h6>
+        </div>
+        <div class="btuns-pick">
+            <div class="pick-input">
+                <span>Pick</span>
+                <input type="number" value="">
+            </div>
+            <div class="win-input">
+                <span>To Win</span>
+                <input type="text" value="" disabled>
+            </div>
+        </div>
+    `;
+
+            betContainer.appendChild(newBet); // Append new pick below previous ones
         }
 
+        function removeBet(element) {
+            let betItem = element.closest(".center-pick");
+            if (betItem) {
+                betItem.remove();
+            }
 
+            // Hide pickslip if no picks are left
+            let betContainer = document.querySelector(".scroll-div");
+            if (betContainer.children.length === 0) {
+                document.getElementById("pickslip").style.display = "none";
+            }
+        }
+
+        // Ensure pickslip can reopen after being closed
         function closePickslip() {
-            document.getElementById('pick-info').innerText = 'Select a bet';
-            document.getElementById('pickslip').classList.remove('open');
-            document.getElementById('schedule-container').classList.remove('shrink');
+            let betContainer = document.querySelector(".scroll-div");
+            betContainer.innerHTML = ""; // Remove all bets
+            document.getElementById("pickslip").style.display = "none"; // Hide pickslip
         }
+
+        // Ensure clicking on a schedule-container item adds a new pick
+        document.getElementById("schedule-container").addEventListener("click", function(event) {
+            let target = event.target;
+            if (target.classList.contains("schedule-item")) { // Clicked item must have the class schedule-item
+                let type = target.getAttribute("data-type"); // Example: data-type="Point Spread"
+                let value = target.getAttribute("data-value"); // Example: data-value="Over 2.5"
+                openPickslip(type, value);
+            }
+        });
     </script>
 @endsection
