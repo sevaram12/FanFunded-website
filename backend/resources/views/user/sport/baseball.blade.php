@@ -17,7 +17,7 @@
                     @php $hasBasketball = false; @endphp
             
                     @foreach ($sportData as $sport)
-                        @if ($sport['group'] == 'Basketball')
+                        @if ($sport['group'] == 'Baseball')
                             @php $hasBasketball = true; @endphp
                             <li>
                                 <a class="dropdown-item sport-option" style="cursor: pointer;" data-value="{{ $sport['key'] }}">
@@ -34,10 +34,10 @@
             </div>
             
 
+            <button>Football</button>
             <button>Basketball</button>
-            <button>Point Spread</button>
-            <button>Total Points</button>
-            <button>Moneyline</button>
+            <button>Baseball</button>
+            <button>MMA</button>
             <button>Hockey</button>
             <button>Soccer</button>
             <button>Tennis</button>
@@ -46,17 +46,15 @@
     </div>
 </div>
 
-
-
     <div class="main-content">
         <div class="container-schedule" id="schedule-container">
             <table class="schedule-table">
                 <thead>
                     <tr>
                         <th>Time</th>
-                        <th>Basketball</th>
-                        <th>Point Spread</th>
-                        <th>Total Points</th>
+                        <th>Baseball</th>
+                        <th>Run Line</th>
+                        <th>Total Runs</th>
                         <th>Moneyline</th>
                     </tr>
                 </thead>

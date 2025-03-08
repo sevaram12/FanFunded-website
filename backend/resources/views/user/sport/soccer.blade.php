@@ -2,8 +2,6 @@
 
 @section('user-content')
 
-
-
 <div class="New-Header">
     <div class="new-navbar-wrapper">
         <div class="new-navbar">
@@ -14,11 +12,11 @@
                 </button>
             
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    @php $hasBasketball = false; @endphp
+                    @php $soccer = false; @endphp
             
                     @foreach ($sportData as $sport)
-                        @if ($sport['group'] == 'Basketball')
-                            @php $hasBasketball = true; @endphp
+                        @if ($sport['group'] == 'Soccer')
+                            @php $soccer = true; @endphp
                             <li>
                                 <a class="dropdown-item sport-option" style="cursor: pointer;" data-value="{{ $sport['key'] }}">
                                     {{ $sport['title'] }}
@@ -27,17 +25,17 @@
                         @endif
                     @endforeach
             
-                    @if (!$hasBasketball)
-                        <li><a class="dropdown-item text-muted" href="#">No Basketball Data</a></li>
+                    @if (!$soccer)
+                        <li><a class="dropdown-item text-muted" href="#">No soccer Data</a></li>
                     @endif
                 </ul>
             </div>
             
 
+            <button>Football</button>
             <button>Basketball</button>
-            <button>Point Spread</button>
-            <button>Total Points</button>
-            <button>Moneyline</button>
+            <button>Baseball</button>
+            <button>MMA</button>
             <button>Hockey</button>
             <button>Soccer</button>
             <button>Tennis</button>
@@ -46,77 +44,80 @@
     </div>
 </div>
 
-
-
     <div class="main-content">
         <div class="container-schedule" id="schedule-container">
             <table class="schedule-table">
                 <thead>
                     <tr>
                         <th>Time</th>
-                        <th>Basketball</th>
-                        <th>Point Spread</th>
-                        <th>Total Points</th>
+                        <th>Soccer</th>
+                        <th>Draw No Pick</th>
+                        <th>Total Goals</th>
                         <th>Moneyline</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($oddsData as $item)
                         @php
-                            $draftKings = collect($item['bookmakers'] ?? [])->firstWhere('key', 'draftkings');
-
+                            $draftKings = collect($item['bookmakers'] ?? [])->firstWhere('key', 'bovada');
+            
                             $homeTeam = $item['home_team'] ?? 'N/A';
                             $awayTeam = $item['away_team'] ?? 'N/A';
-
+            
+                            // Default values
                             $homePoint = $awayPoint = $homePrice = $awayPrice = null;
                             $overPoint = $underPoint = $overPrice = $underPrice = null;
                             $homeMoneyline = $awayMoneyline = null;
-
-                            if ($draftKings && is_array($draftKings) && isset($draftKings['markets']) && is_array($draftKings['markets'])) {
+            
+                            // Check for DraftKings data
+                            if ($draftKings && is_array($draftKings['markets'] ?? [])) {
                                 $markets = collect($draftKings['markets']);
-
-                                // Extract Point Spread Data
+            
+                                // Point Spread
                                 $spreadMarket = $markets->firstWhere('key', 'spreads');
-                                if ($spreadMarket && isset($spreadMarket['outcomes']) && is_array($spreadMarket['outcomes'])) {
+                                if ($spreadMarket && is_array($spreadMarket['outcomes'] ?? [])) {
                                     foreach ($spreadMarket['outcomes'] as $outcome) {
-                                        if (($outcome['name'] ?? '') === $homeTeam) {
+                                        $name = $outcome['name'] ?? '';
+                                        if ($name === $homeTeam) {
                                             $homePoint = $outcome['point'] ?? null;
                                             $homePrice = $outcome['price'] ?? null;
-                                        } elseif (($outcome['name'] ?? '') === $awayTeam) {
+                                        } elseif ($name === $awayTeam) {
                                             $awayPoint = $outcome['point'] ?? null;
                                             $awayPrice = $outcome['price'] ?? null;
                                         }
                                     }
                                 }
-
-                                // Extract Total Points Data
+            
+                                // Total Points
                                 $totalMarket = $markets->firstWhere('key', 'totals');
-                                if ($totalMarket && isset($totalMarket['outcomes']) && is_array($totalMarket['outcomes'])) {
+                                if ($totalMarket && is_array($totalMarket['outcomes'] ?? [])) {
                                     foreach ($totalMarket['outcomes'] as $outcome) {
-                                        if (($outcome['name'] ?? '') === 'Over') {
+                                        $name = $outcome['name'] ?? '';
+                                        if ($name === 'Over') {
                                             $overPoint = $outcome['point'] ?? null;
                                             $overPrice = $outcome['price'] ?? null;
-                                        } elseif (($outcome['name'] ?? '') === 'Under') {
+                                        } elseif ($name === 'Under') {
                                             $underPoint = $outcome['point'] ?? null;
                                             $underPrice = $outcome['price'] ?? null;
                                         }
                                     }
                                 }
-
-                                // Extract Moneyline Data
+            
+                                // Moneyline
                                 $moneylineMarket = $markets->firstWhere('key', 'h2h');
-                                if ($moneylineMarket && isset($moneylineMarket['outcomes']) && is_array($moneylineMarket['outcomes'])) {
+                                if ($moneylineMarket && is_array($moneylineMarket['outcomes'] ?? [])) {
                                     foreach ($moneylineMarket['outcomes'] as $outcome) {
-                                        if (($outcome['name'] ?? '') === $homeTeam) {
+                                        $name = $outcome['name'] ?? '';
+                                        if ($name === $homeTeam) {
                                             $homeMoneyline = $outcome['price'] ?? null;
-                                        } elseif (($outcome['name'] ?? '') === $awayTeam) {
+                                        } elseif ($name === $awayTeam) {
                                             $awayMoneyline = $outcome['price'] ?? null;
                                         }
                                     }
                                 }
                             }
                         @endphp
-
+            
                         @if ($draftKings)
                             <tr>
                                 <!-- Time -->
@@ -124,55 +125,53 @@
                                     <span>{{ \Carbon\Carbon::parse($item['commence_time'] ?? now())->format('g:i A') }}</span>
                                     <span class="date">{{ \Carbon\Carbon::parse($item['commence_time'] ?? now())->format('M j') }}</span>
                                 </td>
-
-                                <!-- Fighters -->
+            
+                                <!-- Teams -->
                                 <td>
                                     <div class="fighter"><span>{{ $homeTeam }}</span></div>
                                     <div class="fighter"><span>{{ $awayTeam }}</span></div>
                                 </td>
-
+            
                                 <!-- Point Spread -->
                                 <td class="bet">
                                     <div onclick="openPickslip('Point Spread', '{{ $homeTeam }} {{ $homePoint }} {{ $homePrice }}')">
-                                        {{ $homePoint !== null ? $homePoint : '-' }}
-                                        <span class="odds">{{ $homePrice !== null ? $homePrice : '-' }}</span>
+                                        {{ $homePoint ?? '-' }}
+                                        <span class="odds">{{ $homePrice ?? '-' }}</span>
                                     </div>
                                     <div onclick="openPickslip('Point Spread', '{{ $awayTeam }} {{ $awayPoint }} {{ $awayPrice }}')">
-                                        {{ $awayPoint !== null ? $awayPoint : '-' }}
-                                        <span class="odds">{{ $awayPrice !== null ? $awayPrice : '-' }}</span>
+                                        {{ $awayPoint ?? '-' }}
+                                        <span class="odds">{{ $awayPrice ?? '-' }}</span>
                                     </div>
                                 </td>
-
+            
                                 <!-- Total Points -->
                                 <td class="bet">
                                     <div onclick="openPickslip('Total Points', 'Over {{ $overPoint }} {{ $overPrice }}')">
-                                        O {{ $overPoint !== null ? $overPoint : '-' }} 
-                                        <span class="odds">{{ $overPrice !== null ? $overPrice : '-' }}</span>
+                                        O {{ $overPoint ?? '-' }}
+                                        <span class="odds">{{ $overPrice ?? '-' }}</span>
                                     </div>
                                     <div onclick="openPickslip('Total Points', 'Under {{ $underPoint }} {{ $underPrice }}')">
-                                        U {{ $underPoint !== null ? $underPoint : '-' }} 
-                                        <span class="odds">{{ $underPrice !== null ? $underPrice : '-' }}</span>
+                                        U {{ $underPoint ?? '-' }}
+                                        <span class="odds">{{ $underPrice ?? '-' }}</span>
                                     </div>
                                 </td>
-
+            
                                 <!-- Moneyline -->
                                 <td class="bet">
                                     <div onclick="openPickslip('Moneyline', '{{ $homeTeam }} {{ $homeMoneyline }}')">
-                                        <span class="odds">{{ $homeMoneyline !== null ? $homeMoneyline : '-' }}</span>
+                                        <span class="odds">{{ $homeMoneyline ?? '-' }}</span>
                                     </div>
                                     <div onclick="openPickslip('Moneyline', '{{ $awayTeam }} {{ $awayMoneyline }}')">
-                                        <span class="odds">{{ $awayMoneyline !== null ? $awayMoneyline : '-' }}</span>
+                                        <span class="odds">{{ $awayMoneyline ?? '-' }}</span>
                                     </div>
                                 </td>
                             </tr>
                         @endif
                     @endforeach
-
                 </tbody>
             </table>
             
-            
-            
+        
         </div>
 
         <div class="pickslip" id="pickslip">

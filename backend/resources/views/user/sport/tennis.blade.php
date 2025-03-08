@@ -2,8 +2,6 @@
 
 @section('user-content')
 
-
-
 <div class="New-Header">
     <div class="new-navbar-wrapper">
         <div class="new-navbar">
@@ -14,11 +12,11 @@
                 </button>
             
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    @php $hasBasketball = false; @endphp
+                    @php $tennis = false; @endphp
             
                     @foreach ($sportData as $sport)
-                        @if ($sport['group'] == 'Basketball')
-                            @php $hasBasketball = true; @endphp
+                        @if ($sport['group'] == 'Tennis')
+                            @php $tennis = true; @endphp
                             <li>
                                 <a class="dropdown-item sport-option" style="cursor: pointer;" data-value="{{ $sport['key'] }}">
                                     {{ $sport['title'] }}
@@ -27,17 +25,17 @@
                         @endif
                     @endforeach
             
-                    @if (!$hasBasketball)
-                        <li><a class="dropdown-item text-muted" href="#">No Basketball Data</a></li>
+                    @if (!$tennis)
+                        <li><a class="dropdown-item text-muted" href="#">No soccer Data</a></li>
                     @endif
                 </ul>
             </div>
             
 
+            <button>Football</button>
             <button>Basketball</button>
-            <button>Point Spread</button>
-            <button>Total Points</button>
-            <button>Moneyline</button>
+            <button>Baseball</button>
+            <button>MMA</button>
             <button>Hockey</button>
             <button>Soccer</button>
             <button>Tennis</button>
@@ -46,24 +44,22 @@
     </div>
 </div>
 
-
-
     <div class="main-content">
         <div class="container-schedule" id="schedule-container">
             <table class="schedule-table">
                 <thead>
                     <tr>
                         <th>Time</th>
-                        <th>Basketball</th>
-                        <th>Point Spread</th>
-                        <th>Total Points</th>
+                        <th>Tennis</th>
+                        <th>Game Spread</th>
+                        <th>Total Games</th>
                         <th>Moneyline</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($oddsData as $item)
                         @php
-                            $draftKings = collect($item['bookmakers'] ?? [])->firstWhere('key', 'draftkings');
+                            $draftKings = collect($item['bookmakers'] ?? [])->firstWhere('key', 'betmgm');
 
                             $homeTeam = $item['home_team'] ?? 'N/A';
                             $awayTeam = $item['away_team'] ?? 'N/A';
@@ -170,9 +166,7 @@
 
                 </tbody>
             </table>
-            
-            
-            
+        
         </div>
 
         <div class="pickslip" id="pickslip">
