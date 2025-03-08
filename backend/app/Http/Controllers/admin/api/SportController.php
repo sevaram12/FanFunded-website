@@ -550,7 +550,9 @@ class SportController extends Controller
             // Initialize cURL session
             $curl = curl_init();
 
-            curl_setopt_array($curl, [
+            curl_setopt_array(
+                $curl,
+                [
                     CURLOPT_URL => $apiUrl,
                     CURLOPT_RETURNTRANSFER => true,
                     CURLOPT_TIMEOUT => 30,

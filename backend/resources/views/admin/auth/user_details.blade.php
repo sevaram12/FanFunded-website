@@ -1,14 +1,13 @@
 @extends('admin.main.main')
 
 @section('admin-content')
-
-
+    <!-- Success Message -->
     @if (Session::has('success'))
         <div class="alert alert-success" role="alert" id="success-message">
             {{ Session::get('success') }}
         </div>
     @endif
-
+    <!-- Error Message -->
     @if (session('fail'))
         <div class="alert alert-danger" id="error-message">
             {{ session('fail') }}
@@ -66,10 +65,11 @@
             <div class="col-md-12 mb-3">
                 <div class="card">
                     <div class="card-body">
-                        {{-- <h4 class="card-title">Project Module Details</h4> --}}
+                        <!-- Table Displaying Users Data -->
                         <div class="table-responsive">
-                            <table class="table table-striped" id="myTable">
-                                <thead  style="background-color:#008080;">
+                            <table class="table table-striped" id="myTable"
+                                style="background-color: #333333; color: #ffffff;">
+                                <thead style="background-color: rgba(84, 0, 123, 0.916); color: white;">
                                     <tr>
                                         <th scope="col">Date</th>
                                         <th scope="col">Name</th>
@@ -121,9 +121,10 @@
             </div>
         </div>
     </div>
-
-    @foreach ($userDetail as $item)
-        <div class="modal fade" id="updateModal{{ $item->id }}" tabindex="-1" role="dialog"
+    <!-- Modals for Updating User Status -->
+    @foreach ($userDetail as $user)
+        <!-- Looping through users -->
+        <div class="modal fade" id="updateModal{{ $user->id }}" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -134,17 +135,17 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="update-user-status" method="POST">
+                        <form action="{{ url('update-user-status') }}" method="POST">
                             @csrf
-                            <input type="hidden" name="id" value="{{ $item->id }}">
+                            <input type="hidden" name="id" value="{{ $user->id }}">
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="user_status" id="inlineRadio1"
-                                    value="De-Active" {{ $item->status == 'De-Active' ? 'checked' : '' }}>
+                                    value="De-Active" {{ $user->status == 'De-Active' ? 'checked' : '' }}>
                                 <label class="form-check-label" for="inlineRadio1">De-Active</label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="user_status" id="inlineRadio2"
-                                    value="Active" {{ $item->status == 'Active' ? 'checked' : '' }}>
+                                    value="Active" {{ $user->status == 'Active' ? 'checked' : '' }}>
                                 <label class="form-check-label" for="inlineRadio2">Active</label>
                             </div>
 
@@ -155,11 +156,11 @@
             </div>
         </div>
     @endforeach
-
-    <!-- jQuery to handle AJAX call -->
+    <!-- jQuery to handle AJAX call and fadeout success/error messages -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script type="text/javascript">
+        // Fade out success and error messages after 4 seconds
         setTimeout(function() {
             $('#success-message').fadeOut('fast')
         }, 4000);
@@ -167,9 +168,25 @@
         setTimeout(function() {
             $('#error-message').fadeOut('fast')
         }, 4000);
-
-
-
-        
     </script>
+    <style>
+        /* Style for the tbody section */
+        #vendor-data {
+            background-color: #230bde;  /* Dark gray background for tbody */
+        }
+    
+        /* Alternating row colors */
+        #vendor-data tr:nth-child(even) {
+            background-color: #422281;  /* Darker gray for even rows */
+        }
+    
+        #vendor-data tr:nth-child(odd) {
+            background-color: #ffffff;  /* Slightly lighter gray for odd rows */
+        }
+    
+        /* Hover effect for rows */
+        #vendor-data tr:hover {
+            background-color: #3b2bb8;  /* Darker shade on hover */
+        }
+    </style>
 @endsection
