@@ -30,7 +30,7 @@ Route::get('sport-details',[UserSportController::class,'sport_details']);
 Route::get('score',[UserSportController::class,'scores']);
 
 
-// ********************************* Admin Dashboard ***************************************
+// ******************************** Admin Dashboard **************************************
 
 Route::get('user-details',[AdminAuthController::class,'user_details']);
 Route::get('signup',[AdminAuthController::class,'sign_up']);
@@ -41,6 +41,7 @@ Route::post('login',[AdminAuthController::class,'admin_login']);
 
 
 // ********************************** User Dashboard ****************************************
+
 
 Route::get('american-football',[UserSportController::class,'american_football_odds']);
 Route::get('basketball',[UserSportController::class,'basketball_odds']);
