@@ -1,43 +1,51 @@
 @extends('user.main.main')
 
 @section('user-content')
-    <div class="new-navbar">
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                {{ request('sport') ? collect($sportData)->firstWhere('key', request('sport'))['title'] ?? 'Select Sport' : 'Select Sport' }}
-            </button>
 
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                @php $hasAmericanFootball = false; @endphp
 
-                @foreach ($sportData as $sport)
-                    @if ($sport['group'] == 'American Football')
-                        @php $hasAmericanFootball = true; @endphp
-                        <li>
-                            <a class="dropdown-item sport-option" style="cursor: pointer;" data-value="{{ $sport['key'] }}">
-                                {{ $sport['title'] }}
-                            </a>
-                        </li>
+
+<div class="New-Header">
+    <div class="new-navbar-wrapper">
+        <div class="new-navbar">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    {{ request('sport') ? (collect($sportData)->firstWhere('key', request('sport'))['title'] ?? 'Select Sport') : 'Select Sport' }}
+                </button>
+            
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    @php $hasBasketball = false; @endphp
+            
+                    @foreach ($sportData as $sport)
+                        @if ($sport['group'] == 'Basketball')
+                            @php $hasBasketball = true; @endphp
+                            <li>
+                                <a class="dropdown-item sport-option" style="cursor: pointer;" data-value="{{ $sport['key'] }}">
+                                    {{ $sport['title'] }}
+                                </a>
+                            </li>
+                        @endif
+                    @endforeach
+            
+                    @if (!$hasBasketball)
+                        <li><a class="dropdown-item text-muted" href="#">No Basketball Data</a></li>
                     @endif
-                @endforeach
+                </ul>
+            </div>
+            
 
-                @if (!$hasAmericanFootball)
-                    <li><a class="dropdown-item text-muted" href="#">No American Football Data</a></li>
-                @endif
-            </ul>
+            <button>Football</button>
+            <button>Basketball</button>
+            <button>Baseball</button>
+            <button>MMA</button>
+            <button>Hockey</button>
+            <button>Soccer</button>
+            <button>Tennis</button>
+            <button>Golf</button>
         </div>
-
-
-        <button>Football</button>
-        <button>Basketball</button>
-        <button>Baseball</button>
-        <button>MMA</button>
-        <button>Hockey</button>
-        <button>Soccer</button>
-        <button>Tennis</button>
-        <button>Golf</button>
     </div>
+</div>
+
 
 
     <div class="main-content">
@@ -48,8 +56,8 @@
                         <th>Time</th>
                         <th>MMA Fighters</th>
                         <th>Point Spread</th>
-                        {{-- <th>Total Points</th>
-                        <th>Moneyline</th> --}}
+                        <th>Total Points</th>
+                        <th>Moneyline</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -64,21 +72,12 @@
                             $overPoint = $underPoint = $overPrice = $underPrice = null;
                             $homeMoneyline = $awayMoneyline = null;
 
-                            if (
-                                $draftKings &&
-                                is_array($draftKings) &&
-                                isset($draftKings['markets']) &&
-                                is_array($draftKings['markets'])
-                            ) {
+                            if ($draftKings && is_array($draftKings) && isset($draftKings['markets']) && is_array($draftKings['markets'])) {
                                 $markets = collect($draftKings['markets']);
 
                                 // Extract Point Spread Data
                                 $spreadMarket = $markets->firstWhere('key', 'spreads');
-                                if (
-                                    $spreadMarket &&
-                                    isset($spreadMarket['outcomes']) &&
-                                    is_array($spreadMarket['outcomes'])
-                                ) {
+                                if ($spreadMarket && isset($spreadMarket['outcomes']) && is_array($spreadMarket['outcomes'])) {
                                     foreach ($spreadMarket['outcomes'] as $outcome) {
                                         if (($outcome['name'] ?? '') === $homeTeam) {
                                             $homePoint = $outcome['point'] ?? null;
@@ -92,11 +91,7 @@
 
                                 // Extract Total Points Data
                                 $totalMarket = $markets->firstWhere('key', 'totals');
-                                if (
-                                    $totalMarket &&
-                                    isset($totalMarket['outcomes']) &&
-                                    is_array($totalMarket['outcomes'])
-                                ) {
+                                if ($totalMarket && isset($totalMarket['outcomes']) && is_array($totalMarket['outcomes'])) {
                                     foreach ($totalMarket['outcomes'] as $outcome) {
                                         if (($outcome['name'] ?? '') === 'Over') {
                                             $overPoint = $outcome['point'] ?? null;
@@ -110,11 +105,7 @@
 
                                 // Extract Moneyline Data
                                 $moneylineMarket = $markets->firstWhere('key', 'h2h');
-                                if (
-                                    $moneylineMarket &&
-                                    isset($moneylineMarket['outcomes']) &&
-                                    is_array($moneylineMarket['outcomes'])
-                                ) {
+                                if ($moneylineMarket && isset($moneylineMarket['outcomes']) && is_array($moneylineMarket['outcomes'])) {
                                     foreach ($moneylineMarket['outcomes'] as $outcome) {
                                         if (($outcome['name'] ?? '') === $homeTeam) {
                                             $homeMoneyline = $outcome['price'] ?? null;
@@ -131,8 +122,7 @@
                                 <!-- Time -->
                                 <td>
                                     <span>{{ \Carbon\Carbon::parse($item['commence_time'] ?? now())->format('g:i A') }}</span>
-                                    <span
-                                        class="date">{{ \Carbon\Carbon::parse($item['commence_time'] ?? now())->format('M j') }}</span>
+                                    <span class="date">{{ \Carbon\Carbon::parse($item['commence_time'] ?? now())->format('M j') }}</span>
                                 </td>
 
                                 <!-- Fighters -->
@@ -143,20 +133,18 @@
 
                                 <!-- Point Spread -->
                                 <td class="bet">
-                                    <div
-                                        onclick="openPickslip('Point Spread', '{{ $homeTeam }} {{ $homePoint }} {{ $homePrice }}')">
+                                    <div onclick="openPickslip('Point Spread', '{{ $homeTeam }} {{ $homePoint }} {{ $homePrice }}')">
                                         {{ $homePoint !== null ? $homePoint : '-' }}
                                         <span class="odds">{{ $homePrice !== null ? $homePrice : '-' }}</span>
                                     </div>
-                                    <div
-                                        onclick="openPickslip('Point Spread', '{{ $awayTeam }} {{ $awayPoint }} {{ $awayPrice }}')">
+                                    <div onclick="openPickslip('Point Spread', '{{ $awayTeam }} {{ $awayPoint }} {{ $awayPrice }}')">
                                         {{ $awayPoint !== null ? $awayPoint : '-' }}
                                         <span class="odds">{{ $awayPrice !== null ? $awayPrice : '-' }}</span>
                                     </div>
                                 </td>
 
                                 <!-- Total Points -->
-                                {{-- <td class="bet">
+                                <td class="bet">
                                     <div onclick="openPickslip('Total Points', 'Over {{ $overPoint }} {{ $overPrice }}')">
                                         O {{ $overPoint !== null ? $overPoint : '-' }} 
                                         <span class="odds">{{ $overPrice !== null ? $overPrice : '-' }}</span>
@@ -165,26 +153,26 @@
                                         U {{ $underPoint !== null ? $underPoint : '-' }} 
                                         <span class="odds">{{ $underPrice !== null ? $underPrice : '-' }}</span>
                                     </div>
-                                </td> --}}
+                                </td>
 
                                 <!-- Moneyline -->
-                                {{-- <td class="bet">
+                                <td class="bet">
                                     <div onclick="openPickslip('Moneyline', '{{ $homeTeam }} {{ $homeMoneyline }}')">
                                         <span class="odds">{{ $homeMoneyline !== null ? $homeMoneyline : '-' }}</span>
                                     </div>
                                     <div onclick="openPickslip('Moneyline', '{{ $awayTeam }} {{ $awayMoneyline }}')">
                                         <span class="odds">{{ $awayMoneyline !== null ? $awayMoneyline : '-' }}</span>
                                     </div>
-                                </td> --}}
+                                </td>
                             </tr>
                         @endif
                     @endforeach
 
                 </tbody>
             </table>
-
-
-
+            
+            
+            
         </div>
 
         <div class="pickslip" id="pickslip">
@@ -275,16 +263,17 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script>
+  <script>
+
         document.querySelectorAll('.sport-option').forEach(item => {
-            item.addEventListener('click', function() {
+            item.addEventListener('click', function () {
                 let selectedSport = this.getAttribute('data-value');
 
                 // Get current URL and remove any existing sport parameter
                 let url = new URL(window.location.href);
-                url.searchParams.delete('sport'); // Remove existing sport param
+                url.searchParams.delete('sport');  // Remove existing sport param
                 url.searchParams.set('sport', selectedSport); // Add new sport param
 
                 window.location.href = url.toString(); // Redirect to updated URL
@@ -292,29 +281,31 @@
         });
 
 
-        function openTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.style.display = 'none';
-            });
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.getElementById(tabName).style.display = 'block';
-            event.target.classList.add('active');
-        }
-
-
-        function openPickslip(type, value) {
-            document.getElementById('pick-info').innerText = `${type}: ${value}`;
-            document.getElementById('pickslip').classList.add('open');
-            document.getElementById('schedule-container').classList.add('shrink');
-        }
-
-
-        function closePickslip() {
-            document.getElementById('pick-info').innerText = 'Select a bet';
-            document.getElementById('pickslip').classList.remove('open');
-            document.getElementById('schedule-container').classList.remove('shrink');
-        }
-    </script>
+      function openTab(tabName) {
+          document.querySelectorAll('.tab-content').forEach(tab => {
+              tab.style.display = 'none';
+          });
+          document.querySelectorAll('.tab').forEach(tab => {
+              tab.classList.remove('active');
+          });
+          document.getElementById(tabName).style.display = 'block';
+          event.target.classList.add('active');
+      }
+      
+      
+      function openPickslip(type, value) {
+          document.getElementById('pick-info').innerText = `${type}: ${value}`;
+          document.getElementById('pickslip').classList.add('open');
+          document.getElementById('schedule-container').classList.add('shrink');
+      }
+      
+      
+      function closePickslip() {
+          document.getElementById('pick-info').innerText = 'Select a bet';
+          document.getElementById('pickslip').classList.remove('open');
+          document.getElementById('schedule-container').classList.remove('shrink');
+      }
+      
+  </script>
+      
 @endsection

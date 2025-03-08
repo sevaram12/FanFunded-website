@@ -17,14 +17,14 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
 Route::get('test',[AdminController::class,'test']);
 
-Route::get('test1',[AdminController::class,'test1']);
+Route::get('/',[AdminController::class,'test1']);
 
 Route::get('sport-details',[UserSportController::class,'sport_details']);
 Route::get('score',[UserSportController::class,'scores']);
@@ -40,4 +40,5 @@ Route::get('user-details',[AdminAuthController::class,'user_details']);
 // ********************************** User Dashboard ****************************************
 
 
-Route::get('american-football',[UserSportController::class,'odds']);
+Route::get('american-football',[UserSportController::class,'american_football_odds']);
+Route::get('basketball',[UserSportController::class,'basketball_odds']);
