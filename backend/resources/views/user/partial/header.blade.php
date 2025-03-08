@@ -155,8 +155,7 @@
                 </li>
                 
                   <li class="d-flex align-items-center justify-content-between px-3 py-2 rounded-3 gap-5">
-                    <a href="cricket.html" class="d-flex align-items-center gap-2" data-key="basketball_euroleague"><img
-                            src="assets/images/icon/basketball.png" alt="icon">Basketball</a>
+                    <a href="{{ url('basketball') }}?sport={{ urlencode('basketball_nba') }}" class="d-flex align-items-center gap-2"><img src="assets/images/icon/basketball.png" alt="icon">Basketball</a>
                     <button type="button" class="g1-color"><i class="ti ti-star"></i></button>
                 </li>
                   <li class="d-flex align-items-center justify-content-between px-3 py-2 rounded-3 gap-5">

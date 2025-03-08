@@ -15,7 +15,7 @@ class UserSportController extends Controller
 
             $curl = curl_init();
 
-            $apiUrl = "https://api.the-odds-api.com/v4/sports/?apiKey=cc95846b25e260612e379b29b82cfaaa";
+            $apiUrl = "https://api.the-odds-api.com/v4/sports/?apiKey=7b69ab974790465fe7e900b871f5dfa2";
 
             curl_setopt_array($curl, [
                 CURLOPT_URL => $apiUrl,
@@ -57,7 +57,7 @@ class UserSportController extends Controller
 
 
 
-    public function odds(Request $request)
+    public function american_football_odds(Request $request)
     {
         try {
             $sport = $request->input('sport');
@@ -68,46 +68,83 @@ class UserSportController extends Controller
                 ], 400);
             }
 
-            // dd($sport);
+            // API keys
+            $apiKeyOdds = "7b69ab974790465fe7e900b871f5dfa2";  // API key for odds
+            // $apiKeySports = "7b69ab974790465fe7e900b871f5dfa2";  // API key for sports
 
-            $apiKey = "6d37b47f19cd9291c267b58924f029de";
-            $regions = $request->input('regions','us');
-            $markets = $request->input('markets','h2h,totals,spreads');
-            $oddsFormat = $request->input('oddsFormat','american');
+            // API URLs
+            $regions = $request->input('regions', 'us');
+            $markets = $request->input('markets', 'h2h,totals,spreads');
+            $oddsFormat = $request->input('oddsFormat', 'american');
 
-            $apiUrl = "https://api.the-odds-api.com/v4/sports/{$sport}/odds/?apiKey={$apiKey}&regions={$regions}&markets={$markets}&oddsFormat={$oddsFormat}";
+            $apiUrlOdds = "https://api.the-odds-api.com/v4/sports/{$sport}/odds/?apiKey={$apiKeyOdds}&regions={$regions}&markets={$markets}&oddsFormat={$oddsFormat}";
+            
+            $apiUrlSports = "https://api.the-odds-api.com/v4/sports/?apiKey={$apiKeyOdds}";
 
-            $curl = curl_init();
+            // Initialize cURL multi-request
+            $multiCurl = curl_multi_init();
+            $curlHandles = [];
 
-            curl_setopt_array($curl, [
-                CURLOPT_URL => $apiUrl,
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_TIMEOUT => 30,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "GET",
-                CURLOPT_HTTPHEADER => [
-                    "Content-Type: application/json"
-                ],
-            ]);
+            // Create cURL handles for each API
+            $urls = [
+                'odds' => $apiUrlOdds,
+                'sports' => $apiUrlSports
+            ];
 
-            $response = curl_exec($curl);
-            $err = curl_error($curl);
-            $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-            curl_close($curl);
-
-            if ($err) {
-                Log::error("cURL error: {$err}");
-                return view('user.sport.american-football')->with('error','Error Not connecting with odds data');
-                // return response()->json(['status' => 'Error connecting to The Odds API.'], 500);
+            foreach ($urls as $key => $url) {
+                $curlHandles[$key] = curl_init();
+                curl_setopt_array($curlHandles[$key], [
+                    CURLOPT_URL => $url,
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_TIMEOUT => 30,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => "GET",
+                    CURLOPT_HTTPHEADER => [
+                        "Content-Type: application/json"
+                    ],
+                ]);
+                curl_multi_add_handle($multiCurl, $curlHandles[$key]);
             }
 
-            $responseData = json_decode($response, true);
-            $oddsData = $responseData;
+            // Execute all requests simultaneously
+            $running = null;
+            do {
+                curl_multi_exec($multiCurl, $running);
+            } while ($running);
 
-            Log::info('API response data:', ['response_data' => $responseData]);
+            // Get responses
+            $oddsData = $sportData = null;
+            foreach ($curlHandles as $key => $curl) {
+                $response = curl_multi_getcontent($curl);
+                $error = curl_error($curl);
+                curl_multi_remove_handle($multiCurl, $curl);
+                curl_close($curl);
 
-            // dd($oddsData);
-            return view('user.sport.american-football',compact('oddsData'));
+                if ($error) {
+                    // Log::error("cURL error for {$key}: {$error}");
+                    return redirect('user.sport.american-football')->with('fail','Error not fetching data.');
+                    // return response()->json(['error' => "Error fetching {$key} data."], 500);
+                }
+
+                $decodedResponse = json_decode($response, true);
+
+                if ($key === 'odds') {
+                    $oddsData = $decodedResponse;
+                } elseif ($key === 'sports') {
+                    $sportData = $decodedResponse;
+                }
+            }
+
+            // Close multi-cURL
+            curl_multi_close($multiCurl);
+
+            // Log API responses
+            Log::info('Odds API response:', ['data' => $oddsData]);
+            Log::info('Sports API response:', ['data' => $sportData]);
+
+           
+            // Return view with combined data
+            return view('user.sport.american-football', compact('oddsData', 'sportData'));
 
         } catch (Exception $exception) {
             $message = $exception->getMessage();
@@ -119,13 +156,111 @@ class UserSportController extends Controller
 
 
 
+    public function basketball_odds(Request $request)
+    {
+        try {
+            $sport = $request->input('sport');
+
+            if (empty($sport)) {
+                return response()->json([
+                    'error' => 'Sport key is required.'
+                ], 400);
+            }
+
+            // API keys
+            $apiKeyOdds = "7b69ab974790465fe7e900b871f5dfa2";  // API key for odds
+            // $apiKeySports = "7b69ab974790465fe7e900b871f5dfa2";  // API key for sports
+
+            // API URLs
+            $regions = $request->input('regions', 'us');
+            $markets = $request->input('markets', 'h2h,totals,spreads');
+            $oddsFormat = $request->input('oddsFormat', 'american');
+
+            $apiUrlOdds = "https://api.the-odds-api.com/v4/sports/{$sport}/odds/?apiKey={$apiKeyOdds}&regions={$regions}&markets={$markets}&oddsFormat={$oddsFormat}";
+
+            $apiUrlSports = "https://api.the-odds-api.com/v4/sports/?apiKey={$apiKeyOdds}";
+
+            // Initialize cURL multi-request
+            $multiCurl = curl_multi_init();
+            $curlHandles = [];
+
+            // Create cURL handles for each API
+            $urls = [
+                'odds' => $apiUrlOdds,
+                'sports' => $apiUrlSports
+            ];
+
+            foreach ($urls as $key => $url) {
+                $curlHandles[$key] = curl_init();
+                curl_setopt_array($curlHandles[$key], [
+                    CURLOPT_URL => $url,
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_TIMEOUT => 30,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => "GET",
+                    CURLOPT_HTTPHEADER => [
+                        "Content-Type: application/json"
+                    ],
+                ]);
+                curl_multi_add_handle($multiCurl, $curlHandles[$key]);
+            }
+
+            // Execute all requests simultaneously
+            $running = null;
+            do {
+                curl_multi_exec($multiCurl, $running);
+            } while ($running);
+
+            // Get responses
+            $oddsData = $sportData = null;
+            foreach ($curlHandles as $key => $curl) {
+                $response = curl_multi_getcontent($curl);
+                $error = curl_error($curl);
+                curl_multi_remove_handle($multiCurl, $curl);
+                curl_close($curl);
+
+                if ($error) {
+                    // Log::error("cURL error for {$key}: {$error}");
+                    return redirect('user.sport.basketball')->with('fail','Error not fetching data.');
+                    // return response()->json(['error' => "Error fetching {$key} data."], 500);
+                }
+
+                $decodedResponse = json_decode($response, true);
+
+                if ($key === 'odds') {
+                    $oddsData = $decodedResponse;
+                } elseif ($key === 'sports') {
+                    $sportData = $decodedResponse;
+                }
+            }
+
+            // Close multi-cURL
+            curl_multi_close($multiCurl);
+
+            // dd($sportData);
+            // Log API responses
+            Log::info('Odds API response:', ['data' => $oddsData]);
+            Log::info('Sports API response:', ['data' => $sportData]);
+
+        //    dd($oddsData);
+            // Return view with combined data
+            return view('user.sport.basketball', compact('oddsData', 'sportData'));
+
+        } catch (Exception $exception) {
+            $message = $exception->getMessage();
+            $sortmessage = strtok($message, '(');
+
+            return response()->json(['error' => 'An error occurred: ' . $sortmessage], 500);
+        }
+    }   
+
 
 
 
     public function scores(Request $request)
     {
         try {
-            $apiKey = "6d37b47f19cd9291c267b58924f029de";
+            $apiKey = "7b69ab974790465fe7e900b871f5dfa2";
             $daysFrom = $request->input('daysFrom', 1);
 
             $apiUrl = "https://api.the-odds-api.com/v4/sports/basketball_nba/scores/?daysFrom={$daysFrom}&apiKey={$apiKey}";
