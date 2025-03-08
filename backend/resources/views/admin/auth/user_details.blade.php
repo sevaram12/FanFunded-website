@@ -7,6 +7,7 @@
             {{ Session::get('success') }}
         </div>
     @endif
+
     <!-- Error Message -->
     @if (session('fail'))
         <div class="alert alert-danger" id="error-message">
@@ -14,52 +15,7 @@
         </div>
     @endif
 
-    {{-- <div class="row">
-
-        <div class="col-2">
-            <a href="{{ url('dashboard') }}" class="btn-submit ml-3 mt-4" style="text-decoration: none; padding: 4px 14px;">
-                <i class="fa-solid fa-left-long"></i>
-            </a>
-        </div>
-        <div class="col-1">
-            <label class="mt-4"><b>Filters :</b></label>
-        </div>
-
-        <div class="col-3">
-            <div class="form-group">
-                <label for="vendor_name"><b>Vendor Name</b></label>
-                <input type="text" class="form-control" id="vendor_name" placeholder="search by vendor name">
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="form-group">
-                <label for="gstin"><b>GSTIN</b></label>
-                <input type="text" class="form-control" id="gstin" placeholder="search by GSTIN number">
-            </div>
-        </div>
-        <div class="col-3">
-            <!--<label for="gstin"><b>Filter</b></label>-->
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="pending" value="Active" checked>
-                <label class="form-check-label" for="exampleRadios1">
-                    <b>Active Entries</b>
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="approved" value="De-Active">
-                <label class="form-check-label" for="exampleRadios2">
-                    <b>De-Active Entries</b>
-                </label>
-            </div>
-            <div class="form-check disabled">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="all" value="all">
-                <label class="form-check-label" for="exampleRadios3">
-                    <b>All Entries</b>
-                </label>
-            </div>
-        </div>
-    </div> --}}
-
+    <!-- Main Content Section -->
     <div class="container mb-4 mt-3">
         <div class="row mt-4">
             <div class="col-md-12 mb-3">
@@ -81,38 +37,38 @@
                                     </tr>
                                 </thead>
                                 <tbody id="vendor-data">
-                                    <?php
-                                    $i = 1;
-                                    ?>
-                                    @foreach ($userDetail as $item)
+                                    @foreach ($userDetail as $user)
+                                        <!-- Looping through users -->
                                         <tr>
-                                            <td>{{ \Carbon\Carbon::parse($item['created_at'])->format('Y-m-d') }}</td>
-                                            <td>{{ $item['name'] }}</td>
-                                            <td>{{ $item['email'] }}</td>
-                                            <td>{{ $item['phone_number'] }}</td>
-                                            <td>{{ $item['total_sales'] }}</td>
+                                            <!-- Display User Info -->
+                                            <td>{{ \Carbon\Carbon::parse($user->created_at)->format('Y-m-d') }}</td>
+                                            <!-- Use $user here -->
+                                            <td>{{ $user->name }}</td> <!-- Use $user here -->
+                                            <td>{{ $user->email }}</td> <!-- Use $user here -->
+                                            <td>{{ $user->phone_no }}</td> <!-- Use $user here -->
+                                            <td>{{ $user->total_sales }}</td> <!-- Use $user here -->
                                             <td>
-                                                @if ($item->status == 'Active')
+                                                <!-- Display User Status -->
+                                                @if ($user->status == 'Active')
+                                                    <!-- Use $user here -->
                                                     <a href="" class="btn-submit" data-toggle="modal"
-                                                        data-target="#updateModal{{ $item->id }}">
-                                                        <b>{{ $item->status }}</b>
+                                                        data-target="#updateModal{{ $user->id }}">
+                                                        <b>{{ $user->status }}</b> <!-- Use $user here -->
                                                     </a>
-                                                @elseif($item->status == 'De-Active')
+                                                @elseif($user->status == 'De-Active')
                                                     <a href="" class="btn-submit btn-pending" data-toggle="modal"
-                                                        data-target="#updateModal{{ $item->id }}">
-                                                        <b>{{ $item->status }}</b>
+                                                        data-target="#updateModal{{ $user->id }}">
+                                                        <b>{{ $user->status }}</b> <!-- Use $user here -->
                                                     </a>
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ url('edit-user-detail/' . $item->id) }}"
-                                                    class="btn-submit"><i
-                                                        class="fa-solid fa-pen-to-square"></i></a>
+                                                <a href="{{ url('edit-user-detail/' . $user->id) }}" class="btn-submit">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
-
-
                                 </tbody>
                             </table>
                         </div>
@@ -121,6 +77,7 @@
             </div>
         </div>
     </div>
+
     <!-- Modals for Updating User Status -->
     @foreach ($userDetail as $user)
         <!-- Looping through users -->

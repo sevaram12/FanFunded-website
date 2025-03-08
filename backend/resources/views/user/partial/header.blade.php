@@ -111,8 +111,7 @@
               <i class="ti ti-menu-deep left-nav-icon n8-color order-2 order-lg-0 d-none">
               </i>
               <a class="navbar-brand d-center text-center gap-1 gap-lg-2 ms-lg-4" href="index.html">
-                  <img class="logo" src="assets/images/logo.png" alt="Logo">
-                  <img class="logo d-none d-xl-block" src="assets/images/logo-text.png" alt="Logo">
+                  <img class="logo" src="assets/images/white_logoff_new.png" alt="Logo">
               </a>
           </div>
           <div class="nav_aside px-5 p2-bg">
@@ -159,7 +158,7 @@
                     <button type="button" class="g1-color"><i class="ti ti-star"></i></button>
                 </li>
                   <li class="d-flex align-items-center justify-content-between px-3 py-2 rounded-3 gap-5">
-                      <a href="basketball.html" class="d-flex align-items-center gap-2" data-key="baseball_mlb_preseason"><img
+                    <a href="{{ url('baseball') }}?sport={{ urlencode('baseball_mlb_preseason') }}" class="d-flex align-items-center gap-2" data-key="baseball_mlb_preseason"><img
                               src="assets/images/icon/soccer-icon.png" alt="icon">Baseball</a>
                       <button type="button" class="g1-color"><i class="ti ti-star"></i></button>
                   </li>
@@ -171,23 +170,23 @@
                   
                  
                   <li class="d-flex align-items-center justify-content-between px-3 py-2 rounded-3 gap-5">
-                      <a href="ice-hockey.html" class="d-flex align-items-center gap-2"><img
+                    <a href="{{ url('icehockey') }}?sport={{ urlencode('icehockey_liiga') }}" class="d-flex align-items-center gap-2"><img
                               src="assets/images/icon/ice-hockey.png" alt="icon" data-key="icehockey_ahl">Ice Hockey</a>
                       <button type="button" class="g1-color"><i class="ti ti-star"></i></button>
                   </li>
-               
+                  
                   <li class="d-flex align-items-center justify-content-between px-3 py-2 rounded-3 gap-5">
-                      <a href="table-tennis.html" class="d-flex align-items-center gap-2" data-key="soccer_argentina_primera_division"><img
+                     <a href="{{ url('soccer') }}?sport={{ urlencode('soccer_argentina_primera_division') }}" class="d-flex align-items-center gap-2" data-key="soccer_argentina_primera_division"><img
                               src="assets/images/icon/soccer-icon.png" alt="icon">Soccer</a>
                       <button type="button" class="g1-color"><i class="ti ti-star"></i></button>
                   </li>
                   <li class="d-flex align-items-center justify-content-between px-3 py-2 rounded-3 gap-5">
-                    <a href="table-tennis.html" class="d-flex align-items-center gap-2" data-key="tennis_atp_indian_wells" ><img
+                    <a href="{{ url('tennis') }}?sport={{ urlencode('tennis_atp_indian_wells') }}" class="d-flex align-items-center gap-2" data-key="tennis_atp_indian_wells" ><img
                             src="assets/images/icon/table-tennis.png" alt="icon">Tennis</a>
                     <button type="button" class="g1-color"><i class="ti ti-star"></i></button>
                 </li>
                 <li class="d-flex align-items-center justify-content-between px-3 py-2 rounded-3 gap-5 mb-5">
-                    <a href="nba-2k.html" class="d-flex align-items-center gap-2"><img
+                    <a href="{{ url('golf') }}?sport={{ urlencode('golf_us_open_winner') }}" class="d-flex align-items-center gap-2"><img
                             src="assets/images/icon/waterpolo.png" alt="icon" data-key="golf_us_open_winner">Golf</a>
                     <button type="button" class="g1-color"><i class="ti ti-star"></i></button>
                 </li>
