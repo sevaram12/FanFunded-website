@@ -32,14 +32,14 @@
                 </div>
 
 
-                <button>Football</button>
-                <button>Basketball</button>
-                <button>Baseball</button>
-                <button>MMA</button>
-                <button>Hockey</button>
-                <button>Soccer</button>
-                <button>Tennis</button>
-                <button>Golf</button>
+                <a href="{{ url('american-football') }}?sport={{ urlencode('americanfootball_ncaaf') }}" class="d-flex align-items-center gap-2"><button>Football</button></a>
+        <a href="{{ url('basketball') }}?sport={{ urlencode('basketball_nba') }}" class="d-flex align-items-center gap-2"><button>Basketball</button></a>
+        <a href="{{ url('baseball') }}?sport={{ urlencode('baseball_mlb_preseason') }}" class="d-flex align-items-center gap-2" data-key="baseball_mlb_preseason"><button>Baseball</button></a>
+        <a href="{{ url('mma') }}?sport={{ urlencode('mma_mixed_martial_arts') }}" class="d-flex align-items-center gap-2"><button>MMA</button></a>
+        <a href="{{ url('icehockey') }}?sport={{ urlencode('icehockey_liiga') }}" class="d-flex align-items-center gap-2"><button>Hockey</button></a>
+        <a href="{{ url('soccer') }}?sport={{ urlencode('soccer_argentina_primera_division') }}" class="d-flex align-items-center gap-2" data-key="soccer_argentina_primera_division"><button>Soccer</button></a>
+        <a href="{{ url('tennis') }}?sport={{ urlencode('tennis_atp_indian_wells') }}" class="d-flex align-items-center gap-2" data-key="tennis_atp_indian_wells" ><button>Tennis</button></a>
+        <a href="{{ url('golf') }}?sport={{ urlencode('golf_us_open_winner') }}" class="d-flex align-items-center gap-2"><button>Golf</button></a>
             </div>
         </div>
     </div>

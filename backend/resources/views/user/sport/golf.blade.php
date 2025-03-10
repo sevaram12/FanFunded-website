@@ -31,14 +31,14 @@
                 </ul>
             </div>
 
-            <button>Football</button>
-            <button>Basketball</button>
-            <button>Baseball</button>
-            <button>MMA</button>
-            <button>Hockey</button>
-            <button>Soccer</button>
-            <button>Tennis</button>
-            <button>Golf</button>
+            <a href="{{ url('american-football') }}?sport={{ urlencode('americanfootball_ncaaf') }}" class="d-flex align-items-center gap-2"><button>Football</button></a>
+        <a href="{{ url('basketball') }}?sport={{ urlencode('basketball_nba') }}" class="d-flex align-items-center gap-2"><button>Basketball</button></a>
+        <a href="{{ url('baseball') }}?sport={{ urlencode('baseball_mlb_preseason') }}" class="d-flex align-items-center gap-2" data-key="baseball_mlb_preseason"><button>Baseball</button></a>
+        <a href="{{ url('mma') }}?sport={{ urlencode('mma_mixed_martial_arts') }}" class="d-flex align-items-center gap-2"><button>MMA</button></a>
+        <a href="{{ url('icehockey') }}?sport={{ urlencode('icehockey_liiga') }}" class="d-flex align-items-center gap-2"><button>Hockey</button></a>
+        <a href="{{ url('soccer') }}?sport={{ urlencode('soccer_argentina_primera_division') }}" class="d-flex align-items-center gap-2" data-key="soccer_argentina_primera_division"><button>Soccer</button></a>
+        <a href="{{ url('tennis') }}?sport={{ urlencode('tennis_atp_indian_wells') }}" class="d-flex align-items-center gap-2" data-key="tennis_atp_indian_wells" ><button>Tennis</button></a>
+        <a href="{{ url('golf') }}?sport={{ urlencode('golf_us_open_winner') }}" class="d-flex align-items-center gap-2"><button>Golf</button></a>
         </div>
     </div>
 </div>
@@ -179,15 +179,13 @@
 
                 <!-- --------------------------------------------- -->
                 <div class="tab-content" id="straight">
-
                     <div class="scroll-div">
                         <div class="center-pick">
                             <div class="over">
                                 <h6>Over 2.5</h6>
-                                <h6 class="remove-bet" onclick="removeBet(this)">❌</h6>
+                                <h6 class="remove-bet" style="cursor: pointer;" onclick="removeBet(this)">❌</h6>
                             </div>
                             <div class="total">
-                                <!-- <h6>Total Rounds</h6> -->
                                 <h6 id="pick-info"></h6>
                             </div>
                             <div class="date-time">
@@ -198,33 +196,28 @@
                                     <span>Pick</span>
                                     <input type="number" value="">
                                 </div>
-
                                 <div class="win-input">
                                     <span>To Win</span>
                                     <input type="text" value="" disabled>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-
                 </div>
-                <!-- --------------------------------------------------------------------- -->
+
+                <!-- --------------------------------------------- -->
                 <div class="tab-content" id="parlay" style="display: none;">
                     <div class="scroll-div">
                         <div class="center-pick">
                             <div class="over">
                                 <h6>Over 2.5</h6>
-                                <h6>❌</h6>
+                                <h6 class="remove-bet" style="cursor: pointer;" onclick="removeBet(this)">❌</h6>
                             </div>
                             <div class="total">
-                                <!-- <h6>Total Rounds</h6> -->
                                 <h6 id="pick-info"></h6>
                             </div>
                             <div class="date-time">
-                                <div class="date-time">
-                                    <h6 id="pick-date-time">Select a bet</h6>
-                                </div>
+                                <h6 id="pick-date-time">Select a bet</h6>
                             </div>
                             <div class="btuns-pick">
                                 <div class="pick-input">
@@ -236,17 +229,15 @@
                                     <input type="text" value="" disabled>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
 
-                <!-- ---------------------------------------------------------------------- -->
+                <!-- --------------------------------------------- -->
                 <div class="collect">
                     <h6>To Collect</h6>
                     <h6>$0.00</h6>
                 </div>
-                <!-- <p id="pick-info">Select a bet</p> -->
 
                 <div class="last-pick-btn">
                     <button class="btn-clear" onclick="closePickslip()">Clear</button>
@@ -258,47 +249,97 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-  <script>
+<script>
+    document.querySelectorAll('.sport-option').forEach(item => {
+        item.addEventListener('click', function() {
+            let selectedSport = this.getAttribute('data-value');
 
-        document.querySelectorAll('.sport-option').forEach(item => {
-            item.addEventListener('click', function () {
-                let selectedSport = this.getAttribute('data-value');
+            // Get current URL and remove any existing sport parameter
+            let url = new URL(window.location.href);
+            url.searchParams.delete('sport'); // Remove existing sport param
+            url.searchParams.set('sport', selectedSport); // Add new sport param
 
-                // Get current URL and remove any existing sport parameter
-                let url = new URL(window.location.href);
-                url.searchParams.delete('sport');  // Remove existing sport param
-                url.searchParams.set('sport', selectedSport); // Add new sport param
-
-                window.location.href = url.toString(); // Redirect to updated URL
-            });
+            window.location.href = url.toString(); // Redirect to updated URL
         });
+    });
 
+    function openTab(tabName) {
+        document.querySelectorAll('.tab-content').forEach(tab => {
+            tab.style.display = 'none';
+        });
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.classList.remove('active');
+        });
+        document.getElementById(tabName).style.display = 'block';
+        event.target.classList.add('active');
+    }
 
-      function openTab(tabName) {
-          document.querySelectorAll('.tab-content').forEach(tab => {
-              tab.style.display = 'none';
-          });
-          document.querySelectorAll('.tab').forEach(tab => {
-              tab.classList.remove('active');
-          });
-          document.getElementById(tabName).style.display = 'block';
-          event.target.classList.add('active');
-      }
-      
-      
-      function openPickslip(type, value) {
-          document.getElementById('pick-info').innerText = `${type}: ${value}`;
-          document.getElementById('pickslip').classList.add('open');
-          document.getElementById('schedule-container').classList.add('shrink');
-      }
-      
-      
-      function closePickslip() {
-          document.getElementById('pick-info').innerText = 'Select a bet';
-          document.getElementById('pickslip').classList.remove('open');
-          document.getElementById('schedule-container').classList.remove('shrink');
-      }
-      
-  </script>
+    function openPickslip(type, value) {
+        let pickslip = document.getElementById("pickslip");
+        let betContainer = document.querySelector(".scroll-div"); // Get the container for picks
+
+        // Ensure pickslip opens every time a new pick is added
+        pickslip.style.display = "block";
+        pickslip.classList.add("open");
+
+        // Create a new pick entry (APPENDS instead of replacing)
+        let newBet = document.createElement("div");
+        newBet.classList.add("center-pick");
+        newBet.innerHTML = `
+<div class="over">
+    <h6>${type}</h6>
+    <h6 class="remove-bet" style="cursor: pointer;" onclick="removeBet(this)">❌</h6>
+</div>
+<div class="total">
+    <h6>${value}</h6>
+</div>
+<div class="date-time">
+    <h6>Select a bet</h6>
+</div>
+<div class="btuns-pick">
+    <div class="pick-input">
+        <span>Pick</span>
+        <input type="number" value="">
+    </div>
+    <div class="win-input">
+        <span>To Win</span>
+        <input type="text" value="" disabled>
+    </div>
+</div>
+`;
+
+        betContainer.appendChild(newBet); // Append new pick below previous ones
+    }
+
+    function removeBet(element) {
+        let betItem = element.closest(".center-pick");
+        if (betItem) {
+            betItem.remove();
+        }
+
+        // Hide pickslip if no picks are left
+        let betContainer = document.querySelector(".scroll-div");
+        if (betContainer.children.length === 0) {
+            document.getElementById("pickslip").style.display = "none";
+        }
+    }
+
+    // Ensure pickslip can reopen after being closed
+    function closePickslip() {
+        let betContainer = document.querySelector(".scroll-div");
+        betContainer.innerHTML = ""; // Remove all bets
+        document.getElementById("pickslip").style.display = "none"; // Hide pickslip
+    }
+
+    // Ensure clicking on a schedule-container item adds a new pick
+    document.getElementById("schedule-container").addEventListener("click", function(event) {
+        let target = event.target;
+        if (target.classList.contains("schedule-item")) { // Clicked item must have the class schedule-item
+            let type = target.getAttribute("data-type"); // Example: data-type="Point Spread"
+            let value = target.getAttribute("data-value"); // Example: data-value="Over 2.5"
+            openPickslip(type, value);
+        }
+    });
+</script>
       
 @endsection
