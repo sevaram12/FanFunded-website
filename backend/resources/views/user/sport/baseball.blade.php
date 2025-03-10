@@ -61,7 +61,7 @@
                 <tbody>
                     @foreach ($oddsData as $item)
                         @php
-                            $draftKings = collect($item['bookmakers'] ?? [])->firstWhere('key', 'draftkings');
+                            $draftKings = collect($item['bookmakers'] ?? [])->firstWhere('key', 'bovada');
 
                             $homeTeam = $item['home_team'] ?? 'N/A';
                             $awayTeam = $item['away_team'] ?? 'N/A';
