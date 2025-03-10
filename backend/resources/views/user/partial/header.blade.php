@@ -158,7 +158,7 @@
                     <button type="button" class="g1-color"><i class="ti ti-star"></i></button>
                 </li>
                   <li class="d-flex align-items-center justify-content-between px-3 py-2 rounded-3 gap-5">
-                    <a href="{{ url('baseball') }}?sport={{ urlencode('baseball_mlb_preseason') }}" class="d-flex align-items-center gap-2" data-key="baseball_mlb_preseason"><img
+                    <a href="{{ url('baseball') }}?sport={{ urlencode('baseball_mlb') }}" class="d-flex align-items-center gap-2" data-key="baseball_mlb_preseason"><img
                               src="assets/images/icon/soccer-icon.png" alt="icon">Baseball</a>
                       <button type="button" class="g1-color"><i class="ti ti-star"></i></button>
                   </li>
