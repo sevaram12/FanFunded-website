@@ -178,9 +178,9 @@
                 </div>
 
                 <!-- --------------------------------------------- -->
-                <div class="tab-content" id="straight">
+                <div class="tab-content" id="straight" style="display: none;">
                     <div class="scroll-div">
-                        <div class="center-pick">
+                        <div class="center-pick" style="display: none">
                             <div class="over">
                                 <h6>Over 2.5</h6>
                                 <h6 class="remove-bet" style="cursor: pointer;" onclick="removeBet(this)">❌</h6>
@@ -208,7 +208,7 @@
                 <!-- --------------------------------------------- -->
                 <div class="tab-content" id="parlay" style="display: none;">
                     <div class="scroll-div">
-                        <div class="center-pick">
+                        <div class="center-pick" style="display: none">
                             <div class="over">
                                 <h6>Over 2.5</h6>
                                 <h6 class="remove-bet" style="cursor: pointer;" onclick="removeBet(this)">❌</h6>
