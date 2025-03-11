@@ -11,9 +11,9 @@
     <!-- #description -->
     <meta name="description" content="Oddsx Sports Betting Website HTML Template">
     <!-- #title -->
-    <title>Oddsx - Sports Betting Website HTML Template</title>
+    <title>fanfunded.oi/admin</title>
     <!-- #favicon -->
-    <link rel="shortcut icon" href="{{asset('assets/images/fav.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('assets/images/white-logo.png')}}" type="image/x-icon">
     <!-- ==== css dependencies start ==== -->
     <link rel="stylesheet" href="{{asset('assets/css/style.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/fanfunded-style.css')}}">

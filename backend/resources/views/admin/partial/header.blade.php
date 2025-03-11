@@ -83,7 +83,7 @@
                 <ul class="navbar-nav navbar-nav-right">
                     <li class="nav-item nav-profile dropdown">
                    <a class="nav-link mb-3" href="#" data-toggle="dropdown" id="profileDropdown" style=" object-fit: cover;">
-                        <img src="{{ asset('public/assets/upload/dummy.jpg') }}" alt="profile" style="width:45px; height:45px;"
+                        <img src="{{ asset('assets/images/provider.jpg') }}" alt="profile" style="width:45px; height:45px;"
     
                              >
                         </a>
