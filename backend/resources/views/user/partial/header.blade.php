@@ -82,7 +82,7 @@
               <ul class="navbar-nav navbar-nav-right">
               <li class="nav-item nav-profile dropdown">
                    <a class="nav-link mb-3" href="#" data-toggle="dropdown" id="profileDropdown" style=" object-fit: cover;">
-                        <img src="{{ asset('public/assets/upload/dummy.jpg') }}" alt="profile" style="width:45px; height:45px;"
+                        <img src="{{ asset('assets/images/provider.jpg') }}" alt="profile" style="width:45px; height:45px;"
     
                              >
                     </a>
@@ -106,14 +106,14 @@
           </button>
       </nav>
       <div id="div10" class="navigation left-nav-area box3  position-fixed">
-          <div
-              class="logo-area slide-toggle3 trader-list position-fixed top-0 d-flex align-items-center justify-content-center pt-6 pt-md-8 gap-sm-4 gap-md-5 gap-lg-7 px-4 px-lg-8">
-              <i class="ti ti-menu-deep left-nav-icon n8-color order-2 order-lg-0 d-none">
-              </i>
-              <a class="navbar-brand d-center text-center gap-1 gap-lg-2 ms-lg-4" href="index.html">
-                  <img class="logo" src="assets/images/white_logoff_new.png" alt="Logo">
-              </a>
+        <div class="logo-area slide-toggle3 trader-list position-fixed top-0 d-flex align-items-center justify-content-end pt-6 pt-md-8 gap-sm-4 gap-md-5 gap-lg-7 px-4 px-lg-8">
+            <i class="ti ti-menu-deep left-nav-icon n8-color order-2 order-lg-0 d-none"></i>
+            
+            <a class="navbar-brand d-center text-center gap-1 gap-lg-2 ms-lg-4" href="index.html" style="display: flex; align-items: center; justify-content: flex-end;">
+              <img class="logo" src="assets/images/white-logo.png" alt="Logo" style="width: 200px; height: auto;">
+            </a>
           </div>
+          
           <div class="nav_aside px-5 p2-bg">
               <div class="nav-clsoeicon">
                   <i class="ti ti-x left-nav-icon n8-color order-2 order-lg-0 d-block d-lg-none fs-three">

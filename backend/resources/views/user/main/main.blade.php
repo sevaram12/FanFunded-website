@@ -13,7 +13,7 @@
     <!-- #title -->
     <title>fanfunded.oi/admin</title>
     <!-- #favicon -->
-    <link rel="shortcut icon" href="{{asset('assets/images/white_logoff_new.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('assets/images/white-logo.png')}}" type="image/x-icon">
     <!-- ==== css dependencies start ==== -->
     <link rel="stylesheet" href="{{asset('assets/css/style.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/fanfunded-style.css')}}">
