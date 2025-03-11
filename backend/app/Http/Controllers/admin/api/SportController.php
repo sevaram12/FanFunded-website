@@ -19,7 +19,7 @@ class SportController extends Controller
 
             $curl = curl_init();
 
-            $apiUrl = "https://api.the-odds-api.com/v4/sports/?apiKey=d6defc06e70741fa7379cd769dea07cb";
+            $apiUrl = "https://api.the-odds-api.com/v4/sports/?apiKey=f552fbb0cd97f1d1dca369b8eca3d276";
 
             curl_setopt_array($curl, [
                 CURLOPT_URL => $apiUrl,
@@ -63,7 +63,7 @@ class SportController extends Controller
     public function scores(Request $request)
     {
         try {
-            $apiKey = "d6defc06e70741fa7379cd769dea07cb";
+            $apiKey = "f552fbb0cd97f1d1dca369b8eca3d276";
             $daysFrom = $request->input('daysFrom', 1);
 
             $apiUrl = "https://api.the-odds-api.com/v4/sports/basketball_nba/scores/?daysFrom={$daysFrom}&apiKey={$apiKey}";
@@ -123,7 +123,7 @@ class SportController extends Controller
     public function getEventOdds(Request $request)
     {
         try {
-            $apiKey = "d6defc06e70741fa7379cd769dea07cb";
+            $apiKey = "f552fbb0cd97f1d1dca369b8eca3d276";
             $sport = $request->input('sport');
             $eventId = $request->input('eventId');
 
@@ -184,7 +184,7 @@ class SportController extends Controller
         try {
             $curl = curl_init();
 
-            $apiKey = "d6defc06e70741fa7379cd769dea07cb";
+            $apiKey = "f552fbb0cd97f1d1dca369b8eca3d276";
             $sport = "basketball_nba";
             $apiUrl = "https://api.the-odds-api.com/v4/sports/{$sport}/participants?apiKey={$apiKey}";
 
@@ -236,7 +236,7 @@ class SportController extends Controller
             }
 
     
-            $apiKey = "d6defc06e70741fa7379cd769dea07cb";
+            $apiKey = "f552fbb0cd97f1d1dca369b8eca3d276";
             $regions = $request->input('regions', 'us');  // Default to 'us'
             $markets = $request->input('markets', 'h2h,totals,spreads');  // Default markets
             $oddsFormat = $request->input('oddsFormat', 'american');  // Default odds format
@@ -332,7 +332,7 @@ class SportController extends Controller
     public function historical_odds(Request $request)
     {
         try {
-            $apiKey = "d6defc06e70741fa7379cd769dea07cb";
+            $apiKey = "f552fbb0cd97f1d1dca369b8eca3d276";
             $sport = $request->input('sport', 'basketball_nba');
             $date = $request->input('date');
 
@@ -401,7 +401,7 @@ class SportController extends Controller
     {
         try {
 
-            $apiKey = "d6defc06e70741fa7379cd769dea07cb";
+            $apiKey = "f552fbb0cd97f1d1dca369b8eca3d276";
 
             $sportKey = $request->input('sport_key');
             $events = $request->input('events');
@@ -462,7 +462,7 @@ class SportController extends Controller
     public function historicalevents(Request $request)
     {
         try {
-            $apiKey = "d6defc06e70741fa7379cd769dea07cb";
+            $apiKey = "f552fbb0cd97f1d1dca369b8eca3d276";
             $date = $request->input('date');
             $sport = $request->input('sport', 'basketball_nba');  // Default to basketball_nba
 
@@ -537,7 +537,7 @@ class SportController extends Controller
             $markets = $request->input('markets', 'player_points,h2h_q1');
 
 
-            $apiKey = env('d6defc06e70741fa7379cd769dea07cb');
+            $apiKey = env('f552fbb0cd97f1d1dca369b8eca3d276');
 
 
             if (!$apiKey) {

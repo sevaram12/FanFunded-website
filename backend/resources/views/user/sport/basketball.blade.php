@@ -192,8 +192,8 @@
                             <div class="date-time">
                                 <h6 id="pick-date-time">Select a bet</h6>
                             </div>
-                            <div class="btuns-pick">
-                                <div class="pick-input">
+                               <div class="btuns-pick">
+                                 <div class="pick-input">
                                     <span>Pick</span>
                                     <input type="number" value="">
                                 </div>
@@ -201,7 +201,7 @@
                                     <span>To Win</span>
                                     <input type="text" value="" disabled>
                                 </div>
-                            </div>
+                               </div>
                         </div>
                     </div>
                 </div>
@@ -299,6 +299,7 @@ function openPickslip(type, team, point, price) {
         <div class="total">
             <h6>${point}</h6>
         </div>
+        <div class="btuns-pick">
         <div class="pick-input">
             <span>Pick</span>
             <input type="number" oninput="calculateWin(this, ${parsedPrice})">
@@ -307,6 +308,8 @@ function openPickslip(type, team, point, price) {
             <span>To Win</span>
             <input type="text" value="0.00" disabled>
         </div>
+        </div>
+
     `;
 
     betContainer.appendChild(newBet);
