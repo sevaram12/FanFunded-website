@@ -37,6 +37,8 @@ Route::get('signup',[AdminAuthController::class,'sign_up']);
 Route::post('signup',[AdminAuthController::class,'register']);
 Route::get('/',[AdminAuthController::class,'login']);
 Route::post('login',[AdminAuthController::class,'admin_login']);
+Route::get('logout', [AdminAuthController::class, 'destroy'])
+->name('logout');
 
 
 

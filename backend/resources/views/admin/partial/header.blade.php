@@ -83,7 +83,7 @@
                 <ul class="navbar-nav navbar-nav-right">
                     <li class="nav-item nav-profile dropdown">
                    <a class="nav-link mb-3" href="#" data-toggle="dropdown" id="profileDropdown" style=" object-fit: cover;">
-                        <img src="{{ asset('public/assets/upload/dummy.jpg') }}" alt="profile" style="width:45px; height:45px;"
+                        <img src="{{ asset('assets/images/provider.jpg') }}" alt="profile" style="width:45px; height:45px;"
     
                              >
                         </a>
@@ -215,7 +215,7 @@
                 <i class="ti ti-menu-deep left-nav-icon n8-color order-2 order-lg-0 d-none">
                 </i>
                 <a class="navbar-brand d-center text-center gap-1 gap-lg-2 ms-lg-4" href="index.html">
-                    <img class="logo" src="assets/images/white_logoff_new.png" alt="Logo">
+                    <img class="logo" src="assets/images/white-logo.png" alt="Logo">
                 </a>
             </div>
             <div class="nav_aside px-5 p2-bg">
