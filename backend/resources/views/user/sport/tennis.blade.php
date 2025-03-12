@@ -296,7 +296,6 @@ newBet.innerHTML = `
             <span>To Win</span>
             <input type="text" value="0.00" disabled>
         </div>
-    </div>
 `;
 
 betContainer.appendChild(newBet);

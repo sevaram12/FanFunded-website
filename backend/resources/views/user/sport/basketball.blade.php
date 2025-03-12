@@ -76,10 +76,10 @@
                             $homePoint = $awayPoint = $homePrice = $awayPrice = null;
                             $overPoint = $underPoint = $overPrice = $underPrice = null;
                             $homeMoneyline = $awayMoneyline = null;
-        
+
                             if ($draftKings && isset($draftKings['markets'])) {
                                 $markets = collect($draftKings['markets']);
-        
+
                                 // Extract Point Spread Data
                                 $spreadMarket = $markets->firstWhere('key', 'spreads');
                                 if ($spreadMarket && isset($spreadMarket['outcomes'])) {
@@ -93,7 +93,7 @@
                                         }
                                     }
                                 }
-        
+
                                 // Extract Total Points Data
                                 $totalMarket = $markets->firstWhere('key', 'totals');
                                 if ($totalMarket && isset($totalMarket['outcomes'])) {
@@ -107,7 +107,7 @@
                                         }
                                     }
                                 }
-        
+
                                 // Extract Moneyline Data
                                 $moneylineMarket = $markets->firstWhere('key', 'h2h');
                                 if ($moneylineMarket && isset($moneylineMarket['outcomes'])) {
@@ -121,42 +121,53 @@
                                 }
                             }
                         @endphp
-        
+
                         @if ($draftKings)
                             <tr>
                                 <td>
                                     <span>{{ \Carbon\Carbon::parse($item['commence_time'] ?? now())->format('g:i A') }}</span>
-                                    <span class="date">{{ \Carbon\Carbon::parse($item['commence_time'] ?? now())->format('M j') }}</span>
+                                    <span
+                                        class="date">{{ \Carbon\Carbon::parse($item['commence_time'] ?? now())->format('M j') }}</span>
                                 </td>
-        
+
                                 <td>
                                     <div class="fighter"><span>{{ $homeTeam }}</span></div>
                                     <div class="fighter"><span>{{ $awayTeam }}</span></div>
                                 </td>
-        
+
                                 <td class="bet">
-                                    <div onclick="openPickslip('Point Spread', '{{ $homeTeam }}', '{{ $homePoint }}', '{{ $homePrice }}')">
-                                        {{ $homePoint  ?? '-' }} <span class="odds">{{ $homePrice !== null ? $homePrice : '-' }}</span>
+                                    <div
+                                        onclick="openPickslip('Point Spread', '{{ $homeTeam }}', '{{ $homePoint }}', '{{ $homePrice }}')">
+                                        {{ $homePoint ?? '-' }} <span
+                                            class="odds">{{ $homePrice !== null ? $homePrice : '-' }}</span>
                                     </div>
-                                    <div onclick="openPickslip('Point Spread', '{{ $awayTeam }}', '{{ $awayPoint }}', '{{ $awayPrice }}')">
-                                        {{ $awayPoint ?? '-' }} <span class="odds">{{ $awayPrice !== null ? $awayPrice : '-' }}</span>
+                                    <div
+                                        onclick="openPickslip('Point Spread', '{{ $awayTeam }}', '{{ $awayPoint }}', '{{ $awayPrice }}')">
+                                        {{ $awayPoint ?? '-' }} <span
+                                            class="odds">{{ $awayPrice !== null ? $awayPrice : '-' }}</span>
                                     </div>
                                 </td>
-        
+
                                 <td class="bet">
-                                    <div onclick="openPickslip('Total Points', 'Over', '{{ $overPoint }}', '{{ $overPrice }}')">
-                                        O {{ $overPoint ?? '-' }} <span class="odds">{{ $overPrice !== null ? $overPrice : '-' }}</span>
+                                    <div
+                                        onclick="openPickslip('Total Points', 'Over', '{{ $overPoint }}', '{{ $overPrice }}')">
+                                        O {{ $overPoint ?? '-' }} <span
+                                            class="odds">{{ $overPrice !== null ? $overPrice : '-' }}</span>
                                     </div>
-                                    <div onclick="openPickslip('Total Points', 'Under', '{{ $underPoint }}', '{{ $underPrice }}')">
-                                        U {{ $underPoint ?? '-' }} <span class="odds">{{ $underPrice !== null ? $underPrice : '-' }}</span>
+                                    <div
+                                        onclick="openPickslip('Total Points', 'Under', '{{ $underPoint }}', '{{ $underPrice }}')">
+                                        U {{ $underPoint ?? '-' }} <span
+                                            class="odds">{{ $underPrice !== null ? $underPrice : '-' }}</span>
                                     </div>
                                 </td>
-        
+
                                 <td class="bet">
-                                    <div onclick="openPickslip('Moneyline', '{{ $homeTeam }}', '', '{{ $homeMoneyline }}')">
+                                    <div
+                                        onclick="openPickslip('Moneyline', '{{ $homeTeam }}', '', '{{ $homeMoneyline }}')">
                                         <span class="odds">{{ $homeMoneyline ?? '-' }}</span>
                                     </div>
-                                    <div onclick="openPickslip('Moneyline', '{{ $awayTeam }}', '', '{{ $awayMoneyline }}')">
+                                    <div
+                                        onclick="openPickslip('Moneyline', '{{ $awayTeam }}', '', '{{ $awayMoneyline }}')">
                                         <span class="odds">{{ $awayMoneyline ?? '-' }}</span>
                                     </div>
                                 </td>
@@ -166,8 +177,8 @@
                 </tbody>
             </table>
         </div>
-        
-        
+
+
 
         <div class="pickslip" id="pickslip">
             <div class="pick-slip">
@@ -264,6 +275,24 @@
             });
         });
 
+
+        function openTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.style.display = 'none';
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.getElementById(tabName).style.display = 'block';
+            event.target.classList.add('active');
+        }
+
+        let totalCollect = 0;
+
+        function openPickslip(type, team, point, price) {
+            let pickslip = document.getElementById("pickslip");
+            let betContainer = document.querySelector(".scroll-div");
+
         let totalCollect = {
     straight: 0,
     parlay: 0
@@ -276,11 +305,32 @@ function openPickslip(type, team, point, price) {
     let straightBetContainer = document.querySelector("#straight .scroll-div");
     let parlayBetContainer = document.querySelector("#parlay .scroll-div");
 
-    pickslip.style.display = "block";
-    pickslip.classList.add("open");
 
-    let parsedPrice = parseFloat(price); // Convert price to float
-    let absolutePrice = Math.abs(parsedPrice); // Convert negative price to positive
+            pickslip.style.display = "block";
+            pickslip.classList.add("open");
+
+            let parsedPrice = parseFloat(price);
+            let absolutePrice = Math.abs(parsedPrice); // Convert negative price to positive
+
+
+            let newBet = document.createElement("div");
+            newBet.classList.add("center-pick");
+
+            newBet.innerHTML = `
+        <div class="over">
+            <h6>${type} - ${team}</h6>
+            <h6 class="remove-bet" style="cursor: pointer;" onclick="removeBet(this, ${absolutePrice})">❌</h6>
+        </div>
+        <div class="total">
+            <h6>${point}</h6>
+        </div>
+        <div class="pick-input">
+            <span>Pick</span>
+            <input type="number" oninput="calculateWin(this, '${type}', ${absolutePrice})">
+        </div>
+        <div class="win-input">
+            <span>To Win</span>
+            <input type="text" value="0.00" disabled>
 
     // Create the bet HTML
     let newBetHTML = `
@@ -302,8 +352,17 @@ function openPickslip(type, team, point, price) {
                     <input type="text" value="0.00" disabled>
                 </div>
             </div>
+
+        </div>
+        <div class="collect">
+            <h6>To Collect</h6>
+            <h6 class="collect-value">$0.00</h6>
         </div>
     `;
+
+
+            betContainer.appendChild(newBet);
+        }
 
     // Append the bet to both tabs (Straight & Parlay)
     let straightBet = document.createElement("div");
@@ -315,32 +374,52 @@ function openPickslip(type, team, point, price) {
     parlayBetContainer.appendChild(parlayBet);
 }
 
-function calculateWin(input, price) {
-    let pickValue = parseFloat(input.value) || 0; // User-entered bet amount
-    let profit, totalPayout;
 
-    let absolutePrice = Math.abs(price); // Convert negative price to positive
+        function calculateWin(input, type, price) {
+            let pickValue = parseFloat(input.value) || 0;
+            let profit, totalPayout, collectValue;
 
-    // **Formula for Negative and Positive Price Values**
-    if (price < 0) {
-        profit = (pickValue * 100) / absolutePrice;
-    } else {
-        profit = (pickValue * price) / 100;
-    }
+            let absolutePrice = Math.abs(price); // Convert negative price to positive before calculation
 
-    totalPayout = pickValue + profit; // "To Collect" amount
+            if (type === "Point Spread" || type === "Moneyline") {
+                console.log("P S")
+                if (price < 0) {
+                    profit = (pickValue * 100) / absolutePrice; // Use absolute price
 
-    // **Update UI**
-    let betContainer = input.closest(".center-pick");
-    let winInput = betContainer.querySelector(".win-input input");
+                } else {
+                    profit = (pickValue * price) / 100;
+                    console.log(profit)
+                }
+            } else if (type === "Total Points") {
+                if (price < 0) {
+                    profit = (pickValue * 100) / absolutePrice; // Use absolute price
+                } else {
+                    profit = (pickValue * 100) / price;
+                }
+            } else {
+                profit = 0;
+            }
+
+            totalPayout = pickValue + profit;
+            collectValue = totalPayout;
+
+
+            let winInput = input.closest(".center-pick").querySelector(".win-input input");
+            let collectDisplay = input.closest(".center-pick").querySelector(".collect-value");
 
     // **Remove old value before updating totalCollect**
     let previousCollectValue = parseFloat(winInput.dataset.collect || 0);
     totalCollect.straight -= previousCollectValue;
     totalCollect.parlay -= previousCollectValue;
 
-    winInput.value = profit.toFixed(2);
-    winInput.dataset.collect = totalPayout; // Store new collect value
+
+            winInput.value = (totalPayout - pickValue).toFixed(2);
+            collectDisplay.textContent = `$${collectValue.toFixed(2)}`;
+
+
+            totalCollect += collectValue;
+            document.querySelector(".total-collect").textContent = `$${totalCollect.toFixed(2)}`;
+        }
 
     totalCollect.straight += totalPayout;
     totalCollect.parlay += totalPayout;
@@ -348,10 +427,33 @@ function calculateWin(input, price) {
     document.querySelector(".collect h6:last-child").textContent = `$${totalCollect.straight.toFixed(2)}`;
 }
 
-// ✅ Function to Remove Bet and Subtract "To Collect" Amount
-function removeBet(element) {
-    let betContainer = element.closest(".center-pick");
-    let winInput = betContainer.querySelector(".win-input input");
+
+        function closePickslip() {
+            document.querySelector(".scroll-div").innerHTML = "";
+            document.getElementById("pickslip").style.display = "none";
+            totalCollect = 0;
+            document.querySelector(".total-collect").textContent = "$0.00";
+        }
+
+
+
+
+
+
+        function removeBet(element) {
+            let betItem = element.closest(".center-pick");
+            if (betItem) {
+                betItem.remove();
+            }
+
+            // Hide pickslip if no picks are left
+            let betContainer = document.querySelector(".scroll-div");
+            if (betContainer.children.length === 0) {
+                document.getElementById("pickslip").style.display = "none";
+            }
+        }
+
+
 
     let collectValue = parseFloat(winInput.dataset.collect || 0);
     totalCollect.straight -= collectValue;
@@ -376,6 +478,7 @@ function closePickslip() {
     totalCollect.parlay = 0;
     document.querySelector(".collect h6:last-child").textContent = "$0.00";
 }
+
 
 // ✅ Function to Open Active Tab
 function openTab(tabName) {
