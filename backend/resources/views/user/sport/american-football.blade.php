@@ -295,13 +295,15 @@ function openPickslip(type, team, point, price) {
         <div class="total">
             <h6>${point}</h6>
         </div>
-        <div class="pick-input">
-            <span>Pick</span>
-            <input type="number" oninput="calculateWin(this, ${parsedPrice})">
-        </div>
-        <div class="win-input">
-            <span>To Win</span>
-            <input type="text" value="0.00" disabled>
+        <div class="btuns-pick">
+            <div class="pick-input ">
+                <span>Pick</span>
+                <input type="number" oninput="calculateWin(this, ${parsedPrice})">
+            </div>
+            <div class="win-input">
+                <span>To Win</span>
+                <input type="text" value="0.00" disabled>
+            </div>
         </div>
     `;
 

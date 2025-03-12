@@ -203,8 +203,8 @@
                             <div class="date-time">
                                 <h6 id="pick-date-time">Select a bet</h6>
                             </div>
-                            <div class="btuns-pick">
-                                <div class="pick-input">
+                               <div class="btuns-pick">
+                                 <div class="pick-input">
                                     <span>Pick</span>
                                     <input type="number" value="">
                                 </div>
@@ -212,7 +212,7 @@
                                     <span>To Win</span>
                                     <input type="text" value="" disabled>
                                 </div>
-                            </div>
+                               </div>
                         </div>
                     </div>
                 </div>
@@ -275,6 +275,7 @@
             });
         });
 
+
         function openTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(tab => {
                 tab.style.display = 'none';
@@ -292,11 +293,25 @@
             let pickslip = document.getElementById("pickslip");
             let betContainer = document.querySelector(".scroll-div");
 
+        let totalCollect = {
+    straight: 0,
+    parlay: 0
+};
+
+function openPickslip(type, team, point, price) {
+    let pickslip = document.getElementById("pickslip");
+
+    // Get both tabs
+    let straightBetContainer = document.querySelector("#straight .scroll-div");
+    let parlayBetContainer = document.querySelector("#parlay .scroll-div");
+
+
             pickslip.style.display = "block";
             pickslip.classList.add("open");
 
             let parsedPrice = parseFloat(price);
             let absolutePrice = Math.abs(parsedPrice); // Convert negative price to positive
+
 
             let newBet = document.createElement("div");
             newBet.classList.add("center-pick");
@@ -316,6 +331,28 @@
         <div class="win-input">
             <span>To Win</span>
             <input type="text" value="0.00" disabled>
+
+    // Create the bet HTML
+    let newBetHTML = `
+        <div class="center-pick">
+            <div class="over">
+                <h6>${type} - ${team}</h6>
+                <h6 class="remove-bet" style="cursor: pointer;" onclick="removeBet(this)">❌</h6>
+            </div>
+            <div class="total">
+                <h6>${point}</h6>
+            </div>
+            <div class="btuns-pick">
+                <div class="pick-input">
+                    <span>Pick</span>
+                    <input type="number" oninput="calculateWin(this, ${parsedPrice})">
+                </div>
+                <div class="win-input">
+                    <span>To Win</span>
+                    <input type="text" value="0.00" disabled>
+                </div>
+            </div>
+
         </div>
         <div class="collect">
             <h6>To Collect</h6>
@@ -323,8 +360,20 @@
         </div>
     `;
 
+
             betContainer.appendChild(newBet);
         }
+
+    // Append the bet to both tabs (Straight & Parlay)
+    let straightBet = document.createElement("div");
+    straightBet.innerHTML = newBetHTML;
+    straightBetContainer.appendChild(straightBet);
+
+    let parlayBet = document.createElement("div");
+    parlayBet.innerHTML = newBetHTML;
+    parlayBetContainer.appendChild(parlayBet);
+}
+
 
         function calculateWin(input, type, price) {
             let pickValue = parseFloat(input.value) || 0;
@@ -354,15 +403,30 @@
             totalPayout = pickValue + profit;
             collectValue = totalPayout;
 
+
             let winInput = input.closest(".center-pick").querySelector(".win-input input");
             let collectDisplay = input.closest(".center-pick").querySelector(".collect-value");
+
+    // **Remove old value before updating totalCollect**
+    let previousCollectValue = parseFloat(winInput.dataset.collect || 0);
+    totalCollect.straight -= previousCollectValue;
+    totalCollect.parlay -= previousCollectValue;
+
 
             winInput.value = (totalPayout - pickValue).toFixed(2);
             collectDisplay.textContent = `$${collectValue.toFixed(2)}`;
 
+
             totalCollect += collectValue;
             document.querySelector(".total-collect").textContent = `$${totalCollect.toFixed(2)}`;
         }
+
+    totalCollect.straight += totalPayout;
+    totalCollect.parlay += totalPayout;
+
+    document.querySelector(".collect h6:last-child").textContent = `$${totalCollect.straight.toFixed(2)}`;
+}
+
 
         function closePickslip() {
             document.querySelector(".scroll-div").innerHTML = "";
@@ -370,6 +434,7 @@
             totalCollect = 0;
             document.querySelector(".total-collect").textContent = "$0.00";
         }
+
 
 
 
@@ -389,6 +454,46 @@
         }
 
 
+
+    let collectValue = parseFloat(winInput.dataset.collect || 0);
+    totalCollect.straight -= collectValue;
+    totalCollect.parlay -= collectValue;
+
+    document.querySelector(".collect h6:last-child").textContent = `$${totalCollect.straight.toFixed(2)}`;
+
+    // Remove both copies of the bet
+    let betText = betContainer.querySelector("h6").textContent;
+    document.querySelectorAll(".center-pick").forEach(bet => {
+        if (bet.querySelector("h6").textContent === betText) {
+            bet.remove();
+        }
+    });
+}
+
+// ✅ Function to Clear Pickslip
+function closePickslip() {
+    document.querySelectorAll(".scroll-div").forEach(div => div.innerHTML = "");
+    document.getElementById("pickslip").style.display = "none";
+    totalCollect.straight = 0;
+    totalCollect.parlay = 0;
+    document.querySelector(".collect h6:last-child").textContent = "$0.00";
+}
+
+
+// ✅ Function to Open Active Tab
+function openTab(tabName) {
+    document.querySelectorAll(".tab-content").forEach(tab => {
+        tab.style.display = "none";
+    });
+    document.querySelectorAll(".tab").forEach(tab => {
+        tab.classList.remove("active");
+    });
+    document.getElementById(tabName).style.display = "block";
+    event.target.classList.add("active");
+}
+
+
+        
 
         // Ensure clicking on a schedule-container item adds a new pick
         document.getElementById("schedule-container").addEventListener("click", function(event) {
