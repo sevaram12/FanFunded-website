@@ -15,7 +15,7 @@ class UserSportController extends Controller
 
             $curl = curl_init();
 
-            $apiUrl = "https://api.the-odds-api.com/v4/sports/?apiKey=f552fbb0cd97f1d1dca369b8eca3d276";
+            $apiUrl = "https://api.the-odds-api.com/v4/sports/?apiKey=92059afbd46e57dbb6c3e490a4c8de2c";
 
             curl_setopt_array($curl, [
                 CURLOPT_URL => $apiUrl,
@@ -70,10 +70,10 @@ class UserSportController extends Controller
 
             // API keys
 
-            $apiKeyOdds = "f552fbb0cd97f1d1dca369b8eca3d276";  // API key for odds
+            $apiKeyOdds = "92059afbd46e57dbb6c3e490a4c8de2c";  // API key for odds
 
 
-            // $apiKeySports = "f552fbb0cd97f1d1dca369b8eca3d276";  // API key for sports
+            // $apiKeySports = "92059afbd46e57dbb6c3e490a4c8de2c";  // API key for sports
 
             // API URLs
             $regions = $request->input('regions', 'us');
@@ -172,8 +172,8 @@ class UserSportController extends Controller
             }
 
             // API keys
-            $apiKeyOdds = "f552fbb0cd97f1d1dca369b8eca3d276";  // API key for odds
-            // $apiKeySports = "f552fbb0cd97f1d1dca369b8eca3d276";  // API key for sports
+            $apiKeyOdds = "92059afbd46e57dbb6c3e490a4c8de2c";  // API key for odds
+            // $apiKeySports = "92059afbd46e57dbb6c3e490a4c8de2c";  // API key for sports
 
             // API URLs
             $regions = $request->input('regions', 'us');
@@ -271,8 +271,8 @@ class UserSportController extends Controller
             }
 
             // API keys
-            $apiKeyOdds = "f552fbb0cd97f1d1dca369b8eca3d276";  // API key for odds
-            // $apiKeySports = "f552fbb0cd97f1d1dca369b8eca3d276";  // API key for sports
+            $apiKeyOdds = "92059afbd46e57dbb6c3e490a4c8de2c";  // API key for odds
+            // $apiKeySports = "92059afbd46e57dbb6c3e490a4c8de2c";  // API key for sports
 
             // API URLs
             $regions = $request->input('regions', 'us');
@@ -374,8 +374,8 @@ class UserSportController extends Controller
             }
 
             // API keys
-            $apiKeyOdds = "f552fbb0cd97f1d1dca369b8eca3d276";  // API key for odds
-            // $apiKeySports = "f552fbb0cd97f1d1dca369b8eca3d276";  // API key for sports
+            $apiKeyOdds = "92059afbd46e57dbb6c3e490a4c8de2c";  // API key for odds
+            // $apiKeySports = "92059afbd46e57dbb6c3e490a4c8de2c";  // API key for sports
 
             // API URLs
             $regions = $request->input('regions', 'us');
@@ -473,7 +473,7 @@ class UserSportController extends Controller
             }
     
             // API key
-            $apiKey = "f552fbb0cd97f1d1dca369b8eca3d276";  
+            $apiKey = "92059afbd46e57dbb6c3e490a4c8de2c";  
     
             // API parameters
             $regions = $request->input('regions', 'us');
@@ -573,7 +573,7 @@ class UserSportController extends Controller
             }
     
             // API key
-            $apiKey = "f552fbb0cd97f1d1dca369b8eca3d276";  
+            $apiKey = "92059afbd46e57dbb6c3e490a4c8de2c";  
     
             // API parameters
             $regions = $request->input('regions', 'us');
@@ -673,7 +673,7 @@ class UserSportController extends Controller
             }
     
             // API key
-            $apiKey = "f552fbb0cd97f1d1dca369b8eca3d276";  
+            $apiKey = "92059afbd46e57dbb6c3e490a4c8de2c";  
     
             // API parameters
             $regions = $request->input('regions', 'us');
@@ -773,7 +773,7 @@ class UserSportController extends Controller
             }
     
             // API key
-            $apiKey = "f552fbb0cd97f1d1dca369b8eca3d276";  
+            $apiKey = "92059afbd46e57dbb6c3e490a4c8de2c";  
     
             // API parameters
             $regions = $request->input('regions', 'us');
@@ -863,7 +863,7 @@ class UserSportController extends Controller
     public function scores(Request $request)
     {
         try {
-            $apiKey = "f552fbb0cd97f1d1dca369b8eca3d276";
+            $apiKey = "92059afbd46e57dbb6c3e490a4c8de2c";
             $daysFrom = $request->input('daysFrom', 1);
 
             $apiUrl = "https://api.the-odds-api.com/v4/sports/basketball_nba/scores/?daysFrom={$daysFrom}&apiKey={$apiKey}";
