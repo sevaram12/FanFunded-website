@@ -1,4 +1,4 @@
-    <!-- start preloader -->
+   <!-- start preloader -->
     <div class="loader-wrapper">
       <div class="loader"></div>
       <div class="loader-section section-left"></div>
@@ -11,34 +11,39 @@
   <header class="header-section2 header-section">
       <nav class="navbar navbar-expand-lg position-relative py-md-3 py-lg-6 workready">
           <div class="collapse navbar-collapse justify-content-between" id="navbar-content">
-              <!-- <ul
-                  class="navbar-nav2fixed  navbar-nav d-flex align-items-lg-center gap-4 gap-sm-5  py-2 py-lg-0 align-self-center p2-bg">
-                  <li class="dropdown show-dropdown">
-                      <a href="index.html">Home</a>
-                  </li>
-                  <li class="dropdown show-dropdown">
-                      <a href="floorball.html">Live Betting</a>
-                  </li>
-                  <li class="dropdown show-dropdown">
-                      <a href="soccer.html">Sports</a>
-                  </li>
-                  <li class="dropdown show-dropdown">
-                      <a href="ecricket.html">eSports</a>
-                  </li>
-                  <li class="dropdown show-dropdown">
-                      <a href="cycling.html">Racing</a>
-                  </li>
-                  <li class="dropdown show-dropdown">
-                      <a href="promotions.html">Promotions</a>
-                  </li>
-                  <li class="dropdown show-dropdown d-block d-sm-none">
-                      <div class="d-flex align-items-center flex-wrap gap-3">
-                          <a href="login.html" class="cmn-btn second-alt px-xxl-11 rounded-2">Log In</a>
-                      <a href="create-acount.html" class="cmn-btn px-xxl-11">Sign Up</a>
-                      </div>
-                  </li>
-              </ul> -->
+              <ul
+              <div class="container-fluid">
+                <div class="navbar-nav d-flex align-items-center w-100">
+                    <!-- Left section: Account info -->
+                    <div class="d-flex align-items-center gap-4 ms-auto">
+                        <p class="text-white mb-0">Account Number: 46039796</p>
+                        <p class="text-white mb-0">Account Status: <b class="text-success">Active</b></p>
+                    </div>
+                    
+    
+                    <!-- Right section: Buttons and avatar -->
+                    <div class="d-flex align-items-center gap-3 ms-auto">
+                        <!-- Wallet Button with icon -->
+                        <button class="btn btn-outline-light w-50 white-button__outline">
+                            $975.11
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="white" height="16" width="16" viewBox="0 0 512 512">
+                                <path
+                                    d="M264.4 95.01c-35.6-.06-80.2 11.19-124.2 34.09C96.27 152 61.45 182 41.01 211.3c-20.45 29.2-25.98 56.4-15.92 75.8 10.07 19.3 35.53 30.4 71.22 30.4 35.69.1 80.29-11.2 124.19-34 44-22.9 78.8-53 99.2-82.2 20.5-29.2 25.9-56.4 15.9-75.8-10.1-19.3-35.5-30.49-71.2-30.49z"></path>
+                            </svg>
+                        </button>
+    
+                        <!-- Request Reward Button with icon -->
+                        <button class="btn btn-light w-52 white-button__borderPrimary">
+                            Request Reward
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" stroke="none" height="16" width="16"
+                                viewBox="0 0 512 512">
+                                <path
+                                    d="M264.4 95.01c-35.6-.06-80.2 11.19-124.2 34.09C96.27 152 61.45 182 41.01 211.3c-20.45 29.2-25.98 56.4-15.92 75.8 10.07 19.3 35.53 30.4 71.22 30.4 35.69.1 80.29-11.2 124.19-34 44-22.9 78.8-53 99.2-82.2 20.5-29.2 25.9-56.4 15.9-75.8-10.1-19.3-35.5-30.49-71.2-30.49z"></path>
+                            </svg>
+                        </button>
+              </ul>
           </div>
+
           <div class="right-area custom-pos position-relative d-flex gap-0 gap-lg-7 align-items-center me-5 me-xl-10">
               <!-- <div class="language-area">
                   <div class="translate_wrapper">
