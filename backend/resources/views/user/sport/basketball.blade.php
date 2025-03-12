@@ -76,10 +76,10 @@
                             $homePoint = $awayPoint = $homePrice = $awayPrice = null;
                             $overPoint = $underPoint = $overPrice = $underPrice = null;
                             $homeMoneyline = $awayMoneyline = null;
-        
+
                             if ($draftKings && isset($draftKings['markets'])) {
                                 $markets = collect($draftKings['markets']);
-        
+
                                 // Extract Point Spread Data
                                 $spreadMarket = $markets->firstWhere('key', 'spreads');
                                 if ($spreadMarket && isset($spreadMarket['outcomes'])) {
@@ -93,7 +93,7 @@
                                         }
                                     }
                                 }
-        
+
                                 // Extract Total Points Data
                                 $totalMarket = $markets->firstWhere('key', 'totals');
                                 if ($totalMarket && isset($totalMarket['outcomes'])) {
@@ -107,7 +107,7 @@
                                         }
                                     }
                                 }
-        
+
                                 // Extract Moneyline Data
                                 $moneylineMarket = $markets->firstWhere('key', 'h2h');
                                 if ($moneylineMarket && isset($moneylineMarket['outcomes'])) {
@@ -121,19 +121,19 @@
                                 }
                             }
                         @endphp
-        
+
                         @if ($draftKings)
                             <tr>
                                 <td>
                                     <span>{{ \Carbon\Carbon::parse($item['commence_time'] ?? now())->format('g:i A') }}</span>
                                     <span class="date">{{ \Carbon\Carbon::parse($item['commence_time'] ?? now())->format('M j') }}</span>
                                 </td>
-        
+
                                 <td>
                                     <div class="fighter"><span>{{ $homeTeam }}</span></div>
                                     <div class="fighter"><span>{{ $awayTeam }}</span></div>
                                 </td>
-        
+
                                 <td class="bet">
                                     <div onclick="openPickslip('Point Spread', '{{ $homeTeam }}', '{{ $homePoint }}', '{{ $homePrice }}')">
                                         {{ $homePoint  ?? '-' }} <span class="odds">{{ $homePrice !== null ? $homePrice : '-' }}</span>
@@ -142,7 +142,7 @@
                                         {{ $awayPoint ?? '-' }} <span class="odds">{{ $awayPrice !== null ? $awayPrice : '-' }}</span>
                                     </div>
                                 </td>
-        
+
                                 <td class="bet">
                                     <div onclick="openPickslip('Total Points', 'Over', '{{ $overPoint }}', '{{ $overPrice }}')">
                                         O {{ $overPoint ?? '-' }} <span class="odds">{{ $overPrice !== null ? $overPrice : '-' }}</span>
@@ -151,7 +151,7 @@
                                         U {{ $underPoint ?? '-' }} <span class="odds">{{ $underPrice !== null ? $underPrice : '-' }}</span>
                                     </div>
                                 </td>
-        
+
                                 <td class="bet">
                                     <div onclick="openPickslip('Moneyline', '{{ $homeTeam }}', '', '{{ $homeMoneyline }}')">
                                         <span class="odds">{{ $homeMoneyline ?? '-' }}</span>
@@ -166,8 +166,8 @@
                 </tbody>
             </table>
         </div>
-        
-        
+
+
 
         <div class="pickslip" id="pickslip">
             <div class="pick-slip">
@@ -262,7 +262,7 @@
                 window.location.href = url.toString(); // Redirect to updated URL
             });
         });
-let totalCollect = {
+        let totalCollect = {
     straight: 0,
     parlay: 0
 };
@@ -326,10 +326,10 @@ function calculateWin(input, price, tabType) {
     let absolutePrice = Math.abs(price); // Convert negative price to positive
 
     // **Formula for Negative and Positive Price Values**
-    if (price < 0) {
+                if (price < 0) {
         profit = (pickValue * 100) / absolutePrice;
-    } else {
-        profit = (pickValue * price) / 100;
+                } else {
+                    profit = (pickValue * price) / 100;
     }
 
     totalPayout = pickValue + profit; // "To Collect" amount
