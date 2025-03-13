@@ -14,7 +14,7 @@
                 <!-- <ul
                     class="navbar-nav2fixed  navbar-nav d-flex align-items-lg-center gap-4 gap-sm-5  py-2 py-lg-0 align-self-center p2-bg">
                     <li class="dropdown show-dropdown">
-                        <a href="index.html">Home</a>
+                        <a href="">Home</a>
                     </li>
                     <li class="dropdown show-dropdown">
                         <a href="floorball.html">Live Betting</a>
@@ -109,7 +109,7 @@
           <div class="logo-area slide-toggle3 trader-list position-fixed top-0 d-flex align-items-center justify-content-end pt-6 pt-md-8 gap-sm-4 gap-md-5 gap-lg-7 px-4 px-lg-8">
               <i class="ti ti-menu-deep left-nav-icon n8-color order-2 order-lg-0 d-none"></i>
               
-              <a class="navbar-brand d-center text-center gap-1 gap-lg-2 ms-lg-4" href="index.html" style="display: flex; align-items: center; justify-content: flex-end;">
+              <a class="navbar-brand d-center text-center gap-1 gap-lg-2 ms-lg-4" href="" style="display: flex; align-items: center; justify-content: flex-end;">
                 <img class="logo" src="assets/images/white-logo.png" alt="Logo" style="width: 200px; height: auto;">
               </a>
             </div>
@@ -122,14 +122,14 @@
                 </div>
                 <ul class="secend-actives bg1-color rounded-5 d-flex flex-column gap-5 mb-5">
                     <li class="active">
-                        <a href="index.html" class="d-flex align-items-center gap-2"><i
+                        <a href="#" class="d-flex align-items-center gap-2"><i
                                 class="ti ti-brand-google-home n5-color fs-five"></i> Home</a>
                     </li>
                     <li class="active">
-                        <a href="index.html" class="d-flex align-items-center gap-2"><i class="fa-solid fa-circle-user"></i>Account Overview</a>
+                        <a href="{{url('account-overview')}}" class="d-flex align-items-center gap-2"><i class="fa-solid fa-circle-user"></i>Account Overview</a>
                     </li>
                     <li class="active">
-                        <a href="index.html" class="d-flex align-items-center gap-2"><i class="fa-regular fa-star"></i>Start New Challenge</a>
+                        <a href="#" class="d-flex align-items-center gap-2"><i class="fa-regular fa-star"></i>Start New Challenge</a>
                     </li>
                     <li class="active">
                         <a href="javascript:void(0)" class="d-flex align-items-center gap-2"><i class="fa-solid fa-circle-question"></i>
