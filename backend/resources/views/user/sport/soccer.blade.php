@@ -168,7 +168,7 @@
                 </div>
 
                 <!-- --------------------------------------------- -->
-                <div class="tab-content" id="straight">
+                <div class="tab-content" id="straight" style="display: none">
                     <div class="scroll-div">
                         <div class="center-pick" style="display: none">
                             <div class="over">
@@ -196,7 +196,7 @@
                 </div>
 
                 <!-- --------------------------------------------- -->
-                <div class="tab-content" id="parlay" >
+                <div class="tab-content" id="parlay" style="display: none">
                     <div class="scroll-div">
                         <div class="center-pick" style="display: none">
                             <div class="over">

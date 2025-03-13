@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\AdminAuthController;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\user\UserSportController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -42,7 +43,7 @@ Route::post('login',[AdminAuthController::class,'admin_login']);
 
 // ********************************** User Dashboard ****************************************
 
-
+Route::get('my-picks',[UserController::class,'my_picks']);
 Route::get('american-football',[UserSportController::class,'american_football_odds']);
 Route::get('basketball',[UserSportController::class,'basketball_odds']);
 Route::get('baseball', [UserSportController::class, 'baseball_odds']);
