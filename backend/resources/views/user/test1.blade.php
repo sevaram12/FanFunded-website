@@ -2,33 +2,33 @@
 
 @section('user-content')
 
-<!-- ----------------------------------------------------------------- -->
+    <!-- ----------------------------------------------------------------- -->
 
-<div class="New-Header">
-        <div class="new-navbar-wrapper">
-            <div class="new-navbar">
-                <div class="dropdown">
-                    <button class="dropbtn">
-                        UFC
-                        <span class="arrow">&#9662;</span>
-                    </button>
-                    <div class="dropdown-content">
-                        <a href="#">Option 1</a>
-                        <a href="#">Option 2</a>
-                        <a href="#">Option 3</a>
+        <div class="New-Header">
+            <div class="new-navbar-wrapper">
+                <div class="new-navbar">
+                    <div class="dropdown">
+                        <button class="dropbtn">
+                            UFC
+                            <span class="arrow">&#9662;</span>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="#">Option 1</a>
+                            <a href="#">Option 2</a>
+                            <a href="#">Option 3</a>
+                        </div>
                     </div>
+                    <button>Football</button>
+                    <button>Basketball</button>
+                    <button>Baseball</button>
+                    <button>MMA</button>
+                    <button>Hockey</button>
+                    <button>Soccer</button>
+                    <button>Tennis</button>
+                    <button>Golf</button>
                 </div>
-                <button>Football</button>
-                <button>Basketball</button>
-                <button>Baseball</button>
-                <button>MMA</button>
-                <button>Hockey</button>
-                <button>Soccer</button>
-                <button>Tennis</button>
-                <button>Golf</button>
             </div>
         </div>
-    </div>
 
 
 <!-- -------------------------------------------------------------------- -->
@@ -55,7 +55,7 @@
                       <div class="fighter">
                           <img src="https://via.placeholder.com/24" alt="Ozzy Diaz">
                           <span>Ozzy Diaz</span>
-                      </div>
+                                </div>
                       <div class="fighter">
                           <img src="https://via.placeholder.com/24" alt="Djorden Santos">
                           <span>Djorden Santos</span>
@@ -101,7 +101,7 @@
                   </div>
                   <div class="date-time">
                       <h6>Mar 9 5:20 AM</h6>
-                  </div>
+                            </div>
                   <div class="btuns-pick">
                         <div class="pick-input">
                             <span>Pick</span>
@@ -143,7 +143,7 @@
                   <div class="over">
                       <h6>Over 2.5</h6>
                       <h6>❌</h6>
-                  </div>
+                </div>
                   <div class="total">
                       <!-- <h6>Total Rounds</h6> -->
                       <h6  id="pick-info"></h6>
@@ -161,7 +161,7 @@
                             <input type="text" value="313.33" disabled>
                         </div>
                     </div>
-              </div>
+                </div>
 
               </div>
 
@@ -192,13 +192,13 @@
                         </div>
                     </div>
                     
-              </div>
+                </div>
 
               <div class="center-pick">
                   <div class="over">
                       <h6>Over 2.5</h6>
                       <h6>❌</h6>
-                  </div>
+                            </div>
                   <div class="total">
                       <!-- <h6>Total Rounds</h6> -->
                       <h6  id="pick-info"></h6>
@@ -210,26 +210,26 @@
                         <div class="pick-input">
                             <span>Pick</span>
                             <input type="number" value="987">
-                        </div>
+                            </div>
                         <div class="win-input">
                             <span>To Win</span>
                             <input type="text" value="313.33" disabled>
                         </div>
                     </div>
                     
-              </div>
+                </div>
               <div class="center-pick">
                   <div class="over">
                       <h6>Over 2.5</h6>
                       <h6>❌</h6>
-                  </div>
+            </div>
                   <div class="total">
                       <!-- <h6>Total Rounds</h6> -->
                       <h6  id="pick-info"></h6>
-                  </div>
+                    </div>
                   <div class="date-time">
                       <h6>Mar 9 5:20 AM</h6>
-                  </div>
+                        </div>
                   <div class="btuns-pick">
                         <div class="pick-input">
                             <span>Pick</span>
@@ -239,11 +239,11 @@
                             <span>To Win</span>
                             <input type="text" value="313.33" disabled>
                         </div>
-                    </div>
+                        </div>
                     
-              </div>
-              </div>
-          </div>
+                        </div>
+                        </div>
+                        </div>
                   <div class="collect">
                       <h6>To Collect</h6>
                       <h6>$0.00</h6>
@@ -253,47 +253,47 @@
                  <div class="last-pick-btn">
                  <button class="btn-clear" onclick="closePickslip()">Clear</button>
                 <button class="white-pick">Pick Place</button>
-                 </div>
-      </div>
-  </div>
-</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-
+            
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"><script>
 
 
 
-<script>
+            <script>
 
-function openTab(tabName) {
-    document.querySelectorAll('.tab-content').forEach(tab => {
-        tab.style.display = 'none';
-    });
-    document.querySelectorAll('.tab').forEach(tab => {
-        tab.classList.remove('active');
-    });
-    document.getElementById(tabName).style.display = 'block';
-    event.target.classList.add('active');
-}
-
-
-function openPickslip(type, value) {
-    document.getElementById('pick-info').innerText = `${type}: ${value}`;
-    document.getElementById('pickslip').classList.add('open');
-    document.getElementById('schedule-container').classList.add('shrink');
-}
+                    function openTab(tabName) {
+                        document.querySelectorAll('.tab-content').forEach(tab => {
+                            tab.style.display = 'none';
+                        });
+                        document.querySelectorAll('.tab').forEach(tab => {
+                            tab.classList.remove('active');
+                        });
+                        document.getElementById(tabName).style.display = 'block';
+                        event.target.classList.add('active');
+                    }
 
 
-function closePickslip() {
-    document.getElementById('pick-info').innerText = 'Select a bet';
-    document.getElementById('pickslip').classList.remove('open');
-    document.getElementById('schedule-container').classList.remove('shrink');
-}
-</script>
+                function openPickslip(type, value) {
+                    document.getElementById('pick-info').innerText = `${type}: ${value}`;
+                    document.getElementById('pickslip').classList.add('open');
+                    document.getElementById('schedule-container').classList.add('shrink');
+                }
+
+
+                function closePickslip() {
+                    document.getElementById('pick-info').innerText = 'Select a bet';
+                    document.getElementById('pickslip').classList.remove('open');
+                    document.getElementById('schedule-container').classList.remove('shrink');
+                }
+            </script>
 
 
 
 <!-- ----------------------------------------------------------------- -->
  
-@endsection
+        @endsection
