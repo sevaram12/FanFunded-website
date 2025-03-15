@@ -44,6 +44,7 @@ Route::post('login',[AdminAuthController::class,'admin_login']);
 // ********************************** User Dashboard ****************************************
 
 Route::get('my-picks',[UserController::class,'my_picks']);
+Route::get('account-overview',[UserController::class,'account_overview']);
 Route::get('american-football',[UserSportController::class,'american_football_odds']);
 Route::get('basketball',[UserSportController::class,'basketball_odds']);
 Route::get('baseball', [UserSportController::class, 'baseball_odds']);
