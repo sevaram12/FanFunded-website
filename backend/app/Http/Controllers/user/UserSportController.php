@@ -15,7 +15,7 @@ class UserSportController extends Controller
 
             $curl = curl_init();
 
-            $apiUrl = "https://api.the-odds-api.com/v4/sports/?apiKey=92059afbd46e57dbb6c3e490a4c8de2c";
+            $apiUrl = "https://api.the-odds-api.com/v4/sports/?apiKey=0bf706b5f1d1d3819e513934a35cddd2";
 
             curl_setopt_array($curl, [
                 CURLOPT_URL => $apiUrl,
@@ -70,10 +70,10 @@ class UserSportController extends Controller
 
             // API keys
 
-            $apiKeyOdds = "92059afbd46e57dbb6c3e490a4c8de2c";  // API key for odds
+            $apiKeyOdds = "0bf706b5f1d1d3819e513934a35cddd2";  // API key for odds
 
 
-            // $apiKeySports = "92059afbd46e57dbb6c3e490a4c8de2c";  // API key for sports
+            // $apiKeySports = "0bf706b5f1d1d3819e513934a35cddd2";  // API key for sports
 
             // API URLs
             $regions = $request->input('regions', 'us');
@@ -147,7 +147,13 @@ class UserSportController extends Controller
 
             // dd($oddsData);
             // Return view with combined data
-            return view('user.sport.american-football', compact('oddsData', 'sportData'));
+
+            if(session()->has('user_id')){
+                return view('user.sport.american-football', compact('oddsData', 'sportData'));
+            }else{
+                return redirect('/');
+            }
+            
         } catch (Exception $exception) {
             $message = $exception->getMessage();
             $sortmessage = strtok($message, '(');
@@ -172,8 +178,8 @@ class UserSportController extends Controller
             }
 
             // API keys
-            $apiKeyOdds = "92059afbd46e57dbb6c3e490a4c8de2c";  // API key for odds
-            // $apiKeySports = "92059afbd46e57dbb6c3e490a4c8de2c";  // API key for sports
+            $apiKeyOdds = "0bf706b5f1d1d3819e513934a35cddd2";  // API key for odds
+            // $apiKeySports = "0bf706b5f1d1d3819e513934a35cddd2";  // API key for sports
 
             // API URLs
             $regions = $request->input('regions', 'us');
@@ -248,7 +254,13 @@ class UserSportController extends Controller
 
             //    dd($oddsData);
             // Return view with combined data
-            return view('user.sport.basketball', compact('oddsData', 'sportData'));
+
+            if(session()->has('user_id')){
+                return view('user.sport.basketball', compact('oddsData', 'sportData'));
+            }else{
+                return redirect('/');
+            }
+            
         } catch (Exception $exception) {
             $message = $exception->getMessage();
             $sortmessage = strtok($message, '(');
@@ -271,8 +283,8 @@ class UserSportController extends Controller
             }
 
             // API keys
-            $apiKeyOdds = "92059afbd46e57dbb6c3e490a4c8de2c";  // API key for odds
-            // $apiKeySports = "92059afbd46e57dbb6c3e490a4c8de2c";  // API key for sports
+            $apiKeyOdds = "0bf706b5f1d1d3819e513934a35cddd2";  // API key for odds
+            // $apiKeySports = "0bf706b5f1d1d3819e513934a35cddd2";  // API key for sports
 
             // API URLs
             $regions = $request->input('regions', 'us');
@@ -347,7 +359,13 @@ class UserSportController extends Controller
 
             //    dd($oddsData);
             // Return view with combined data
-            return view('user.sport.mma', compact('oddsData', 'sportData'));
+
+            if(session()->has('user_id')){
+                return view('user.sport.mma', compact('oddsData', 'sportData'));
+            }else{
+                return redirect('/');
+            }
+            
         } catch (Exception $exception) {
             $message = $exception->getMessage();
             $sortmessage = strtok($message, '(');
@@ -374,8 +392,8 @@ class UserSportController extends Controller
             }
 
             // API keys
-            $apiKeyOdds = "92059afbd46e57dbb6c3e490a4c8de2c";  // API key for odds
-            // $apiKeySports = "92059afbd46e57dbb6c3e490a4c8de2c";  // API key for sports
+            $apiKeyOdds = "0bf706b5f1d1d3819e513934a35cddd2";  // API key for odds
+            // $apiKeySports = "0bf706b5f1d1d3819e513934a35cddd2";  // API key for sports
 
             // API URLs
             $regions = $request->input('regions', 'us');
@@ -450,7 +468,13 @@ class UserSportController extends Controller
 
         //    dd($oddsData);
             // Return view with combined data
-            return view('user.sport.baseball', compact('oddsData', 'sportData'));
+
+            if(session()->has('user_id')){
+                return view('user.sport.baseball', compact('oddsData', 'sportData'));
+            }else{
+                return redirect('/');
+            }
+            
 
         } catch (Exception $exception) {
             $message = $exception->getMessage();
@@ -473,7 +497,7 @@ class UserSportController extends Controller
             }
     
             // API key
-            $apiKey = "92059afbd46e57dbb6c3e490a4c8de2c";  
+            $apiKey = "0bf706b5f1d1d3819e513934a35cddd2";  
     
             // API parameters
             $regions = $request->input('regions', 'us');
@@ -550,7 +574,13 @@ class UserSportController extends Controller
             Log::info('Sports API response:', ['data' => $sportData]);
     
             // Return view with combined data
-            return view('user.sport.icehockey', compact('oddsData', 'sportData'));
+
+            if(session()->has('user_id')){
+                return view('user.sport.icehockey', compact('oddsData', 'sportData'));
+            }else{
+                return redirect('/');
+            }
+            
     
         } catch (Exception $exception) {
             $message = $exception->getMessage();
@@ -573,7 +603,7 @@ class UserSportController extends Controller
             }
     
             // API key
-            $apiKey = "92059afbd46e57dbb6c3e490a4c8de2c";  
+            $apiKey = "0bf706b5f1d1d3819e513934a35cddd2";  
     
             // API parameters
             $regions = $request->input('regions', 'us');
@@ -650,7 +680,13 @@ class UserSportController extends Controller
             Log::info('Sports API response:', ['data' => $sportData]);
     
             // Return view with combined data
-            return view('user.sport.soccer', compact('oddsData', 'sportData'));
+
+            if(session()->has('user_id')){
+                return view('user.sport.soccer', compact('oddsData', 'sportData'));
+            }else{
+                return redirect('/');
+            }
+            
     
         } catch (Exception $exception) {
             $message = $exception->getMessage();
@@ -673,7 +709,7 @@ class UserSportController extends Controller
             }
     
             // API key
-            $apiKey = "92059afbd46e57dbb6c3e490a4c8de2c";  
+            $apiKey = "0bf706b5f1d1d3819e513934a35cddd2";  
     
             // API parameters
             $regions = $request->input('regions', 'us');
@@ -750,7 +786,12 @@ class UserSportController extends Controller
             Log::info('Sports API response:', ['data' => $sportData]);
     
             // Return view with combined data
-            return view('user.sport.tennis', compact('oddsData', 'sportData'));
+            if(session()->has('user_id')){
+                return view('user.sport.tennis', compact('oddsData', 'sportData'));
+            }else{
+                return redirect('/');
+            }
+            
     
         } catch (Exception $exception) {
             $message = $exception->getMessage();
@@ -773,7 +814,7 @@ class UserSportController extends Controller
             }
     
             // API key
-            $apiKey = "92059afbd46e57dbb6c3e490a4c8de2c";  
+            $apiKey = "0bf706b5f1d1d3819e513934a35cddd2";  
     
             // API parameters
             $regions = $request->input('regions', 'us');
@@ -850,7 +891,13 @@ class UserSportController extends Controller
             Log::info('Sports API response:', ['data' => $sportData]);
     
             // Return view with combined data
-            return view('user.sport.golf', compact('oddsData', 'sportData'));
+            if(session()->has('user_id')){
+                return view('user.sport.golf', compact('oddsData', 'sportData'));
+            }else{
+                return redirect('/');
+            }
+
+            
     
         } catch (Exception $exception) {
             $message = $exception->getMessage();
@@ -863,7 +910,7 @@ class UserSportController extends Controller
     public function scores(Request $request)
     {
         try {
-            $apiKey = "92059afbd46e57dbb6c3e490a4c8de2c";
+            $apiKey = "0bf706b5f1d1d3819e513934a35cddd2";
             $daysFrom = $request->input('daysFrom', 1);
 
             $apiUrl = "https://api.the-odds-api.com/v4/sports/basketball_nba/scores/?daysFrom={$daysFrom}&apiKey={$apiKey}";
@@ -908,8 +955,12 @@ class UserSportController extends Controller
                 return redirect('score')->with('fail', 'No scores found for the requested NBA games.');
             }
 
-
-            return view('user.partial.header', compact('scoreData'));
+            if(session()->has('user_id')){
+                return view('user.partial.header', compact('scoreData'));
+            }else{
+                return redirect('/');
+            }
+            
         } catch (Exception $exception) {
             Log::error("Exception: {$exception->getMessage()}");
             return response()->json(['error' => 'An error occurred: ' . $exception->getMessage()], 500);

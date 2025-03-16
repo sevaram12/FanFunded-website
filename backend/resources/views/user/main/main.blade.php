@@ -10,6 +10,12 @@
     <meta name="keywords" content="boot, Bootstrap, Oddsx Sports Betting Website HTML Template">
     <!-- #description -->
     <meta name="description" content="Oddsx Sports Betting Website HTML Template">
+    
+    
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+    
+
+    
     <!-- #title -->
     <title>fanfunded.oi/admin</title>
     <!-- #favicon -->

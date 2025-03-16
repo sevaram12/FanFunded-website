@@ -81,7 +81,7 @@
                 <!-- <a href="login.html" class="cmn-btn second-alt px-xxl-11 rounded-2 me-5 me-lg-0 d-none d-sm-block">Log In</a> -->
                 <ul class="navbar-nav navbar-nav-right">
                 <li class="nav-item nav-profile dropdown">
-                     <a class="nav-link mb-3" href="#" data-toggle="dropdown" id="profileDropdown" style=" object-fit: cover;">
+                     <a class="nav-link mb-3" href="#" data-toggle="dropdown" id="profileDropdown" style=" object-fit: cover; color:white">
                           <img src="{{ asset('assets/images/provider.jpg') }}" alt="profile" style="width:45px; height:45px;"
       
                                >
@@ -92,7 +92,7 @@
                           <!--    <i class="fa-regular fa-user"></i>-->
                           <!--    Profile-->
                           <!--</a>-->
-                          <a class="dropdown-item" href="{{ url('logout') }}">
+                          <a class="dropdown-item" href="{{ url('logout') }}" style="color: white">
                               <i class="typcn typcn-eject text-primary"></i>
                               Logout
                           </a>
