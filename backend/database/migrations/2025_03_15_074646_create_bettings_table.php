@@ -15,11 +15,27 @@ return new class extends Migration
     {
         Schema::create('bettings', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id')->nullable();
-            $table->string('straight_bets')->nullable();
-            $table->string('parlay_bets')->nullable();
-            $table->string('total_collect')->nullable();
+            $table->string('bet_id'); // Unique bet ID from API
+            $table->string('sport_key');
+            $table->string('sport')->nullable();
+            $table->string('price')->nullable(); // odds
+            $table->string('sport_title');
+            $table->dateTime('commence_time');
+            $table->string('home_team');
+            $table->string('away_team');
+            $table->string('bookmaker_key'); // Bookmaker identifier
+            $table->string('bookmaker_title'); // Bookmaker name
+            $table->string('type'); // Bet type (Moneyline, Spread, Totals)
+            $table->string('team')->nullable(); // Team name (if applicable)
+            $table->decimal('pick', 8, 2)->nullable();
+            $table->decimal('to_win', 8, 2)->nullable();
+            $table->enum('bet_type', ['straight', 'parlay']); // Indicates whether it's a straight or parlay bet
+            $table->decimal('total_collect', 10, 2)->nullable(); // Total collect value for each bet type
+            $table->unsignedBigInteger('user_id'); // User placing the bet
             $table->timestamps();
+
+            // Foreign key constraint
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
