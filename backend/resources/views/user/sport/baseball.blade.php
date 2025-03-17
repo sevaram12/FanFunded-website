@@ -71,6 +71,14 @@
                             $draftKings = collect($item['bookmakers'] ?? [])->firstWhere('key', 'draftkings');
                             $homeTeam = $item['home_team'] ?? 'N/A';
                             $awayTeam = $item['away_team'] ?? 'N/A';
+                            $betId = $item['id'] ?? 'N/A';
+                            $sportKey = $item['sport_key'] ?? 'N/A';
+                            $sportTitle = $item['sport_title'] ?? 'N/A';
+                            $commenceTime = $item['commence_time'] ?? 'N/A';
+                            $bookmakerKey = $draftKings['key'] ?? 'N/A';
+                            $bookmakerTitle = $draftKings['title'] ?? 'N/A';
+
+                            // Initialize betting data
                             $homePoint = $awayPoint = $homePrice = $awayPrice = null;
                             $overPoint = $underPoint = $overPrice = $underPrice = null;
                             $homeMoneyline = $awayMoneyline = null;
@@ -121,11 +129,14 @@
                         @endphp
 
                         @if ($draftKings)
-                            <tr>
+                            <tr class="bet-row" data-bet-id="{{ $betId }}" data-sport-key="{{ $sportKey }}"
+                                data-sport-title="{{ $sportTitle }}" data-commence-time="{{ $commenceTime }}"
+                                data-home-team="{{ $homeTeam }}" data-away-team="{{ $awayTeam }}"
+                                data-bookmaker-key="{{ $bookmakerKey }}" data-bookmaker-title="{{ $bookmakerTitle }}">
                                 <td>
-                                    <span>{{ \Carbon\Carbon::parse($item['commence_time'] ?? now())->format('g:i A') }}</span>
+                                    <span>{{ \Carbon\Carbon::parse($commenceTime ?? now())->format('g:i A') }}</span>
                                     <span
-                                        class="date">{{ \Carbon\Carbon::parse($item['commence_time'] ?? now())->format('M j') }}</span>
+                                        class="date">{{ \Carbon\Carbon::parse($commenceTime ?? now())->format('M j') }}</span>
                                 </td>
 
                                 <td>
@@ -135,12 +146,12 @@
 
                                 <td class="bet">
                                     <div
-                                        onclick="openPickslip('Point Spread', '{{ $homeTeam }}', '{{ $homePoint }}', '{{ $homePrice }}')">
+                                        onclick="openPickslip('Point Spread', '{{ $homeTeam }}', '{{ $homePoint }}', '{{ $homePrice }}', this)">
                                         {{ $homePoint ?? '-' }} <span
                                             class="odds">{{ $homePrice !== null ? $homePrice : '-' }}</span>
                                     </div>
                                     <div
-                                        onclick="openPickslip('Point Spread', '{{ $awayTeam }}', '{{ $awayPoint }}', '{{ $awayPrice }}')">
+                                        onclick="openPickslip('Point Spread', '{{ $awayTeam }}', '{{ $awayPoint }}', '{{ $awayPrice }}', this)">
                                         {{ $awayPoint ?? '-' }} <span
                                             class="odds">{{ $awayPrice !== null ? $awayPrice : '-' }}</span>
                                     </div>
@@ -148,12 +159,12 @@
 
                                 <td class="bet">
                                     <div
-                                        onclick="openPickslip('Total Points', 'Over', '{{ $overPoint }}', '{{ $overPrice }}')">
+                                        onclick="openPickslip('Total Points', '{{ $homeTeam }}', '{{ $overPoint }}', '{{ $overPrice }}', this)">
                                         O {{ $overPoint ?? '-' }} <span
                                             class="odds">{{ $overPrice !== null ? $overPrice : '-' }}</span>
                                     </div>
                                     <div
-                                        onclick="openPickslip('Total Points', 'Under', '{{ $underPoint }}', '{{ $underPrice }}')">
+                                        onclick="openPickslip('Total Points', '{{ $awayTeam }}', '{{ $underPoint }}', '{{ $underPrice }}', this)">
                                         U {{ $underPoint ?? '-' }} <span
                                             class="odds">{{ $underPrice !== null ? $underPrice : '-' }}</span>
                                     </div>
@@ -161,17 +172,18 @@
 
                                 <td class="bet">
                                     <div
-                                        onclick="openPickslip('Moneyline', '{{ $homeTeam }}', '', '{{ $homeMoneyline }}')">
+                                        onclick="openPickslip('Moneyline', '{{ $homeTeam }}', '', '{{ $homeMoneyline }}', this)">
                                         <span class="odds">{{ $homeMoneyline ?? '-' }}</span>
                                     </div>
                                     <div
-                                        onclick="openPickslip('Moneyline', '{{ $awayTeam }}', '', '{{ $awayMoneyline }}')">
+                                        onclick="openPickslip('Moneyline', '{{ $awayTeam }}', '', '{{ $awayMoneyline }}', this)">
                                         <span class="odds">{{ $awayMoneyline ?? '-' }}</span>
                                     </div>
                                 </td>
                             </tr>
                         @endif
                     @endforeach
+
                 </tbody>
             </table>
 
@@ -260,7 +272,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        
         document.querySelectorAll('.sport-option').forEach(item => {
             item.addEventListener('click', function() {
                 let selectedSport = this.getAttribute('data-value');
@@ -284,55 +295,70 @@
             });
         });
 
-        function openPickslip(type, team, point, price) {
+        function openPickslip(type, team, point, price, element) {
             let pickslip = document.getElementById("pickslip");
+            let betRow = element.closest(".bet-row");
 
-            // Get both tabs
-            let straightBetContainer = document.querySelector("#straight .scroll-div");
-            let parlayBetContainer = document.querySelector("#parlay .scroll-div");
+            let betId = betRow.dataset.betId;
+            let sportKey = betRow.dataset.sportKey;
+            let sportTitle = betRow.dataset.sportTitle;
+            let commenceTime = betRow.dataset.commenceTime;
+            let homeTeam = betRow.dataset.homeTeam;
+            let awayTeam = betRow.dataset.awayTeam;
+            let bookmakerKey = betRow.dataset.bookmakerKey;
+            let bookmakerTitle = betRow.dataset.bookmakerTitle;
 
             pickslip.style.display = "block";
             pickslip.classList.add("open");
-
-            let parsedPrice = parseFloat(price); // Convert price to float
+            let parsedPrice = parseFloat(price) || 0;
 
             // Ensure "To Collect" sections exist first
             ensureCollectSectionExists("straight");
             ensureCollectSectionExists("parlay");
 
-            // Function to create a bet for each tab separately
+
             let createBetElement = (tabType) => {
                 let newBet = document.createElement("div");
                 newBet.classList.add("center-pick");
-                newBet.dataset.tab = tabType; // Assign tab type
+                newBet.dataset.tab = tabType;
+                newBet.dataset.price = parsedPrice;
+                newBet.dataset.sport = "Baseball";
 
                 newBet.innerHTML = `
-                    <div class="over">
-                        <h6>${type} - ${team}</h6>
-                        <h6 class="remove-bet" style="cursor: pointer;" onclick="removeBet(this, '${tabType}')">❌</h6>
-                    </div>
-                    <div class="total">
-                        <h6>${point}</h6>
-                    </div>
-                    <div class="btuns-pick">
-                        <div class="pick-input">
-                            <span>Pick</span>
-                            <input type="number" oninput="calculateWin(this, ${parsedPrice}, '${tabType}')">
-                        </div>
-                        <div class="win-input">
-                            <span>To Win</span>
-                            <input type="text" value="0.00" disabled>
-                        </div>
-                    </div>
-                `;
+            <div class="over">
+                <h6>${type} - ${team} (Price: ${parsedPrice})</h6>
+                <h6 class="remove-bet" style="cursor: pointer;" onclick="removeBet(this, '${tabType}')">❌</h6>
+            </div>
+            <div class="total">
+                <h6>${point}</h6>
+            </div>
+            <div class="btuns-pick">
+                <div class="pick-input">
+                    <span>Pick</span>
+                    <input type="number" oninput="calculateWin(this, ${parsedPrice}, '${tabType}')">
+                </div>
+                <div class="win-input">
+                    <span>To Win</span>
+                    <input type="text" value="0.00" disabled>
+                </div>
+            </div>
+        `;
+
+                newBet.dataset.betId = betId;
+                newBet.dataset.sportKey = sportKey;
+                newBet.dataset.sportTitle = sportTitle;
+                newBet.dataset.commenceTime = commenceTime;
+                newBet.dataset.homeTeam = homeTeam;
+                newBet.dataset.awayTeam = awayTeam;
+                newBet.dataset.bookmakerKey = bookmakerKey;
+                newBet.dataset.bookmakerTitle = bookmakerTitle;
+
                 return newBet;
             };
 
-            // Append the bet to both Straight & Parlay independently
-            straightBetContainer.appendChild(createBetElement("straight"));
-            parlayBetContainer.appendChild(createBetElement("parlay"));
+            document.querySelector("#straight .scroll-div").appendChild(createBetElement("straight"));
+            document.querySelector("#parlay .scroll-div").appendChild(createBetElement("parlay"));
 
-            // Ensure "To Collect" sections remain updated
             updateCollectDisplay();
         }
 
@@ -430,8 +456,6 @@
             event.target.classList.add("active");
         }
 
-
-
         // Ensure clicking on a schedule-container item adds a new pick
         document.getElementById("schedule-container").addEventListener("click", function(event) {
             let target = event.target;
@@ -453,46 +477,61 @@
             }
 
             let csrfToken = csrfTokenElement.getAttribute("content");
-
             let userId = "{{ session('user_id') }}";
 
             let straightBets = [];
             let parlayBets = [];
+            let betId, sportKey, sportTitle, commenceTime, homeTeam, awayTeam, bookmakerKey, bookmakerTitle;
 
-            document.querySelectorAll("#straight .center-pick").forEach(item => {
-                let type = item.querySelector(".over h6:first-child").textContent;
-                let team = type.split(" - ")[1];
-                let pick = item.querySelector(".pick-input input").value || 0;
-                let toWin = item.querySelector(".win-input input").value || 0;
+            document.querySelectorAll(".center-pick").forEach(item => {
+                let betType = item.dataset.tab;
+                let price = parseFloat(item.dataset.price) || 0; // ✅ Price extract karna ensure kiya
 
-                straightBets.push({
-                    type,
-                    team,
-                    pick,
-                    toWin
-                });
-            });
+                console.log("Extracted Price:", price); // ✅ Debugging Price Extraction
 
-            document.querySelectorAll("#parlay .center-pick").forEach(item => {
-                let type = item.querySelector(".over h6:first-child").textContent;
-                let team = type.split(" - ")[1];
-                let pick = item.querySelector(".pick-input input").value || 0;
-                let toWin = item.querySelector(".win-input input").value || 0;
+                let betData = {
+                    type: item.querySelector(".over h6:first-child").textContent,
+                    team: item.dataset.team || null,
+                    pick: parseFloat(item.querySelector(".pick-input input").value) || 0,
+                    toWin: parseFloat(item.querySelector(".win-input input").value) || 0,
+                    price: price // ✅ Ensure price is sent
+                };
 
-                parlayBets.push({
-                    type,
-                    team,
-                    pick,
-                    toWin
-                });
+                if (betType === "straight") {
+                    straightBets.push(betData);
+                } else if (betType === "parlay") {
+                    parlayBets.push(betData);
+                }
+
+                if (!betId) {
+                    betId = item.dataset.betId;
+                    sportKey = item.dataset.sportKey;
+                    sportTitle = item.dataset.sportTitle;
+                    commenceTime = item.dataset.commenceTime;
+                    homeTeam = item.dataset.homeTeam;
+                    awayTeam = item.dataset.awayTeam;
+                    bookmakerKey = item.dataset.bookmakerKey;
+                    bookmakerTitle = item.dataset.bookmakerTitle;
+                }
             });
 
             let data = {
                 user_id: userId,
+                bet_id: betId,
+                sport: "Baseball", // ✅ Added `sport` parameter
+                sport_key: sportKey,
+                sport_title: sportTitle,
+                commence_time: commenceTime,
+                home_team: homeTeam,
+                away_team: awayTeam,
+                bookmaker_key: bookmakerKey,
+                bookmaker_title: bookmakerTitle,
                 straight_bets: straightBets,
                 parlay_bets: parlayBets,
-                total_collect: totalCollect
+                total_collect: totalCollect // ✅ Ensure `total_collect` is sent
             };
+
+            console.log("Sending Data to Backend:", data); // ✅ Debugging before sending to backend
 
             fetch("{{ route('store.baseball.pickslip') }}", {
                     method: "POST",
@@ -502,17 +541,10 @@
                     },
                     body: JSON.stringify(data)
                 })
-                .then(response => {
-                    if (!response.ok) {
-                        return response.text().then(text => {
-                            throw new Error(text)
-                        });
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log("Response:", data);
-                    if (data.success) {
+                .then(response => response.json())
+                .then(responseData => {
+                    console.log("Response from Backend:", responseData);
+                    if (responseData.success) {
                         alert("Pickslip placed successfully!");
                         closePickslip();
                     } else {
@@ -521,8 +553,5 @@
                 })
                 .catch(error => console.error("Fetch Error:", error));
         }
-
-
     </script>
-    
 @endsection

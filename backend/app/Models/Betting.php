@@ -9,5 +9,9 @@ class Betting extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'straight_bets', 'parlay_bets', 'total_collect'];
+    protected $fillable = [
+        'bet_id', 'sport_key', 'sport_title', 'commence_time',
+        'home_team', 'away_team', 'bookmaker_key', 'bookmaker_title',
+        'type', 'team', 'pick', 'to_win', 'bet_type', 'total_collect', 'user_id' , 'price' , 'sport'
+    ];
 }

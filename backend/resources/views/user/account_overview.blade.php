@@ -83,6 +83,8 @@
     <table class="table ">
       <thead class="table-color">
         <tr >
+          <th scope="col">Id</th>
+          <th scope="col">Sport</th>
           <th scope="col">Event</th>
           <th scope="col">League</th>
           <th scope="col">Your Pick</th>
@@ -95,17 +97,23 @@
         </tr>
       </thead>
       <tbody class="table-data">
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>Otto</td>
-          <td>Otto</td>
-          <td>Otto</td>
-          <td>Otto</td>
-          <td>Otto</td>
-        </tr>
+        
+          @foreach ($bettings as $bet)
+          <tr>
+            <th scope="row">{{ $bet->id}}</th>
+            <td>{{ $bet->sport}}</td>
+            <td>{{ $bet->home_team }} vs {{ $bet->away_team }}</td>
+            <td>{{ $bet->sport_title}}</td>
+            <td>{{ $bet->type}}</td>
+            <td>{{ $bet->price}}</td>
+            <td>{{ $bet->pick}}</td>
+            <td>{{ $bet->outcome}}</td>
+            <td>{{ $bet->total_collect}}</td>
+            <td>{{ $bet->commence_time}}</td>  
+            <td>{{ $bet->created_at}}</td>  
+          </tr>
+          @endforeach
+        
       
       </tbody>
     </table>
