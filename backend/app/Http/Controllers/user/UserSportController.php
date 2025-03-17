@@ -147,7 +147,13 @@ class UserSportController extends Controller
 
             // dd($oddsData);
             // Return view with combined data
-            return view('user.sport.american-football', compact('oddsData', 'sportData'));
+
+            if(session()->has('user_id')){
+                return view('user.sport.american-football', compact('oddsData', 'sportData'));
+            }else{
+                return redirect('/');
+            }
+            
         } catch (Exception $exception) {
             $message = $exception->getMessage();
             $sortmessage = strtok($message, '(');
@@ -248,7 +254,13 @@ class UserSportController extends Controller
 
             //    dd($oddsData);
             // Return view with combined data
-            return view('user.sport.basketball', compact('oddsData', 'sportData'));
+
+            if(session()->has('user_id')){
+                return view('user.sport.basketball', compact('oddsData', 'sportData'));
+            }else{
+                return redirect('/');
+            }
+            
         } catch (Exception $exception) {
             $message = $exception->getMessage();
             $sortmessage = strtok($message, '(');
@@ -347,7 +359,13 @@ class UserSportController extends Controller
 
             //    dd($oddsData);
             // Return view with combined data
-            return view('user.sport.mma', compact('oddsData', 'sportData'));
+
+            if(session()->has('user_id')){
+                return view('user.sport.mma', compact('oddsData', 'sportData'));
+            }else{
+                return redirect('/');
+            }
+            
         } catch (Exception $exception) {
             $message = $exception->getMessage();
             $sortmessage = strtok($message, '(');
@@ -450,7 +468,13 @@ class UserSportController extends Controller
 
         //    dd($oddsData);
             // Return view with combined data
-            return view('user.sport.baseball', compact('oddsData', 'sportData'));
+
+            if(session()->has('user_id')){
+                return view('user.sport.baseball', compact('oddsData', 'sportData'));
+            }else{
+                return redirect('/');
+            }
+            
 
         } catch (Exception $exception) {
             $message = $exception->getMessage();
@@ -550,7 +574,13 @@ class UserSportController extends Controller
             Log::info('Sports API response:', ['data' => $sportData]);
     
             // Return view with combined data
-            return view('user.sport.icehockey', compact('oddsData', 'sportData'));
+
+            if(session()->has('user_id')){
+                return view('user.sport.icehockey', compact('oddsData', 'sportData'));
+            }else{
+                return redirect('/');
+            }
+            
     
         } catch (Exception $exception) {
             $message = $exception->getMessage();
@@ -650,7 +680,13 @@ class UserSportController extends Controller
             Log::info('Sports API response:', ['data' => $sportData]);
     
             // Return view with combined data
-            return view('user.sport.soccer', compact('oddsData', 'sportData'));
+
+            if(session()->has('user_id')){
+                return view('user.sport.soccer', compact('oddsData', 'sportData'));
+            }else{
+                return redirect('/');
+            }
+            
     
         } catch (Exception $exception) {
             $message = $exception->getMessage();
@@ -750,7 +786,12 @@ class UserSportController extends Controller
             Log::info('Sports API response:', ['data' => $sportData]);
     
             // Return view with combined data
-            return view('user.sport.tennis', compact('oddsData', 'sportData'));
+            if(session()->has('user_id')){
+                return view('user.sport.tennis', compact('oddsData', 'sportData'));
+            }else{
+                return redirect('/');
+            }
+            
     
         } catch (Exception $exception) {
             $message = $exception->getMessage();
@@ -850,7 +891,13 @@ class UserSportController extends Controller
             Log::info('Sports API response:', ['data' => $sportData]);
     
             // Return view with combined data
-            return view('user.sport.golf', compact('oddsData', 'sportData'));
+            if(session()->has('user_id')){
+                return view('user.sport.golf', compact('oddsData', 'sportData'));
+            }else{
+                return redirect('/');
+            }
+
+            
     
         } catch (Exception $exception) {
             $message = $exception->getMessage();
@@ -908,8 +955,12 @@ class UserSportController extends Controller
                 return redirect('score')->with('fail', 'No scores found for the requested NBA games.');
             }
 
-
-            return view('user.partial.header', compact('scoreData'));
+            if(session()->has('user_id')){
+                return view('user.partial.header', compact('scoreData'));
+            }else{
+                return redirect('/');
+            }
+            
         } catch (Exception $exception) {
             Log::error("Exception: {$exception->getMessage()}");
             return response()->json(['error' => 'An error occurred: ' . $exception->getMessage()], 500);

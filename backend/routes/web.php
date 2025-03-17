@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\admin\AdminAuthController;
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\user\auth\UserAuthController;
+use App\Http\Controllers\user\UserBettingController;
 use App\Http\Controllers\user\UserSportController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -43,7 +45,9 @@ Route::post('login',[AdminAuthController::class,'admin_login']);
 
 // ********************************** User Dashboard ****************************************
 
+Route::get('logout',[UserAuthController::class,'logout']);
 Route::get('my-picks',[UserController::class,'my_picks']);
+Route::get('account-overview',[UserController::class,'account_overview']);
 Route::get('american-football',[UserSportController::class,'american_football_odds']);
 Route::get('basketball',[UserSportController::class,'basketball_odds']);
 Route::get('baseball', [UserSportController::class, 'baseball_odds']);
@@ -52,4 +56,7 @@ Route::get('icehockey', [UserSportController::class, 'icehockey_odds']);
 Route::get('soccer', [UserSportController::class, 'soccer_odds']);
 Route::get('tennis', [UserSportController::class, 'tennis_odds']);
 Route::get('golf', [UserSportController::class, 'golf_odds']);
+
+
+Route::post('store-baseball-pickslip', [UserBettingController::class, 'store'])->name('store.baseball.pickslip');
 
