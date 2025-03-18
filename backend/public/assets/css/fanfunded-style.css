@@ -557,6 +557,21 @@ span {
     border-radius: 8px;
 }
 
+.history button {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.history button.active {
+    color: white;
+    font-weight: 700;
+    margin: 8px;
+    border-radius: 8px;
+    background: linear-gradient(90deg, rgb(139, 43, 215) 0.11%, rgb(208, 0, 204) 99.93%);
+}
+
 /* ----------------------end my picks---------------------------- */
 
 /* ----------------------------start account overview -------------------- */
@@ -629,4 +644,18 @@ span {
 
 .table-data{
     color: white;
+}
+
+
+/* ----------------------------End account overview -------------------- */
+
+
+
+/* ---------------------------- Account header section -------------------- */
+
+.account-number{
+    padding: 10px 15px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px;
+    background-color: #ffffff33 !important;
+    border-radius: 8px;
 }
