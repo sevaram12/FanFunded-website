@@ -36,6 +36,9 @@ Route::get('score',[UserSportController::class,'scores']);
 // ******************************** Admin Dashboard **************************************
 
 Route::get('user-details',[AdminAuthController::class,'user_details']);
+
+Route::get('pick-history', [AdminController::class, 'pick_history']);
+
 Route::get('signup',[AdminAuthController::class,'sign_up']);
 Route::post('signup',[AdminAuthController::class,'register']);
 Route::get('/',[AdminAuthController::class,'login']);
@@ -56,8 +59,6 @@ Route::get('icehockey', [UserSportController::class, 'icehockey_odds']);
 Route::get('soccer', [UserSportController::class, 'soccer_odds']);
 Route::get('tennis', [UserSportController::class, 'tennis_odds']);
 Route::get('golf', [UserSportController::class, 'golf_odds']);
-
-
 Route::post('store-baseball-pickslip', [UserBettingController::class, 'store'])->name('store.baseball.pickslip');
 Route::post('store-basketball-pickslip', [UserBettingController::class, 'store'])->name('store.basketball.pickslip');
 Route::post('store-golf-pickslip', [UserBettingController::class, 'store'])->name('store.golf.pickslip');
@@ -66,4 +67,8 @@ Route::post('store-mma-pickslip', [UserBettingController::class, 'store'])->name
 Route::post('store-soccer-pickslip', [UserBettingController::class, 'store'])->name('store.soccer.pickslip');
 Route::post('store-tennis-pickslip', [UserBettingController::class, 'store'])->name('store.tennis.pickslip');
 Route::post('store-football-pickslip', [UserBettingController::class, 'store'])->name('store.football.pickslip');
+
+Route::get('winning-delails', [UserBettingController::class, 'winning_delails']);
+
+Route::get('my_picks', [UserBettingController::class, 'pickhistory']);
 
