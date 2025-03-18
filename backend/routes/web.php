@@ -57,6 +57,13 @@ Route::get('soccer', [UserSportController::class, 'soccer_odds']);
 Route::get('tennis', [UserSportController::class, 'tennis_odds']);
 Route::get('golf', [UserSportController::class, 'golf_odds']);
 Route::post('store-baseball-pickslip', [UserBettingController::class, 'store'])->name('store.baseball.pickslip');
+Route::post('store-basketball-pickslip', [UserBettingController::class, 'store'])->name('store.basketball.pickslip');
+Route::post('store-golf-pickslip', [UserBettingController::class, 'store'])->name('store.golf.pickslip');
+Route::post('store-icehockey-pickslip', [UserBettingController::class, 'store'])->name('store.icehockey.pickslip');
+Route::post('store-mma-pickslip', [UserBettingController::class, 'store'])->name('store.mma.pickslip');
+Route::post('store-soccer-pickslip', [UserBettingController::class, 'store'])->name('store.soccer.pickslip');
+Route::post('store-tennis-pickslip', [UserBettingController::class, 'store'])->name('store.tennis.pickslip');
+Route::post('store-football-pickslip', [UserBettingController::class, 'store'])->name('store.football.pickslip');
 
 Route::get('winning-delails', [UserBettingController::class, 'winning_delails']);
 
