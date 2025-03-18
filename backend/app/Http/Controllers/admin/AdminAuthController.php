@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\admin;
-
+use App\Models\Betting;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -95,7 +95,13 @@ class AdminAuthController extends Controller
     }
     public function user_details(){
 
+        if(session()->has('user_id')){
+
+            $bettings = Betting::orderBy('id','desc')->get();
+
         $userDetail = User::where('role','0')->get();
-        return view('admin.auth.user_details',compact('userDetail'));
+        return view('admin.auth.user_details',compact('userDetail','bettings'));
     }
+    
+}
 }

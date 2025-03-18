@@ -36,6 +36,9 @@ Route::get('score',[UserSportController::class,'scores']);
 // ******************************** Admin Dashboard **************************************
 
 Route::get('user-details',[AdminAuthController::class,'user_details']);
+
+Route::get('pick-history', [AdminController::class, 'pick_history']);
+
 Route::get('signup',[AdminAuthController::class,'sign_up']);
 Route::post('signup',[AdminAuthController::class,'register']);
 Route::get('/',[AdminAuthController::class,'login']);
