@@ -323,6 +323,7 @@
                 newBet.dataset.tab = tabType;
                 newBet.dataset.price = parsedPrice;
                 newBet.dataset.sport = "Baseball";
+                newBet.dataset.team = team; // ✅ Store team name
 
                 newBet.innerHTML = `
             <div class="over">
@@ -486,6 +487,7 @@
             document.querySelectorAll(".center-pick").forEach(item => {
                 let betType = item.dataset.tab;
                 let price = parseFloat(item.dataset.price) || 0; // ✅ Price extract karna ensure kiya
+                let teamName = item.dataset.team || null; // ✅ Store team name
 
                 console.log("Extracted Price:", price); // ✅ Debugging Price Extraction
 

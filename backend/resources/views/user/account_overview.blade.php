@@ -1,6 +1,25 @@
 @extends('user.main.main')
 
 @section('user-content')
+    @if (Session::has('success'))
+        <div class="alert alert-success" role="alert" id="success-message">
+            {{ Session::get('success') }}
+        </div>
+    @endif
+
+    @if (session('fail'))
+        <div class="alert alert-danger" id="error-message">
+            {{ session('fail') }}
+        </div>
+    @endif
+
+
+    @if (session('error'))
+        <div class="alert alert-danger" id="error-message">
+            {{ session('error') }}
+        </div>
+    @endif
+
     <div class="container pt-5">
         <div class="row">
             <div class="col-lg-4">
@@ -13,9 +32,12 @@
                         <span class="balance-percentage circle">2.67%</span>
                     </div>
                 </div>
-                <div class="pick">
-                    Pick
-                </div>
+                <a href="{{ url('basketball') }}?sport={{ urlencode('basketball_nba') }}"
+                    style="color: black; text-decoration: none;">
+                    <div class="pick">
+                        Pick
+                    </div>
+                </a>
             </div>
 
             <div class="col-lg-8">
@@ -97,19 +119,11 @@
                 <tbody class="table-data">
                     @foreach ($bettings as $bet)
                         @php
-                            // Flatten all scores from different sports
-                            $flattenedScores = collect($allScores)->flatMap(fn($sport) => $sport);
-
-                            // Find matching game by bet_id
-                            $matchingScore = $flattenedScores->firstWhere('id', $bet->bet_id);
-
-                            // Determine outcome: Active if completed == false, otherwise Closed
-                            $isActive =
-                                $matchingScore && isset($matchingScore['completed']) && !$matchingScore['completed'];
-                            $outcome = $isActive ? 'Active' : 'Closed';
+                            // Determine if the bet is Active or Closed
+                            $statusClass = $bet->match_status == 'Active' ? 'active' : 'closed';
                         @endphp
 
-                        <tr class="betting-record" data-status="{{ $isActive ? 'active' : 'closed' }}">
+                        <tr class="betting-record" data-status="{{ $statusClass }}">
                             <th scope="row">{{ $bet->id }}</th>
                             <td>{{ $bet->sport }}</td>
                             <td>{{ $bet->home_team }} vs {{ $bet->away_team }}</td>
@@ -117,7 +131,8 @@
                             <td>{{ $bet->type }}</td>
                             <td>{{ $bet->price }}</td>
                             <td>{{ $bet->pick }}</td>
-                            <td class="outcome-status">{{ $outcome }}</td> <!-- Updated Outcome Column -->
+                            <td class="outcome-status"><span class="match-status">{{ $bet->match_status }}</span></td>
+                            <!-- Directly using match_status -->
                             <td>{{ $bet->total_collect }}</td>
                             <td>{{ $bet->commence_time }}</td>
                             <td>{{ $bet->created_at }}</td>
@@ -126,28 +141,34 @@
                 </tbody>
             </table>
         </div>
+
+
     </div>
 
-<script>
-  document.querySelectorAll('.filter-btn').forEach(button => {
-      button.addEventListener('click', function() {
-          document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-          this.classList.add('active');
-  
-          let filter = this.getAttribute('data-filter');
-          document.querySelectorAll('.betting-record').forEach(record => {
-              if (record.getAttribute('data-status') === filter) {
-                  record.style.display = "table-row";
-              } else {
-                  record.style.display = "none";
-              }
-          });
-      });
-  });
-  
-  // Initially show only Active bets
-  document.addEventListener("DOMContentLoaded", function() {
-      document.querySelectorAll('.betting-record[data-status="closed"]').forEach(row => row.style.display = "none");
-  });
-</script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Initially show only "Active" bets
+            document.querySelectorAll('.betting-record[data-status="closed"]').forEach(row => row.style.display =
+                "none");
+            document.querySelector('.filter-btn[data-filter="active"]').classList.add('active');
+
+            // Add event listeners to filter buttons
+            document.querySelectorAll('.filter-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons and add to clicked button
+                    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove(
+                        'active'));
+                    this.classList.add('active');
+
+                    let filter = this.getAttribute('data-filter');
+
+                    // Show or hide rows based on filter selection
+                    document.querySelectorAll('.betting-record').forEach(record => {
+                        record.style.display = (record.getAttribute('data-status') ===
+                            filter) ? "table-row" : "none";
+                    });
+                });
+            });
+        });
+    </script>
 @endsection

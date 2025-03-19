@@ -212,12 +212,12 @@
 </div>
 <!-- fixed footer ends -->
 <!-- Footer Section Starts -->
-<footer class="footer_section pt-10 pt-md-15 pt-lg-20 p2-bg pb-12 pb-md-0">
+{{-- <footer class="footer_section pt-10 pt-md-15 pt-lg-20 p2-bg pb-12 pb-md-0">
   <div class="container-fluid">
       <div class="row mb-10 mb-md-15 mb-lg-20">
           <div class="col-12">
               <div class="footer_section__main">
-                  {{-- <div class="row gy-8">
+                  <div class="row gy-8">
                       <div class="col-sm-6 col-md-4 col-lg-4 col-xl-2 col-xxl-2">
                           <div class="footer_section__sports">
                               <h4 class="mb-5 mb-md-6">Sports</h4>
@@ -374,12 +374,12 @@
                               </ul>
                           </div>
                       </div>
-                  </div> --}}
+                  </div>
               </div>
           </div>
       </div>
       <div class="row">
-          {{-- <div class="col-12 px-0 mx-0">
+          <div class="col-12 px-0 mx-0">
               <div class="brand-slider n6-bg pt-7 pb-1 pb-sm-2">
                   <div class="footer_section__slider swiper-wrapper d-flex align-items-center">
                       <div class="footer_section__slider-brand swiper-slide px-4">
@@ -453,8 +453,8 @@
                       </div>
                   </div>
               </div>
-          </div> --}}
+          </div>
       </div>
   </div>
-</footer>
+</footer> --}}
 <!-- Footer Section Ends -->
