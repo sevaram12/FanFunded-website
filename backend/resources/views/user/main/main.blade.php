@@ -229,6 +229,35 @@ ClassicEditor
 
 
 
+    document.addEventListener("DOMContentLoaded", function () {
+        let button = document.getElementById("accountButton");
+        let box = document.getElementById("accountBox");
+
+        button.addEventListener("click", function (event) {
+            // Toggle box visibility
+            if (box.style.display === "block") {
+                box.style.display = "none";
+            } else {
+                let buttonRect = button.getBoundingClientRect();
+                
+                // Position the box below the button
+                box.style.top = `${window.scrollY + buttonRect.bottom + 5}px`;
+                box.style.left = `${buttonRect.left}px`;
+                box.style.display = "block";
+            }
+
+            // Stop event from propagating to document click listener
+            event.stopPropagation();
+        });
+
+        // Close the box when clicking outside
+        document.addEventListener("click", function (event) {
+            if (!box.contains(event.target) && event.target !== button) {
+                box.style.display = "none";
+            }
+        });
+
+    });
 
   </script>
 

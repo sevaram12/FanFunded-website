@@ -55,6 +55,7 @@ class UserBettingController extends Controller
                     'user_id' => $userId,
                     'type' => $bet['type'],
                     'team' => $bet['team'] ?? null,
+                    'your_bet_team' => $bet['team'] ?? null,
                     'price' => $bet['price'], // ✅ Store correct price value
                     'pick' => $bet['pick'] ?? 0,
                     'to_win' => $bet['toWin'] ?? 0,
@@ -81,6 +82,7 @@ class UserBettingController extends Controller
                     'user_id' => $userId,
                     'type' => $bet['type'],
                     'team' => $bet['team'] ?? null,
+                    'your_bet_team' => $bet['team'] ?? null,
                     'pick' => $bet['pick'] ?? 0,
                     'price' => $bet['price'], // ✅ Store correct price value
                     'to_win' => $bet['toWin'] ?? 0,
@@ -95,104 +97,118 @@ class UserBettingController extends Controller
             return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
-    public function pickhistory()
-    {
-        // Fetch all betting records with user details
-        $pickslips = Betting::with('user')->orderBy('created_at', 'desc')->get();
-    
-        if ($pickslips->isEmpty()) {
-            return view('user.sport.my_picks', ['winningDetails' => [], 'losingDetails' => []]);
-        }
-    
-        // Separate winning and losing bets
-        $winningDetails = [];
-        $losingDetails = [];
-    
-        foreach ($pickslips as $pickslip) {
-            $betData = [
-                'user' => optional($pickslip->user)->name,
-                'created_at' => $pickslip->created_at,
-                'game' => $pickslip->game ?: '',
-                'bet_type' => $pickslip->bet_type ?: '',
-                'team' => $pickslip->team ?: '',
-                'spread' => $pickslip->spread ?: '',
-                'odds' => $pickslip->odds ?: '',
-                'total_pick' => $pickslip->total_pick ?: 0,
-                'payout' => $pickslip->payout ?: 0,
-                'pick_id' => $pickslip->pick_id ?: '',
-                'straight_bets' => json_decode($pickslip->straight_bets, true) ?? [],
-                'parlay_bets' => json_decode($pickslip->parlay_bets, true) ?? [],
-                'total_collect' => json_decode($pickslip->total_collect, true) ?? ['straight' => 0, 'parlay' => 0],
-                'status' => $pickslip->status // Assuming you have a 'status' column for Win/Loss
-            ];
-    
-            if ($pickslip->status === 'win') {
-                $winningDetails[] = $betData;
-            } else {
-                $losingDetails[] = $betData;
-            }
-        }
-    
-        return view('user.sport.my_picks', compact('winningDetails', 'losingDetails'));
+
+
+    public function cashout($id){
+        
+        $betting = Betting::find($id);
+        $betting->match_status = 'Cashed Out';
+        $betting->save();
+
+        return redirect()->back()->with('success','Cashedout Successfully!!');
     }
+
+
+
+
+    // public function pickhistory()
+    // {
+    //     // Fetch all betting records with user details
+    //     $pickslips = Betting::with('user')->orderBy('created_at', 'desc')->get();
+    
+    //     if ($pickslips->isEmpty()) {
+    //         return view('user.sport.my_picks', ['winningDetails' => [], 'losingDetails' => []]);
+    //     }
+    
+    //     // Separate winning and losing bets
+    //     $winningDetails = [];
+    //     $losingDetails = [];
+    
+    //     foreach ($pickslips as $pickslip) {
+    //         $betData = [
+    //             'user' => optional($pickslip->user)->name,
+    //             'created_at' => $pickslip->created_at,
+    //             'game' => $pickslip->game ?: '',
+    //             'bet_type' => $pickslip->bet_type ?: '',
+    //             'team' => $pickslip->team ?: '',
+    //             'spread' => $pickslip->spread ?: '',
+    //             'odds' => $pickslip->odds ?: '',
+    //             'total_pick' => $pickslip->total_pick ?: 0,
+    //             'payout' => $pickslip->payout ?: 0,
+    //             'pick_id' => $pickslip->pick_id ?: '',
+    //             'straight_bets' => json_decode($pickslip->straight_bets, true) ?? [],
+    //             'parlay_bets' => json_decode($pickslip->parlay_bets, true) ?? [],
+    //             'total_collect' => json_decode($pickslip->total_collect, true) ?? ['straight' => 0, 'parlay' => 0],
+    //             'status' => $pickslip->status // Assuming you have a 'status' column for Win/Loss
+    //         ];
+    
+    //         if ($pickslip->status === 'win') {
+    //             $winningDetails[] = $betData;
+    //         } else {
+    //             $losingDetails[] = $betData;
+    //         }
+    //     }
+    
+    //     return view('user.sport.my_picks', compact('winningDetails', 'losingDetails'));
+    // }
     
 
 
-    public function winning_delails()
-    {
-        // Fetch all betting records with user details
-        $pickslips = Betting::with('user')->orderBy('created_at', 'desc')->get();
+    // public function winning_delails()
+    // {
+    //     // Fetch all betting records with user details
+    //     $pickslips = Betting::with('user')->orderBy('created_at', 'desc')->get();
     
-        // Default values to prevent errors
-        if ($pickslips->isEmpty()) {
-            return view('user.sport.winning-delails', [
-                'winningDetails' => [],
-                'currentBalance' => 0,  
-                'totalPicks' => 0,  
-                'highestWinningPick' => 0, 
-                'picksWon' => 0,
-                'picksLoss' => 0,
-            ]);
-        }
+    //     // Default values to prevent errors
+    //     if ($pickslips->isEmpty()) {
+    //         return view('user.sport.winning-delails', [
+    //             'winningDetails' => [],
+    //             'currentBalance' => 0,  
+    //             'totalPicks' => 0,  
+    //             'highestWinningPick' => 0, 
+    //             'picksWon' => 0,
+    //             'picksLoss' => 0,
+    //         ]);
+    //     }
     
-        // Mapping bet details
-        $winningDetails = $pickslips->map(function ($pickslip) {
-            return [
-                'user' => optional($pickslip->user)->name,
-                'created_at' => $pickslip->created_at,
-                'game' => $pickslip->game ?: '',
-                'bet_type' => $pickslip->bet_type ?: '',
-                'team' => $pickslip->team ?: '',
-                'spread' => $pickslip->spread ?: '',
-                'odds' => $pickslip->odds ?: '',
-                'total_pick' => $pickslip->total_pick ?: 0,
-                'payout' => $pickslip->payout ?: 0,
-                'pick_id' => $pickslip->pick_id ?: '',
-                'straight_bets' => json_decode($pickslip->straight_bets, true) ?? [],
-                'parlay_bets' => json_decode($pickslip->parlay_bets, true) ?? [],
-                'total_collect' => json_decode($pickslip->total_collect, true) ?? ['straight' => 0, 'parlay' => 0],
-                'status' => $pickslip->status ?? 'lost'
-            ];
-        });
+    //     // Mapping bet details
+    //     $winningDetails = $pickslips->map(function ($pickslip) {
+    //         return [
+    //             'user' => optional($pickslip->user)->name,
+    //             'created_at' => $pickslip->created_at,
+    //             'game' => $pickslip->game ?: '',
+    //             'bet_type' => $pickslip->bet_type ?: '',
+    //             'team' => $pickslip->team ?: '',
+    //             'spread' => $pickslip->spread ?: '',
+    //             'odds' => $pickslip->odds ?: '',
+    //             'total_pick' => $pickslip->total_pick ?: 0,
+    //             'payout' => $pickslip->payout ?: 0,
+    //             'pick_id' => $pickslip->pick_id ?: '',
+    //             'straight_bets' => json_decode($pickslip->straight_bets, true) ?? [],
+    //             'parlay_bets' => json_decode($pickslip->parlay_bets, true) ?? [],
+    //             'total_collect' => json_decode($pickslip->total_collect, true) ?? ['straight' => 0, 'parlay' => 0],
+    //             'status' => $pickslip->status ?? 'lost'
+    //         ];
+    //     });
     
-        // **Calculations**
-        $currentBalance = $pickslips->sum('payout'); // Total earnings
-        $totalPicks = $pickslips->count(); // Total number of picks
-        $highestWinningPick = $pickslips->max('payout'); // Highest payout among all bets
+    //     // **Calculations**
+    //     $currentBalance = $pickslips->sum('payout'); // Total earnings
+    //     $totalPicks = $pickslips->count(); // Total number of picks
+    //     $highestWinningPick = $pickslips->max('payout'); // Highest payout among all bets
     
-        // **Counting Wins/Losses**
-        $picksWon = $pickslips->where('status', 'won')->count();
-        $picksLoss = $pickslips->where('status', 'lost')->count();
+    //     // **Counting Wins/Losses**
+    //     $picksWon = $pickslips->where('status', 'won')->count();
+    //     $picksLoss = $pickslips->where('status', 'lost')->count();
     
-        return view('user.sport.winning-delails', compact(
-            'winningDetails',
-            'currentBalance',
-            'totalPicks',
-            'highestWinningPick',
-            'picksWon',
-            'picksLoss'
-        ));
-    }
+    //     return view('user.sport.winning-delails', compact(
+    //         'winningDetails',
+    //         'currentBalance',
+    //         'totalPicks',
+    //         'highestWinningPick',
+    //         'picksWon',
+    //         'picksLoss'
+    //     ));
+    // }
     
     
 

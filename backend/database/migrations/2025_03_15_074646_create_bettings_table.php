@@ -23,6 +23,7 @@ return new class extends Migration
             $table->dateTime('commence_time');
             $table->string('home_team');
             $table->string('away_team');
+            $table->string('your_bet_team')->nullable();
             $table->string('bookmaker_key'); // Bookmaker identifier
             $table->string('bookmaker_title'); // Bookmaker name
             $table->string('type'); // Bet type (Moneyline, Spread, Totals)
@@ -31,6 +32,7 @@ return new class extends Migration
             $table->decimal('to_win', 8, 2)->nullable();
             $table->enum('bet_type', ['straight', 'parlay']); // Indicates whether it's a straight or parlay bet
             $table->decimal('total_collect', 10, 2)->nullable(); // Total collect value for each bet type
+            $table->string('match_status')->default('Active')->nullable();
             $table->unsignedBigInteger('user_id'); // User placing the bet
             $table->timestamps();
 
