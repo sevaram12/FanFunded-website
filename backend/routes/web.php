@@ -27,6 +27,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('test',[AdminController::class,'test']);
 
+
 Route::get('test1',[AdminController::class,'test1']);
 
 Route::get('sport-details',[UserSportController::class,'sport_details']);
