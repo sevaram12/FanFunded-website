@@ -503,6 +503,7 @@
     padding: 8px;
     border-radius: 10px;
     border: 1px solid yellow;
+    
 }
 
 .my-pick-gap {
@@ -520,9 +521,10 @@
 }
 
 .status {
-    padding: 14px;
+    padding: 5px 14px;
     background-color: green;
     border-radius: 50px;
+    text-align: center !important;
 }
 
 .gapping {
@@ -564,6 +566,14 @@ span {
     transition: all 0.3s ease;
 }
 
+.active1 {
+    color: white;
+    font-weight: 700;
+    margin: 8px;
+    border-radius: 8px;
+    background: linear-gradient(90deg, rgb(139, 43, 215) 0.11%, rgb(208, 0, 204) 99.93%);
+}
+
 .history button.active {
     color: white;
     font-weight: 700;
@@ -572,6 +582,15 @@ span {
     background: linear-gradient(90deg, rgb(139, 43, 215) 0.11%, rgb(208, 0, 204) 99.93%);
 }
 
+
+.cashout{
+    background: linear-gradient(90deg, rgb(139, 43, 215) 0.11%, rgb(208, 0, 204) 99.93%);
+    text-align: center;
+    padding: 8px 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+}
 /* ----------------------end my picks---------------------------- */
 
 /* ----------------------------start account overview -------------------- */
@@ -646,6 +665,26 @@ span {
     color: white;
 }
 
+.match-status{
+    padding: 1px 6px !important;
+    background-color: green !important;
+    border-radius: 50px !important;
+    color: white !important;
+    text-align: center !important;
+}
+
+.outcome-status{
+    text-align: center !important;
+}
+
+.betting-record td{
+    font-size: 14px;
+}
+
+.betting-record td span{
+    font-size: 13px;
+}
+
 
 /* ----------------------------End account overview -------------------- */
 
@@ -658,4 +697,37 @@ span {
     box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px;
     background-color: #ffffff33 !important;
     border-radius: 8px;
+}
+
+.account-box {
+    display: none;
+    position: absolute;
+    background: black;
+    padding: 15px;
+    border: 1px solid #f478ff;
+    box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    width: 450px;
+    color: white;
+    z-index: 1000;
+    top: 90px;
+    left: 280px !important;
+}
+
+.account-box p{
+    font-size: 14px;
+}
+
+.account-box button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background: #ffffff26;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.account-box button:hover {
+    background: #d35fcb;
 }
