@@ -22,7 +22,9 @@ class UserController extends Controller
         
 
         // API Configuration
-        $apiKey = "20cd66305d2f9d331582403ca81a68d6";
+
+        $apiKey = "eba3924acdfde456754ad3cd5c59bd1a";
+
         $daysFrom = $request->input('daysFrom', 3);
         $dateFormat = "iso";
 
@@ -201,7 +203,9 @@ class UserController extends Controller
         $bettings = Betting::where('user_id', $user_id)->orderBy('id', 'desc')->get();
 
         // API Configuration
-        $apiKey = "20cd66305d2f9d331582403ca81a68d6";
+
+        $apiKey = "eba3924acdfde456754ad3cd5c59bd1a";
+
         $daysFrom = $request->input('daysFrom', 3);
         $dateFormat = "iso";
 
