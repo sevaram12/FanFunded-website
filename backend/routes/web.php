@@ -71,4 +71,5 @@ Route::post('store-football-pickslip', [UserBettingController::class, 'store'])-
 Route::get('winning-delails', [UserBettingController::class, 'winning_delails']);
 
 Route::get('my_picks', [UserBettingController::class, 'pickhistory']);
+Route::get('cashout/{id}',[UserBettingController::class,'cashout']);
 

@@ -15,27 +15,53 @@
             <div class="collapse navbar-collapse justify-content-between" id="navbar-content">
                 
                 <div class="container" style="margin-left: 50px">
-                    <div class="row d-flex align-items-center ">
+                    <div class="row d-flex align-items-center">
                         <div class="col-lg-6 d-flex justify-content-between align-items-center">
                             <p>Account Number</p>
-                            <button class="account-number">68603548</button>
+                            <button class="account-number" id="accountButton">68603548</button>
+                    
+                            <!-- Box to show when clicked -->
+                            <div id="accountBox" class="account-box">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-4">
+                                        <p>Your Accounts</p>
+                                        <p><strong>68603548</strong></p>
+                                        <button class="status-btn">Active</button>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="d-flex justify-content-between">
+                                            <p>Starting Balance</p>
+                                            <p>$1,000.00</p>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <p>Current Balance</p>
+                                            <p>$1,021.90</p>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <p>Current Performance</p>
+                                            <p style="color: #4caf50;">4.39%</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    
                             <p>Account Status: <span style="color: #f478ff">Active</span></p>
                         </div>
                         <div class="col-lg-6">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <div class="history ">
-                                        <button class="active">$1002 <i class="fa-solid fa-coins"></i> <span style="border: 1px solid #b171b7; color: white; border-radius: 50px;">Wallet</span></button>
+                                    <div class="history">
+                                        <button class="active1">$1002 <i class="fa-solid fa-coins"></i> 
+                                            <span style="border: 1px solid #b171b7; color: white; border-radius: 50px;">Wallet</span>
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="history ">
-                                        
-                                        <button class="active" style="padding: 8px 10px">Request Reward <i class="fa-solid fa-coins"></i> </button>
+                                    <div class="history">
+                                        <button class="active1" style="padding: 8px 10px">Request Reward <i class="fa-solid fa-coins"></i></button>
                                     </div>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
