@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Betting;
+use App\Models\PaypalPayment;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -20,10 +21,13 @@ class UserController extends Controller
         // Fetch user's betting data
         $bettings = Betting::where('user_id', $user_id)->orderBy('id', 'desc')->get();
         
+        $payment = PaypalPayment::where('user_id',$user_id)->where('challenge_status','Active')->first();
+
+        $your_balance = $payment->your_balance;
 
         // API Configuration
 
-        $apiKey = "eba3924acdfde456754ad3cd5c59bd1a";
+        $apiKey = "34ccb3c0d93144a6a6afc32a5eb77a8a";
 
         $daysFrom = $request->input('daysFrom', 3);
         $dateFormat = "iso";
@@ -182,7 +186,7 @@ class UserController extends Controller
                                 : 0;
 
             // Pass data to Blade view
-            return view('user.my_picks', compact('bettings', 'allScores','no_of_pick','pick_won','pick_loss','win_rate','loss_rate','highestWinningPickPercentage','averageProfitPerPickDollar'));
+            return view('user.my_picks', compact('bettings', 'allScores','no_of_pick','pick_won','pick_loss','win_rate','loss_rate','highestWinningPickPercentage','averageProfitPerPickDollar','your_balance'));
         } catch (Exception $e) {
             return response()->json(['error' => 'An unexpected error occurred: ' . $e->getMessage()], 500);
         }
@@ -202,9 +206,12 @@ class UserController extends Controller
         // Fetch user's betting data
         $bettings = Betting::where('user_id', $user_id)->orderBy('id', 'desc')->get();
 
+        $payment = PaypalPayment::where('user_id',$user_id)->where('challenge_status','Active')->first();
+
+        $your_balance = $payment->your_balance;
         // API Configuration
 
-        $apiKey = "eba3924acdfde456754ad3cd5c59bd1a";
+        $apiKey = "34ccb3c0d93144a6a6afc32a5eb77a8a";
 
         $daysFrom = $request->input('daysFrom', 3);
         $dateFormat = "iso";
@@ -321,7 +328,7 @@ class UserController extends Controller
             }
 
             // Pass data to Blade view
-            return view('user.account_overview', compact('bettings', 'allScores'));
+            return view('user.account_overview', compact('bettings', 'allScores','your_balance'));
         } catch (Exception $e) {
             return response()->json(['error' => 'An unexpected error occurred: ' . $e->getMessage()], 500);
         }

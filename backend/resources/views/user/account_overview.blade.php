@@ -26,7 +26,7 @@
                 <div class="balance">
                     {{-- <img src="{{asset('assets/images/bg-balance.png')}}" alt=""> --}}
                     <h5 class="bet-team">Balance</h5>
-                    <h1 class="bet-team">$1,015.71</h1>
+                    <h1 class="bet-team">${{$your_balance}}</h1>
                     <div class="d-flex bet-team">
                         <span class="balance-percentage">$26.71</span>
                         <span class="balance-percentage circle">2.67%</span>
@@ -131,7 +131,13 @@
                             <td>{{ $bet->type }}</td>
                             <td>{{ $bet->price }}</td>
                             <td>{{ $bet->pick }}</td>
-                            <td class="outcome-status"><span class="match-status">{{ $bet->match_status }}</span></td>
+                            <td class="outcome-status">
+                                <span class="match-status {{ $bet->match_status == 'Lost' ? 'bg-red' : '' }}">
+                                    {{ $bet->match_status }}
+                                </span>
+                            </td>
+                            
+                            
                             <!-- Directly using match_status -->
                             <td>{{ $bet->total_collect }}</td>
                             <td>{{ $bet->commence_time }}</td>

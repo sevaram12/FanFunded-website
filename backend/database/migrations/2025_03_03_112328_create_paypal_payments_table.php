@@ -19,6 +19,10 @@ return new class extends Migration
             $table->text('paypal_payment_id')->nullable();
             $table->string('amount')->nullable();
             $table->string('currency')->nullable();
+            $table->string('phase')->nullable();
+            $table->string('account_size')->nullable();
+            $table->string('challenge_fees')->nullable();
+            $table->string('your_balance')->nullable();
             $table->string('minimum_picks')->nullable();
             $table->string('minimum_picks_amount')->nullable();
             $table->string('maximum_picks_amount')->nullable();
@@ -26,6 +30,9 @@ return new class extends Migration
             $table->string('maximum_daily_loss')->nullable();
             $table->string('profit_target')->nullable();
             $table->string('time_limit')->nullable();
+            $table->string('start_date')->nullable();
+            $table->string('end_date')->nullable();
+            $table->string('challenge_status')->default('Active')->nullable();
             $table->string('payment_status')->default('Pending')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

@@ -591,6 +591,13 @@ span {
     margin-top: 10px;
     cursor: pointer;
 }
+
+.bg-red {
+    background-color: red;
+    padding: 5px 14px;
+    border-radius: 50px;
+    text-align: center !important;
+}
 /* ----------------------end my picks---------------------------- */
 
 /* ----------------------------start account overview -------------------- */
@@ -685,6 +692,12 @@ span {
     font-size: 13px;
 }
 
+.bg-red{
+    background-color: red !important;
+    padding: 5px 14px !important;
+    border-radius: 50px !important;
+    text-align: center !important;
+}
 
 /* ----------------------------End account overview -------------------- */
 
