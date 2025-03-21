@@ -31,7 +31,7 @@
             <div class="col-lg-3 my-pick-gap">
                 <div class="my-picks-box">
                     <h6 class="pb-2">Current Balance</h6>
-                    <h5>$1,023.45</h5>
+                    <h5>${{$your_balance}}</h5>
                 </div>
             </div>
 
@@ -102,7 +102,10 @@
                         <div class="history-header d-flex justify-content-between align-items-center box">
                             <div class="d-flex align-items-center won">
                                 <i class="fa-solid fa-basketball"></i>
-                                <h6 class="status">{{ $betting->match_status }}</h6>
+                                <h6 class="status {{ $betting->match_status == 'Lost' ? 'bg-red' : '' }}">
+                                    {{ $betting->match_status }}
+                                </h6>
+                                
                             </div>
                             <h6 class="gapping">{{ $betting->commence_time }}</h6>
                         </div>
