@@ -1,6 +1,27 @@
 @extends('user.main.main')
 
 @section('user-content')
+
+@if (Session::has('success'))
+        <div class="alert alert-success" role="alert" id="success-message">
+            {{ Session::get('success') }}
+        </div>
+    @endif
+
+    @if (session('fail'))
+        <div class="alert alert-danger" id="error-message">
+            {{ session('fail') }}
+        </div>
+    @endif
+    
+    
+      @if(session('error'))
+        <div class="alert alert-danger" id="error-message">
+            {{ session('error') }}
+        </div>
+    @endif
+
+
     <div class="New-Header">
         <div class="new-navbar-wrapper">
             <div class="new-navbar">
@@ -546,11 +567,11 @@
                 .then(response => response.json())
                 .then(responseData => {
                     console.log("Response from Backend:", responseData);
-                    if (responseData.success) {
-                        alert("Pickslip placed successfully!");
+                    if (responseData.status) {
+                        alert(responseData.message);
                         closePickslip();
                     } else {
-                        alert("Error placing pickslip.");
+                        alert(responseData.message);
                     }
                 })
                 .catch(error => console.error("Fetch Error:", error));

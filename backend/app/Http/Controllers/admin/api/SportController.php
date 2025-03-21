@@ -20,7 +20,7 @@ class SportController extends Controller
             $curl = curl_init();
 
 
-            $apiUrl = "https://api.the-odds-api.com/v4/sports/?apiKey=20cd66305d2f9d331582403ca81a68d6";
+            $apiUrl = "https://api.the-odds-api.com/v4/sports/?apiKey=34ccb3c0d93144a6a6afc32a5eb77a8a";
 
 
             curl_setopt_array($curl, [
@@ -66,7 +66,7 @@ class SportController extends Controller
     {
         try {
 
-            $apiKey = "20cd66305d2f9d331582403ca81a68d6";
+            $apiKey = "34ccb3c0d93144a6a6afc32a5eb77a8a";
 
             $daysFrom = $request->input('daysFrom', 1);
 
@@ -128,7 +128,7 @@ class SportController extends Controller
     {
         try {
 
-            $apiKey = "20cd66305d2f9d331582403ca81a68d6";
+            $apiKey = "34ccb3c0d93144a6a6afc32a5eb77a8a";
 
             $sport = $request->input('sport');
             $eventId = $request->input('eventId');
@@ -190,7 +190,7 @@ class SportController extends Controller
         try {
             $curl = curl_init();
 
-            $apiKey = "20cd66305d2f9d331582403ca81a68d6";
+            $apiKey = "34ccb3c0d93144a6a6afc32a5eb77a8a";
 
             $sport = "basketball_nba";
             $apiUrl = "https://api.the-odds-api.com/v4/sports/{$sport}/participants?apiKey={$apiKey}";
@@ -244,7 +244,7 @@ class SportController extends Controller
 
     
 
-            $apiKey = "20cd66305d2f9d331582403ca81a68d6";
+            $apiKey = "34ccb3c0d93144a6a6afc32a5eb77a8a";
 
             $regions = $request->input('regions', 'us');  // Default to 'us'
             $markets = $request->input('markets', 'h2h,totals,spreads');  // Default markets
@@ -342,7 +342,7 @@ class SportController extends Controller
     {
         try {
 
-            $apiKey = "20cd66305d2f9d331582403ca81a68d6";
+            $apiKey = "34ccb3c0d93144a6a6afc32a5eb77a8a";
 
             $sport = $request->input('sport', 'basketball_nba');
             $date = $request->input('date');
@@ -413,7 +413,7 @@ class SportController extends Controller
         try {
 
 
-            $apiKey = "20cd66305d2f9d331582403ca81a68d6";
+            $apiKey = "34ccb3c0d93144a6a6afc32a5eb77a8a";
 
 
             $sportKey = $request->input('sport_key');
@@ -476,7 +476,7 @@ class SportController extends Controller
     {
         try {
 
-            $apiKey = "20cd66305d2f9d331582403ca81a68d6";
+            $apiKey = "34ccb3c0d93144a6a6afc32a5eb77a8a";
 
             $date = $request->input('date');
             $sport = $request->input('sport', 'basketball_nba');  // Default to basketball_nba
@@ -553,7 +553,7 @@ class SportController extends Controller
 
 
 
-            $apiKey = env('20cd66305d2f9d331582403ca81a68d6');
+            $apiKey = env('34ccb3c0d93144a6a6afc32a5eb77a8a');
 
 
 

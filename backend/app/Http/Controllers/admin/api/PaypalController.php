@@ -87,6 +87,10 @@ class PaypalController extends Controller
                 'amount' => $request->amount,
                 'user_id' => $request->user_id,
                 'currency' => 'USD',
+                'phase' => $request->phase,
+                'account_size' => $request->account_size,
+                'challenge_fees' => $request->challenge_fees ?? $request->amount,
+                'your_balance' => $request->account_size,
                 'minimum_picks' => $request->minimum_picks,
                 'minimum_picks_amount' => $request->minimum_picks_amount,
                 'maximum_picks_amount' => $request->maximum_picks_amount,
@@ -94,8 +98,11 @@ class PaypalController extends Controller
                 'maximum_daily_loss' => $request->maximum_daily_loss,
                 'profit_target' => $request->profit_target,
                 'time_limit' => $request->time_limit,
+                'start_date' => now(),
+                'end_date' => ($request->time_limit != 'N/A') ? now()->addDays((int) $request->time_limit) : null, // Null means infinite
                 'paypal_payment_id' => $payment->getId()
             ]);
+            
 
             foreach ($payment->getLinks() as $link) {
                 if ($link->getRel() == 'approval_url') {

@@ -535,11 +535,11 @@
             .then(response => response.json())
             .then(responseData => {
                 console.log("Response from Backend:", responseData);
-                if (responseData.success) {
-                    alert("Pickslip placed successfully!");
+                if (responseData.status) {
+                    alert(responseData.message);
                     closePickslip();
                 } else {
-                    alert("Error placing pickslip.");
+                    alert(responseData.message);
                 }
             })
             .catch(error => console.error("Fetch Error:", error));
